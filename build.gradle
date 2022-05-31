@@ -4,7 +4,17 @@ buildscript {
         localProperties = new Properties()
         localProperties.load(new FileInputStream(rootProject.file("local.properties")))
     }
+}
+plugins {
+    id 'com.android.application' version '7.2.0' apply false
+    id 'com.android.library' version '7.2.0' apply false
+    id 'org.jetbrains.kotlin.android' version '1.5.31' apply false
+}
+
+allprojects {
     repositories {
+        google()
+        mavenCentral()
         maven {
             name = "Mapbox"
             url 'https://api.mapbox.com/downloads/v2/releases/maven'
@@ -12,16 +22,22 @@ buildscript {
                 basic(BasicAuthentication)
             }
             credentials {
-                username = localProperties['MAPBOX_ACCOUNT_NAME']
+                username = "mapbox"
+                password = localProperties['MAPBOX_DOWNLOADS_TOKEN']
+            }
+        }
+        maven {
+            name = "Mapbox snapshots"
+            url 'https://api.mapbox.com/downloads/v2/snapshots/maven'
+            authentication {
+                basic(BasicAuthentication)
+            }
+            credentials {
+                username = "mapbox"
                 password = localProperties['MAPBOX_DOWNLOADS_TOKEN']
             }
         }
     }
-}
-plugins {
-    id 'com.android.application' version '7.2.0' apply false
-    id 'com.android.library' version '7.2.0' apply false
-    id 'org.jetbrains.kotlin.android' version '1.5.31' apply false
 }
 
 task clean(type: Delete) {
