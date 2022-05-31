@@ -1,12 +1,16 @@
 package com.ably.tracking.demo.publisher
 
-import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Notification
 import android.content.Context
+import android.util.Log
+import androidx.core.app.NotificationCompat
 import com.ably.tracking.Accuracy
 import com.ably.tracking.Resolution
 import com.ably.tracking.connection.Authentication
 import com.ably.tracking.connection.ConnectionConfiguration
+import com.ably.tracking.logging.LogHandler
+import com.ably.tracking.logging.LogLevel
 import com.ably.tracking.publisher.*
 
 class AssetTracker(
@@ -40,6 +44,11 @@ class AssetTracker(
                 )
             ) // provide either the default resolution policy factory or your custom implementation
             .profile(RoutingProfile.CYCLING) // provide mode of transportation for better location enhancements
+            .logHandler(TrackerLogHandler())
+            .backgroundTrackingNotificationProvider(
+                TrackerPublisherNotificationProvider(context),
+                97852
+            )
             .start()
     }
 
@@ -54,5 +63,23 @@ class AssetTracker(
             ablyClientId = BuildConfig.ABLY_APP_ID,
             ablyApiKey = BuildConfig.ABLY_API_KEY
         )
+    }
+
+    class TrackerLogHandler : LogHandler {
+        override fun logMessage(level: LogLevel, message: String, throwable: Throwable?) {
+            Log.d("AssetTracker", "$message $throwable")
+        }
+    }
+
+    class TrackerPublisherNotificationProvider(private val context: Context) :
+        PublisherNotificationProvider {
+        override fun getNotification(): Notification {
+            return NotificationCompat.Builder(context, "CHANNEL_ID")
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle("My notification")
+                .setContentText("Much longer text that cannot fit one line...")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .build()
+        }
     }
 }
