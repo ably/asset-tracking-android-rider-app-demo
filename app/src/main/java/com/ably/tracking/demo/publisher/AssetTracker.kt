@@ -47,4 +47,12 @@ class AssetTracker(
         publisher?.stop()
         publisher = null
     }
+
+    companion object {
+        fun build() = AssetTracker(
+            mapBoxAccessToken = BuildConfig.MAPBOX_ACCESS_TOKEN,
+            ablyClientId = BuildConfig.ABLY_APP_ID,
+            ablyApiKey = BuildConfig.ABLY_API_KEY
+        )
+    }
 }
