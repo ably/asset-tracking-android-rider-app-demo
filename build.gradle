@@ -1,8 +1,23 @@
 buildscript {
     ext {
         compose_version = '1.1.0-beta01'
+        localProperties = new Properties()
+        localProperties.load(new FileInputStream(rootProject.file("local.properties")))
     }
-}// Top-level build file where you can add configuration options common to all sub-projects/modules.
+    repositories {
+        maven {
+            name = "Mapbox"
+            url 'https://api.mapbox.com/downloads/v2/releases/maven'
+            authentication {
+                basic(BasicAuthentication)
+            }
+            credentials {
+                username = localProperties['MAPBOX_ACCOUNT_NAME']
+                password = localProperties['MAPBOX_DOWNLOADS_TOKEN']
+            }
+        }
+    }
+}
 plugins {
     id 'com.android.application' version '7.2.0' apply false
     id 'com.android.library' version '7.2.0' apply false
