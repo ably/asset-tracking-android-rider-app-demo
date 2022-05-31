@@ -1,8 +1,8 @@
 package com.ably.tracking.demo.publisher
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
-import androidx.annotation.RequiresPermission
 import com.ably.tracking.Accuracy
 import com.ably.tracking.Resolution
 import com.ably.tracking.connection.Authentication
@@ -16,7 +16,7 @@ class AssetTracker(
 ) {
     private var publisher: Publisher? = null
 
-    @RequiresPermission(anyOf = [Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION])
+    @SuppressLint("MissingPermission")
     fun connect(context: Context) {
         // Prepare the default resolution for the Resolution Policy
         val defaultResolution =
@@ -39,7 +39,7 @@ class AssetTracker(
                     context
                 )
             ) // provide either the default resolution policy factory or your custom implementation
-            .profile(RoutingProfile.DRIVING) // provide mode of transportation for better location enhancements
+            .profile(RoutingProfile.CYCLING) // provide mode of transportation for better location enhancements
             .start()
     }
 
