@@ -3,6 +3,7 @@ package com.ably.tracking.demo.publisher
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.ably.tracking.demo.publisher.ably.AssetTracker
 import kotlinx.coroutines.runBlocking
 import java.util.*
 

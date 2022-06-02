@@ -1,4 +1,4 @@
-package com.ably.tracking.demo.publisher
+package com.ably.tracking.demo.publisher.ably
 
 import android.annotation.SuppressLint
 import android.app.Notification
@@ -9,10 +9,11 @@ import com.ably.tracking.Accuracy
 import com.ably.tracking.Resolution
 import com.ably.tracking.connection.Authentication
 import com.ably.tracking.connection.ConnectionConfiguration
+import com.ably.tracking.demo.publisher.BuildConfig
+import com.ably.tracking.demo.publisher.R
 import com.ably.tracking.logging.LogHandler
 import com.ably.tracking.logging.LogLevel
 import com.ably.tracking.publisher.*
-import java.util.*
 
 class AssetTracker(
     private val mapBoxAccessToken: String,
