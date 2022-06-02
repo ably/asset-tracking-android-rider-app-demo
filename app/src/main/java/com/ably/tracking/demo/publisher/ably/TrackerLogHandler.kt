@@ -1,0 +1,17 @@
+package com.ably.tracking.demo.publisher.ably
+
+import android.util.Log
+import com.ably.tracking.logging.LogHandler
+import com.ably.tracking.logging.LogLevel
+
+class TrackerLogHandler : LogHandler {
+    override fun logMessage(level: LogLevel, message: String, throwable: Throwable?) {
+        when (level) {
+            LogLevel.VERBOSE -> Log.v("AssetTracker", "Message: $message, Throwable: $throwable")
+            LogLevel.INFO -> Log.i("AssetTracker", "Message: $message, Throwable: $throwable")
+            LogLevel.DEBUG -> Log.d("AssetTracker", "Message: $message, Throwable: $throwable")
+            LogLevel.WARN -> Log.w("AssetTracker", "Message: $message, Throwable: $throwable")
+            LogLevel.ERROR -> Log.e("AssetTracker", "Message: $message, Throwable: $throwable")
+        }
+    }
+}
