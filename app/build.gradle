@@ -18,7 +18,6 @@ android {
             useSupportLibrary true
         }
 
-        buildConfigField("String", "ABLY_APP_ID", "\"${localProperties["ABLY_APP_ID"]}\"")
         buildConfigField("String", "ABLY_API_KEY", "\"${localProperties["ABLY_API_KEY"]}\"")
         buildConfigField("String", "MAPBOX_ACCESS_TOKEN", "\"${localProperties["MAPBOX_ACCESS_TOKEN"]}\"")
     }

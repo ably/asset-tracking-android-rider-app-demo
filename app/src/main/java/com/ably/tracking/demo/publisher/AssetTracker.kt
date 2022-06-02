@@ -12,16 +12,16 @@ import com.ably.tracking.connection.ConnectionConfiguration
 import com.ably.tracking.logging.LogHandler
 import com.ably.tracking.logging.LogLevel
 import com.ably.tracking.publisher.*
+import java.util.*
 
 class AssetTracker(
     private val mapBoxAccessToken: String,
-    private val ablyClientId: String,
     private val ablyApiKey: String
 ) {
     private var publisher: Publisher? = null
 
     @SuppressLint("MissingPermission")
-    fun connect(context: Context) {
+    fun connect(context: Context, clientId: String) {
         // Prepare the default resolution for the Resolution Policy
         val defaultResolution =
             Resolution(Accuracy.BALANCED, desiredInterval = 1000L, minimumDisplacement = 1.0)
@@ -30,7 +30,7 @@ class AssetTracker(
             .connection(
                 ConnectionConfiguration(
                     Authentication.basic(
-                        ablyClientId,
+                        clientId,
                         ablyApiKey
                     )
                 )
@@ -60,7 +60,6 @@ class AssetTracker(
     companion object {
         fun build() = AssetTracker(
             mapBoxAccessToken = BuildConfig.MAPBOX_ACCESS_TOKEN,
-            ablyClientId = BuildConfig.ABLY_APP_ID,
             ablyApiKey = BuildConfig.ABLY_API_KEY
         )
     }
