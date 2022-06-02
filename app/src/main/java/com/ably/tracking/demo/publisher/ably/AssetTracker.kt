@@ -4,10 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import com.ably.tracking.Accuracy
 import com.ably.tracking.Resolution
+import com.ably.tracking.TrackableState
 import com.ably.tracking.connection.Authentication
 import com.ably.tracking.connection.ConnectionConfiguration
 import com.ably.tracking.demo.publisher.BuildConfig
 import com.ably.tracking.publisher.*
+import kotlinx.coroutines.flow.StateFlow
 
 class AssetTracker(
     private val mapBoxAccessToken: String,
@@ -45,6 +47,12 @@ class AssetTracker(
                 97852
             )
             .start()
+    }
+
+    suspend fun addTrackable(trackableId: String): StateFlow<TrackableState> =
+    publisher!!.let{
+        val trackable = Trackable(id = trackableId)
+        it.add(trackable)
     }
 
     suspend fun disconnect() {

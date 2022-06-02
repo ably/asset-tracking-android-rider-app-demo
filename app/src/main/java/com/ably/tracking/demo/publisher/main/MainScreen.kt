@@ -1,4 +1,4 @@
-package com.ably.tracking.demo.publisher
+package com.ably.tracking.demo.publisher.main
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.ably.tracking.demo.publisher.ui.theme.AATPublisherDemoTheme
 
 @Composable
-fun MainScreen(){
+fun MainScreen(viewModel: MainViewModel){
     // A surface container using the 'background' color from the theme
     Surface(
         modifier = Modifier.fillMaxSize(),

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AATPublisherDemo</string>
+    <string name="trackable_state_online">Online</string>
+    <string name="trackable_state_publishing">Publishing</string>
+    <string name="trackable_state_offline">Offline</string>
+    <string name="trackable_state_failed">Failed</string>
 </resources>

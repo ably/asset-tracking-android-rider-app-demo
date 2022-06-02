@@ -1,4 +1,4 @@
-package com.ably.tracking.demo.publisher
+package com.ably.tracking.demo.publisher.common
 
 import android.Manifest
 import android.content.Context
