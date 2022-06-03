@@ -12,6 +12,9 @@ import org.junit.Test
 @ExperimentalCoroutinesApi
 internal class MainViewModelTest : BaseViewModelTest() {
 
+    private val destinationLatitude = "51.1065859"
+    private val destinationLongitude = "17.0312766"
+
     private val assetTracker = FakeAssetTracker()
 
     private val viewModel = MainViewModel(assetTracker, baseTestCoroutineDispatcher)
@@ -22,7 +25,7 @@ internal class MainViewModelTest : BaseViewModelTest() {
         val orderName = "Hawaii pizza"
 
         //when
-        viewModel.addOrder(orderName)
+        viewModel.addOrder(orderName, destinationLatitude, destinationLongitude)
 
         //then
         val order = viewModel.state.value.orders.firstOrNull { it.name == orderName }
@@ -34,8 +37,8 @@ internal class MainViewModelTest : BaseViewModelTest() {
     fun `after updating order state in asset manager view model state is updated`() =
         runBlockingTest {
             //given
-            val orderName = "Hawaii pizza"
-            viewModel.addOrder(orderName)
+            val orderName = "Sushi"
+            viewModel.addOrder(orderName, destinationLatitude, destinationLongitude)
 
             //when
             assetTracker.trackableStates[orderName]?.emit(TrackableState.Publishing)
@@ -49,8 +52,8 @@ internal class MainViewModelTest : BaseViewModelTest() {
     fun `onTrack clicked selected trackable is tracked`() =
         runBlockingTest {
             //given
-            val orderName = "Hawaii pizza"
-            viewModel.addOrder(orderName)
+            val orderName = "Pancake"
+            viewModel.addOrder(orderName, destinationLatitude, destinationLongitude)
 
             //when
             viewModel.state.value.orders.first().onTrackClicked()

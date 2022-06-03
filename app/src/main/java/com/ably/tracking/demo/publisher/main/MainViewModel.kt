@@ -27,22 +27,23 @@ class MainViewModel(private val assetTracker: AssetTracker, coroutineScope: Coro
         assetTracker.disconnect()
     }
 
-    fun addOrder(orderName: String) = launch {
-        val trackableStateFlow = assetTracker.addTrackable(orderName)
+    fun addOrder(orderName: String, destinationLatitude: String, destinationLongitude: String) =
+        launch {
+            val trackableStateFlow = assetTracker.addTrackable(orderName)
 
-        val order = Order(orderName, trackableStateFlow.value.toStringRes()) {
-            onTrackCLicked(orderName)
-        }
-        updateState { state ->
-            state.copy(orders = state.orders + order)
-        }
-
-        trackableStateFlow
-            .onEach { state ->
-                updateState { it.updateTrackableState(orderName, state) }
+            val order = Order(orderName, trackableStateFlow.value.toStringRes()) {
+                onTrackCLicked(orderName)
             }
-            .launchIn(this)
-    }
+            updateState { state ->
+                state.copy(orders = state.orders + order)
+            }
+
+            trackableStateFlow
+                .onEach { state ->
+                    updateState { it.updateTrackableState(orderName, state) }
+                }
+                .launchIn(this)
+        }
 
     private fun onTrackCLicked(trackableId: String) = launch {
         assetTracker.track(trackableId)
