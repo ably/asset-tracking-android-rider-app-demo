@@ -16,7 +16,6 @@ abstract class BaseViewModel(private val baseCoroutineDispatcher: CoroutineDispa
 
     private val viewModelJob = Job()
 
-
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancelChildren()
