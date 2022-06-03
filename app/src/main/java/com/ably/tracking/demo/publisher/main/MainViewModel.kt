@@ -30,7 +30,9 @@ class MainViewModel(private val assetTracker: AssetTracker, coroutineScope: Coro
     fun addOrder(orderName: String) = launch {
         val trackableStateFlow = assetTracker.addTrackable(orderName)
 
-        val order = Order(orderName, trackableStateFlow.value.toStringRes())
+        val order = Order(orderName, trackableStateFlow.value.toStringRes()) {
+            onTrackCLicked(orderName)
+        }
         updateState { state ->
             state.copy(orders = state.orders + order)
         }
@@ -40,6 +42,10 @@ class MainViewModel(private val assetTracker: AssetTracker, coroutineScope: Coro
                 updateState { it.updateTrackableState(orderName, state) }
             }
             .launchIn(this)
+    }
+
+    private fun onTrackCLicked(trackableId: String) = launch {
+        assetTracker.track(trackableId)
     }
 
     private fun MainScreenState.updateTrackableState(

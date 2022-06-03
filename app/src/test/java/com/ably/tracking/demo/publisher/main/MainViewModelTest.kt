@@ -44,4 +44,18 @@ internal class MainViewModelTest : BaseViewModelTest() {
             val order = viewModel.state.value.orders.first { it.name == orderName }
             assertThat(order.state).isEqualTo(R.string.trackable_state_publishing)
         }
+
+    @Test
+    fun `onTrack clicked selected trackable is tracked`() =
+        runBlockingTest {
+            //given
+            val orderName = "Hawaii pizza"
+            viewModel.addOrder(orderName)
+
+            //when
+            viewModel.state.value.orders.first().onTrackClicked()
+
+            //then
+            assertThat(assetTracker.trackedTrackableId).isEqualTo(orderName)
+        }
 }

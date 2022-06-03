@@ -9,6 +9,8 @@ class FakeAssetTracker : AssetTracker {
 
     val trackableStates = mutableMapOf<String, MutableStateFlow<TrackableState>>()
 
+    var trackedTrackableId: String? = null
+
     override fun connect(clientId: String) {
         //no-op
     }
@@ -17,6 +19,10 @@ class FakeAssetTracker : AssetTracker {
         val stateFlow = MutableStateFlow<TrackableState>(TrackableState.Offline(null))
         trackableStates[trackableId] = stateFlow
         return stateFlow
+    }
+
+    override suspend fun track(trackableId: String) {
+        trackedTrackableId = trackableId
     }
 
     override suspend fun disconnect() {

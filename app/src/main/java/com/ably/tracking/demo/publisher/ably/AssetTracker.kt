@@ -11,6 +11,8 @@ interface AssetTracker {
 
     suspend fun addTrackable(trackableId: String): StateFlow<TrackableState>
 
+    suspend fun track(trackableId: String)
+
     suspend fun disconnect()
 
     companion object {
