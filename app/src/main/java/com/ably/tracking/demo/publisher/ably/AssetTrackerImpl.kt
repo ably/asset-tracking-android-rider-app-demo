@@ -57,9 +57,46 @@ class AssetTrackerImpl(
     ): StateFlow<TrackableState> =
         publisher!!.let {
             val trackable =
-                Trackable(id = trackableId, Destination(destinationLatitude, destinationLongitude))
+                Trackable(
+                    id = trackableId,
+                    Destination(destinationLatitude, destinationLongitude),
+                    constraints = getOrderResolutionConstraints()
+                )
             it.add(trackable)
         }
+
+    private fun getOrderResolutionConstraints() =
+        DefaultResolutionConstraints(
+            resolutions = getResolutionSet(),
+            proximityThreshold = DefaultProximity(spatial = 1.0),
+            batteryLevelThreshold = 15.0f,
+            lowBatteryMultiplier = 5.0f
+        )
+
+    private fun getResolutionSet() =
+        DefaultResolutionSet(
+            farWithoutSubscriber = Resolution(
+                accuracy = Accuracy.MINIMUM,
+                desiredInterval = 2000L,
+                minimumDisplacement = 100.0
+            ),
+            farWithSubscriber = Resolution(
+                accuracy = Accuracy.BALANCED,
+                desiredInterval = 1000L,
+                minimumDisplacement = 10.0
+            ),
+            nearWithoutSubscriber = Resolution(
+                accuracy = Accuracy.BALANCED,
+                desiredInterval = 1000L,
+                minimumDisplacement = 10.0
+            ),
+            nearWithSubscriber = Resolution(
+                accuracy = Accuracy.HIGH,
+                desiredInterval = 500L,
+                minimumDisplacement = 1.0
+            )
+        )
+
 
     override suspend fun track(trackableId: String) {
         val trackable = publisher!!.trackables.replayCache.last().first { it.id == trackableId }
