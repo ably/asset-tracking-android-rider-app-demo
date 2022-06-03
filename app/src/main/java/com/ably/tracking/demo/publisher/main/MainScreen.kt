@@ -44,7 +44,7 @@ fun MainScreenContent(state: MainScreenState, onAddTrackable: (String, String, S
                     setShowDialog(true)
                 }
             ) {
-                Text(text = "Add order")
+                Text(text = stringResource(id = R.string.add_order_button))
             }
         }
         items(state.orders) { item ->
@@ -68,7 +68,7 @@ fun OrderRow(order: Order) {
         Text(text = order.name)
         Text(text = stringResource(id = order.state))
         Button(onClick = order.onTrackClicked) {
-            Text(text = "Track")
+            Text(text = stringResource(id = R.string.track_order_button))
         }
     }
 }
@@ -86,7 +86,7 @@ fun AddOrderDialog(setShowDialog: (Boolean) -> Unit, onConfirm: (String, String,
         title = {
             Text(
                 modifier = Modifier.padding(8.dp),
-                text = "Enter order details"
+                text = stringResource(id = R.string.add_order_dialog_title)
             )
         },
         confirmButton = {
@@ -97,7 +97,7 @@ fun AddOrderDialog(setShowDialog: (Boolean) -> Unit, onConfirm: (String, String,
                     onConfirm(orderName, destinationLatitude, destinationLongitude)
                 },
             ) {
-                Text("Confirm")
+                Text(stringResource(id = R.string.add_order_dialog_confirm_button))
             }
         },
         text = {
@@ -108,7 +108,13 @@ fun AddOrderDialog(setShowDialog: (Boolean) -> Unit, onConfirm: (String, String,
                     onValueChange = {
                         orderName = it
                     },
-                    label = { Text("Order name") }
+                    label = {
+                        Text(
+                            stringResource(
+                                id = R.string.add_order_dialog_order_name_hint
+                            )
+                        )
+                    }
                 )
                 TextField(
                     modifier = Modifier.padding(8.dp),
@@ -116,7 +122,13 @@ fun AddOrderDialog(setShowDialog: (Boolean) -> Unit, onConfirm: (String, String,
                     onValueChange = {
                         destinationLatitude = it
                     },
-                    label = { Text("Destination latitude") }
+                    label = {
+                        Text(
+                            stringResource(
+                                id = R.string.add_order_dialog_order_latitude_hint
+                            )
+                        )
+                    }
                 )
                 TextField(
                     modifier = Modifier.padding(8.dp),
@@ -124,7 +136,13 @@ fun AddOrderDialog(setShowDialog: (Boolean) -> Unit, onConfirm: (String, String,
                     onValueChange = {
                         destinationLongitude = it
                     },
-                    label = { Text("Destination longitude") }
+                    label = {
+                        Text(
+                            stringResource(
+                                id = R.string.add_order_dialog_order_longitude_hint
+                            )
+                        )
+                    }
                 )
             }
         },
