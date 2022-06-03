@@ -1,3 +1,8 @@
 package com.ably.tracking.demo.publisher.main
 
-data class Order(val name: String)
+import androidx.annotation.StringRes
+
+data class Order(
+    val name: String,
+    @StringRes val state: Int
+)
