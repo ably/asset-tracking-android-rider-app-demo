@@ -50,9 +50,14 @@ class AssetTrackerImpl(
             .start()
     }
 
-    override suspend fun addTrackable(trackableId: String): StateFlow<TrackableState> =
+    override suspend fun addTrackable(
+        trackableId: String,
+        destinationLatitude: Double,
+        destinationLongitude: Double
+    ): StateFlow<TrackableState> =
         publisher!!.let {
-            val trackable = Trackable(id = trackableId)
+            val trackable =
+                Trackable(id = trackableId, Destination(destinationLatitude, destinationLongitude))
             it.add(trackable)
         }
 

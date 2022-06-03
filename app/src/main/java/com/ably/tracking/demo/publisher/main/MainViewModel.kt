@@ -29,7 +29,11 @@ class MainViewModel(private val assetTracker: AssetTracker, coroutineScope: Coro
 
     fun addOrder(orderName: String, destinationLatitude: String, destinationLongitude: String) =
         launch {
-            val trackableStateFlow = assetTracker.addTrackable(orderName)
+            val trackableStateFlow = assetTracker.addTrackable(
+                orderName,
+                destinationLatitude.toDouble(),
+                destinationLongitude.toDouble()
+            )
 
             val order = Order(orderName, trackableStateFlow.value.toStringRes()) {
                 onTrackCLicked(orderName)

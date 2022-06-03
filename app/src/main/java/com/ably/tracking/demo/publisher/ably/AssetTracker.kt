@@ -9,7 +9,11 @@ interface AssetTracker {
 
     fun connect(clientId: String)
 
-    suspend fun addTrackable(trackableId: String): StateFlow<TrackableState>
+    suspend fun addTrackable(
+        trackableId: String,
+        destinationLatitude: Double,
+        destinationLongitude: Double
+    ): StateFlow<TrackableState>
 
     suspend fun track(trackableId: String)
 

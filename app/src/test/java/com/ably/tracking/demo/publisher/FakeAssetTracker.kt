@@ -15,7 +15,11 @@ class FakeAssetTracker : AssetTracker {
         //no-op
     }
 
-    override suspend fun addTrackable(trackableId: String): StateFlow<TrackableState> {
+    override suspend fun addTrackable(
+        trackableId: String,
+        destinationLatitude: Double,
+        destinationLongitude: Double
+    ): StateFlow<TrackableState> {
         val stateFlow = MutableStateFlow<TrackableState>(TrackableState.Offline(null))
         trackableStates[trackableId] = stateFlow
         return stateFlow
