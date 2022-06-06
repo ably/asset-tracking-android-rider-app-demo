@@ -34,8 +34,8 @@ class TrackerPublisherNotificationProvider(private val context: Context) :
     }
 
     companion object{
-        private val NOTIFICATION_CHANNEL_ID="trackingPublisherChannel"
-        private val NOTIFICATION_CHANNEL_NAME="Tracking Notifications"
-        private val NOTIFICATION_CHANNEL_DESCRIPTION="Notifications about tracking service running"
+        private const val NOTIFICATION_CHANNEL_ID="trackingPublisherChannel"
+        private const val NOTIFICATION_CHANNEL_NAME="Tracking Notifications"
+        private const val NOTIFICATION_CHANNEL_DESCRIPTION="Notifications about tracking service running"
     }
 }

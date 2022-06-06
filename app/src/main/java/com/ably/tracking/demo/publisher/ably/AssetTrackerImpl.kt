@@ -7,8 +7,15 @@ import com.ably.tracking.Resolution
 import com.ably.tracking.TrackableState
 import com.ably.tracking.connection.Authentication
 import com.ably.tracking.connection.ConnectionConfiguration
-import com.ably.tracking.demo.publisher.BuildConfig
-import com.ably.tracking.publisher.*
+import com.ably.tracking.publisher.DefaultProximity
+import com.ably.tracking.publisher.DefaultResolutionConstraints
+import com.ably.tracking.publisher.DefaultResolutionPolicyFactory
+import com.ably.tracking.publisher.DefaultResolutionSet
+import com.ably.tracking.publisher.Destination
+import com.ably.tracking.publisher.MapConfiguration
+import com.ably.tracking.publisher.Publisher
+import com.ably.tracking.publisher.RoutingProfile
+import com.ably.tracking.publisher.Trackable
 import kotlinx.coroutines.flow.StateFlow
 
 class AssetTrackerImpl(
@@ -45,7 +52,7 @@ class AssetTrackerImpl(
             .logHandler(TrackerLogHandler())
             .backgroundTrackingNotificationProvider(
                 TrackerPublisherNotificationProvider(context),
-                97852
+                NOTIFICATION_ID
             )
             .start()
     }
@@ -106,5 +113,9 @@ class AssetTrackerImpl(
     override suspend fun disconnect() {
         publisher?.stop()
         publisher = null
+    }
+
+    companion object {
+        private const val NOTIFICATION_ID = 97852
     }
 }
