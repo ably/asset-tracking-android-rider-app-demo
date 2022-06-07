@@ -7,6 +7,7 @@ import com.ably.tracking.Resolution
 import com.ably.tracking.TrackableState
 import com.ably.tracking.connection.Authentication
 import com.ably.tracking.connection.ConnectionConfiguration
+import com.ably.tracking.demo.publisher.common.NotificationProvider
 import com.ably.tracking.publisher.DefaultProximity
 import com.ably.tracking.publisher.DefaultResolutionConstraints
 import com.ably.tracking.publisher.DefaultResolutionPolicyFactory
@@ -20,6 +21,7 @@ import kotlinx.coroutines.flow.StateFlow
 
 class AssetTrackerImpl(
     private val context: Context,
+    private val notificationProvider: NotificationProvider,
     private val mapBoxAccessToken: String,
     private val ablyApiKey: String
 ) : AssetTracker {
@@ -51,8 +53,8 @@ class AssetTrackerImpl(
             .profile(RoutingProfile.CYCLING) // provide mode of transportation for better location enhancements
             .logHandler(TrackerLogHandler())
             .backgroundTrackingNotificationProvider(
-                TrackerPublisherNotificationProvider(context),
-                NOTIFICATION_ID
+                PublisherNotificationProviderAdapter(notificationProvider),
+                notificationProvider.notificationId
             )
             .start()
     }
@@ -113,9 +115,5 @@ class AssetTrackerImpl(
     override suspend fun disconnect() {
         publisher?.stop()
         publisher = null
-    }
-
-    companion object {
-        private const val NOTIFICATION_ID = 97852
     }
 }

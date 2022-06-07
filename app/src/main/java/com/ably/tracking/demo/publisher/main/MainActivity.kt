@@ -1,8 +1,11 @@
 package com.ably.tracking.demo.publisher.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.core.content.ContextCompat
+import com.ably.tracking.demo.publisher.PublisherService
 import com.ably.tracking.demo.publisher.common.PermissionHelper
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -17,10 +20,7 @@ class MainActivity : ComponentActivity() {
         PermissionHelper.ensureLocationPermission(this) {
             viewModel.beginTracking()
         }
-    }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.finishTracking()
+        ContextCompat.startForegroundService(this, Intent(this, PublisherService::class.java))
     }
 }
