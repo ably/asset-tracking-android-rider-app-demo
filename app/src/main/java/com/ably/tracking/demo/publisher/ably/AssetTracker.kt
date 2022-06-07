@@ -20,7 +20,7 @@ interface AssetTracker {
     suspend fun disconnect()
 
     companion object {
-        fun build(context: Context) = AssetTrackerImpl(
+        fun build(context: Context): AssetTracker = AssetTrackerImpl(
             context = context,
             mapBoxAccessToken = BuildConfig.MAPBOX_ACCESS_TOKEN,
             ablyApiKey = BuildConfig.ABLY_API_KEY
