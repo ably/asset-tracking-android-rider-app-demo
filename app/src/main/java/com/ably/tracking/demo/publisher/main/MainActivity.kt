@@ -1,20 +1,17 @@
 package com.ably.tracking.demo.publisher.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.ably.tracking.demo.publisher.ably.AssetTracker
+import androidx.core.content.ContextCompat
+import com.ably.tracking.demo.publisher.PublisherService
 import com.ably.tracking.demo.publisher.common.PermissionHelper
-import com.ably.tracking.demo.publisher.common.ViewModelProviderFactory
-import kotlinx.coroutines.Dispatchers
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
 
-    private val viewModel by lazy {
-        ViewModelProvider(this, ViewModelProviderFactory(this))[MainViewModel::class.java]
-    }
+    private val viewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,10 +20,7 @@ class MainActivity : ComponentActivity() {
         PermissionHelper.ensureLocationPermission(this) {
             viewModel.beginTracking()
         }
-    }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.finishTracking()
+        ContextCompat.startForegroundService(this, Intent(this, PublisherService::class.java))
     }
 }

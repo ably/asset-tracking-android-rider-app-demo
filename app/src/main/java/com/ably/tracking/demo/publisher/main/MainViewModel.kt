@@ -23,10 +23,6 @@ class MainViewModel(private val assetTracker: AssetTracker, coroutineScope: Coro
         assetTracker.connect(clientId)
     }
 
-    fun finishTracking() = GlobalScope.launch {
-        assetTracker.disconnect()
-    }
-
     fun addOrder(orderName: String, destinationLatitude: String, destinationLongitude: String) =
         launch {
             val trackableStateFlow = assetTracker.addTrackable(
