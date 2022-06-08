@@ -54,3 +54,6 @@ fastlane/report.xml
 # ExecFiles
 tools/scripts/exec/testsRat
 tools/scripts/exec/testsSmoke
+
+#Google services config
+app/google-services.jso
