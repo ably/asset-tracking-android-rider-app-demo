@@ -56,4 +56,4 @@ tools/scripts/exec/testsRat
 tools/scripts/exec/testsSmoke
 
 #Google services config
-/app/google-services.json
+#/app/google-services.json
