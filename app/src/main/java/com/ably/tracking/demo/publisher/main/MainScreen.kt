@@ -83,8 +83,13 @@ fun OrderRow(order: Order) {
     ) {
         Text(text = order.name)
         Text(text = stringResource(id = order.state))
-        Button(onClick = order.onTrackClicked) {
-            Text(text = stringResource(id = R.string.track_order_button))
+        Column {
+            Button(onClick = order.onTrackClicked) {
+                Text(text = stringResource(id = R.string.track_order_button))
+            }
+            Button(onClick = order.onRemoveClicked) {
+                Text(text = stringResource(id = R.string.remove_order_button))
+            }
         }
     }
 }
