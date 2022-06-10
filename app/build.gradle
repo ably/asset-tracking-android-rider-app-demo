@@ -68,7 +68,7 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
     // AAT
-    implementation "com.ably.tracking:publishing-sdk:1.1.0-rc.3"
+    implementation "com.ably.tracking:publishing-sdk:1.1.0-rc.4"
 
     // Koin for Android
     implementation "io.insert-koin:koin-android:3.2.0"
