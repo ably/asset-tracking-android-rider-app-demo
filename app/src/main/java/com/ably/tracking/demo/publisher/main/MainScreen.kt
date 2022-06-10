@@ -153,18 +153,20 @@ private fun TextInput(
 @Preview(showBackground = true)
 @Composable
 fun OrderRowPreview() {
-    val order = Order(name = "Burger", R.string.trackable_state_online) {}
+    val order = Order(name = "Burger", R.string.trackable_state_online, {}, {})
     OrderRow(order = order)
 }
 
 @Preview(showBackground = true)
 @Composable
 fun MainScreenContentPreview() {
-    val state = MainScreenState(listOf(
-        Order(name = "Burger", R.string.trackable_state_online) {},
-        Order(name = "Pizza", R.string.trackable_state_offline) {},
-        Order(name = "Sushi", R.string.trackable_state_publishing) {}
-    ))
+    val state = MainScreenState(
+        listOf(
+            Order(name = "Burger", R.string.trackable_state_online, {}, {}),
+            Order(name = "Pizza", R.string.trackable_state_offline, {}, {}),
+            Order(name = "Sushi", R.string.trackable_state_publishing, {}, {})
+        )
+    )
     MainScreenContent(state) { _, _, _ -> }
 }
 

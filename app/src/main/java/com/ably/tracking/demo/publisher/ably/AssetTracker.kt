@@ -15,5 +15,7 @@ interface AssetTracker {
 
     suspend fun track(trackableId: String)
 
+    suspend fun remove(trackableId: String)
+
     suspend fun disconnect()
 }

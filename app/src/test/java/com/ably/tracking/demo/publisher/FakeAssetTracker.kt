@@ -29,6 +29,10 @@ class FakeAssetTracker : AssetTracker {
         trackedTrackableId = trackableId
     }
 
+    override suspend fun remove(trackableId: String) {
+        trackableStates.remove(trackableId)
+    }
+
     override suspend fun disconnect() {
         //no-op
     }

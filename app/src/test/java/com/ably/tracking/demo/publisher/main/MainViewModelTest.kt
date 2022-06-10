@@ -61,4 +61,18 @@ internal class MainViewModelTest : BaseViewModelTest() {
             //then
             assertThat(assetTracker.trackedTrackableId).isEqualTo(orderName)
         }
+
+    @Test
+    fun `on remove clicked selected trackable is removed`() =
+        runBlockingTest {
+            //given
+            val orderName = "Pancake"
+            viewModel.addOrder(orderName, destinationLatitude, destinationLongitude)
+
+            //when
+            viewModel.state.value.orders.first().onRemoveClicked()
+
+            //then
+            assertThat(assetTracker.trackableStates[orderName]).isNull()
+        }
 }

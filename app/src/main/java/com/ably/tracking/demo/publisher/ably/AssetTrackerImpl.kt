@@ -112,6 +112,11 @@ class AssetTrackerImpl(
         publisher!!.track(trackable)
     }
 
+    override suspend fun remove(trackableId: String) {
+        val trackable = publisher!!.trackables.replayCache.last().first { it.id == trackableId }
+        publisher!!.remove(trackable)
+    }
+
     override suspend fun disconnect() {
         publisher?.stop()
         publisher = null

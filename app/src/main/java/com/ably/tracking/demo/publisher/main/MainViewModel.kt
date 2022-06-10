@@ -31,9 +31,17 @@ class MainViewModel(private val assetTracker: AssetTracker, coroutineScope: Coro
                 destinationLongitude.toDouble()
             )
 
-            val order = Order(orderName, trackableStateFlow.value.toStringRes()) {
-                onTrackCLicked(orderName)
-            }
+            val order = Order(
+                name = orderName,
+                state = trackableStateFlow.value.toStringRes(),
+                onTrackClicked = {
+                    onTrackCLicked(orderName)
+                },
+                onRemoveClicked = {
+                    onRemoveClicked(orderName)
+                }
+            )
+
             updateState { state ->
                 state.copy(orders = state.orders + order)
             }
@@ -47,6 +55,10 @@ class MainViewModel(private val assetTracker: AssetTracker, coroutineScope: Coro
 
     private fun onTrackCLicked(trackableId: String) = launch {
         assetTracker.track(trackableId)
+    }
+
+    private fun onRemoveClicked(trackableId: String) = launch {
+        assetTracker.remove(trackableId)
     }
 
     private fun MainScreenState.updateTrackableState(
