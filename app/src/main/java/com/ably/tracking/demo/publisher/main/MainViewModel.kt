@@ -4,10 +4,13 @@ import com.ably.tracking.TrackableState
 import com.ably.tracking.demo.publisher.ably.AssetTracker
 import com.ably.tracking.demo.publisher.common.BaseViewModel
 import com.ably.tracking.demo.publisher.common.toStringRes
+import com.ably.tracking.publisher.Trackable
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import java.util.*
@@ -19,8 +22,44 @@ class MainViewModel(private val assetTracker: AssetTracker, coroutineScope: Coro
 
     val state: MutableStateFlow<MainScreenState> = MutableStateFlow(MainScreenState())
 
+    private val trackableStates = mutableMapOf<String, StateFlow<TrackableState>>()
+
     fun beginTracking() = launch {
         assetTracker.connect(clientId)
+            .map { it.mapToOrders() }
+            .collect { trackables ->
+                updateState {
+                    it.copy(orders = trackables)
+                }
+            }
+    }
+
+    private fun Set<Trackable>.mapToOrders() =
+        map {
+            Order(
+                name = it.id,
+                state = it.getState().toStringRes(),
+                onTrackClicked = {
+                    onTrackCLicked(it.id)
+                },
+                onRemoveClicked = {
+                    onRemoveClicked(it.id)
+                }
+            )
+        }
+
+    private fun Trackable.getState(): TrackableState {
+        val trackableStateFlow = trackableStates[id] ?: assetTracker.getTrackableState(id)
+        return trackableStateFlow?.value ?: TrackableState.Offline()
+    }
+
+    private fun onTrackCLicked(trackableId: String) = launch {
+        assetTracker.track(trackableId)
+    }
+
+    private fun onRemoveClicked(trackableId: String) = launch {
+        assetTracker.remove(trackableId)
+        trackableStates.remove(trackableId)
     }
 
     fun addOrder(orderName: String, destinationLatitude: String, destinationLongitude: String) =
@@ -31,20 +70,7 @@ class MainViewModel(private val assetTracker: AssetTracker, coroutineScope: Coro
                 destinationLongitude.toDouble()
             )
 
-            val order = Order(
-                name = orderName,
-                state = trackableStateFlow.value.toStringRes(),
-                onTrackClicked = {
-                    onTrackCLicked(orderName)
-                },
-                onRemoveClicked = {
-                    onRemoveClicked(orderName)
-                }
-            )
-
-            updateState { state ->
-                state.copy(orders = state.orders + order)
-            }
+            trackableStates[orderName] = trackableStateFlow
 
             trackableStateFlow
                 .onEach { state ->
@@ -53,21 +79,17 @@ class MainViewModel(private val assetTracker: AssetTracker, coroutineScope: Coro
                 .launchIn(this)
         }
 
-    private fun onTrackCLicked(trackableId: String) = launch {
-        assetTracker.track(trackableId)
-    }
-
-    private fun onRemoveClicked(trackableId: String) = launch {
-        assetTracker.remove(trackableId)
-    }
-
     private fun MainScreenState.updateTrackableState(
         orderName: String,
         state: TrackableState
     ): MainScreenState {
         val orderIndex = orders.indexOfFirst { order -> order.name == orderName }
-        val updatedOrder = orders[orderIndex].copy(state = state.toStringRes())
-        return copy(orders = orders.copyAndReplaceOrderAt(orderIndex, updatedOrder))
+        return if (orderIndex == -1) {
+            this
+        } else {
+            val updatedOrder = orders[orderIndex].copy(state = state.toStringRes())
+            copy(orders = orders.copyAndReplaceOrderAt(orderIndex, updatedOrder))
+        }
     }
 
     private fun List<Order>.copyAndReplaceOrderAt(index: Int, order: Order) =

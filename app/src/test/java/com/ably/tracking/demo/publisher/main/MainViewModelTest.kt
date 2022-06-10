@@ -6,7 +6,7 @@ import com.ably.tracking.demo.publisher.FakeAssetTracker
 import com.ably.tracking.demo.publisher.R
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
@@ -20,9 +20,10 @@ internal class MainViewModelTest : BaseViewModelTest() {
     private val viewModel = MainViewModel(assetTracker, baseTestCoroutineDispatcher)
 
     @Test
-    fun `after calling add on view model new order is created`() = runBlockingTest {
+    fun `after calling add on view model new order is created`() = runTest {
         //given
         val orderName = "Hawaii pizza"
+        viewModel.beginTracking()
 
         //when
         viewModel.addOrder(orderName, destinationLatitude, destinationLongitude)
@@ -35,9 +36,10 @@ internal class MainViewModelTest : BaseViewModelTest() {
 
     @Test
     fun `after updating order state in asset manager view model state is updated`() =
-        runBlockingTest {
+        runTest {
             //given
             val orderName = "Sushi"
+            viewModel.beginTracking()
             viewModel.addOrder(orderName, destinationLatitude, destinationLongitude)
 
             //when
@@ -50,9 +52,10 @@ internal class MainViewModelTest : BaseViewModelTest() {
 
     @Test
     fun `onTrack clicked selected trackable is tracked`() =
-        runBlockingTest {
+        runTest {
             //given
             val orderName = "Pancake"
+            viewModel.beginTracking()
             viewModel.addOrder(orderName, destinationLatitude, destinationLongitude)
 
             //when
@@ -64,9 +67,10 @@ internal class MainViewModelTest : BaseViewModelTest() {
 
     @Test
     fun `on remove clicked selected trackable is removed`() =
-        runBlockingTest {
+        runTest {
             //given
             val orderName = "Pancake"
+            viewModel.beginTracking()
             viewModel.addOrder(orderName, destinationLatitude, destinationLongitude)
 
             //when
@@ -74,5 +78,6 @@ internal class MainViewModelTest : BaseViewModelTest() {
 
             //then
             assertThat(assetTracker.trackableStates[orderName]).isNull()
+            assertThat(viewModel.state.value.orders).isEmpty()
         }
 }
