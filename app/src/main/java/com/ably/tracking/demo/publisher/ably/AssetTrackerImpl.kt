@@ -17,6 +17,7 @@ import com.ably.tracking.publisher.MapConfiguration
 import com.ably.tracking.publisher.Publisher
 import com.ably.tracking.publisher.RoutingProfile
 import com.ably.tracking.publisher.Trackable
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class AssetTrackerImpl(
@@ -27,8 +28,16 @@ class AssetTrackerImpl(
 ) : AssetTracker {
     private var publisher: Publisher? = null
 
+    override fun connect(clientId: String): SharedFlow<Set<Trackable>> {
+        if (publisher == null) {
+            establishNewConnection(clientId)
+        }
+
+        return publisher!!.trackables
+    }
+
     @SuppressLint("MissingPermission")
-    override fun connect(clientId: String) {
+    private fun establishNewConnection(clientId: String) {
         // Prepare the default resolution for the Resolution Policy
         val defaultResolution =
             Resolution(Accuracy.BALANCED, desiredInterval = 1000L, minimumDisplacement = 1.0)
@@ -106,10 +115,16 @@ class AssetTrackerImpl(
             )
         )
 
+    override fun getTrackableState(trackableId: String) = publisher!!.getTrackableState(trackableId)
 
     override suspend fun track(trackableId: String) {
         val trackable = publisher!!.trackables.replayCache.last().first { it.id == trackableId }
         publisher!!.track(trackable)
+    }
+
+    override suspend fun remove(trackableId: String) {
+        val trackable = publisher!!.trackables.replayCache.last().first { it.id == trackableId }
+        publisher!!.remove(trackable)
     }
 
     override suspend fun disconnect() {

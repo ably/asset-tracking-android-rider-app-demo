@@ -76,12 +76,12 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics'
 
     // AAT
-    implementation "com.ably.tracking:publishing-sdk:1.1.0-rc.3"
+    implementation "com.ably.tracking:publishing-sdk:1.1.0-rc.4"
 
     // Koin for Android
     implementation "io.insert-koin:koin-android:3.2.0"
 
     testImplementation 'junit:junit:4.13.2'
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1"
     testImplementation "com.google.truth:truth:1.1.3"
 }
