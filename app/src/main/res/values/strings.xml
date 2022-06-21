@@ -8,6 +8,9 @@
     <string name="add_order_dialog_order_name_hint">Order name</string>
     <string name="add_order_dialog_order_latitude_hint">Latitude</string>
     <string name="add_order_dialog_order_longitude_hint">Longitude</string>
+    <string name="background_location_permission_dialog_title">Background location permission required</string>
+    <string name="background_location_permission_dialog_text">Please enable permission for location access in background in app settings</string>
+    <string name="ok">OK</string>
     <string name="trackable_state_online">Online</string>
     <string name="trackable_state_publishing">Publishing</string>
     <string name="trackable_state_offline">Offline</string>

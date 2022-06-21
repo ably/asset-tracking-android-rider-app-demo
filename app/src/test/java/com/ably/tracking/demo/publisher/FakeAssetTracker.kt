@@ -9,13 +9,21 @@ import kotlinx.coroutines.flow.StateFlow
 
 class FakeAssetTracker : AssetTracker {
 
+    var connectCallsCount = 0
+
+    override var isConnected: Boolean = false
+
     val trackableStates = mutableMapOf<String, MutableStateFlow<TrackableState>>()
 
     var trackedTrackableId: String? = null
 
     val trackables = MutableStateFlow(emptySet<Trackable>())
 
-    override fun connect(clientId: String): SharedFlow<Set<Trackable>> = trackables
+    override fun connect(clientId: String): SharedFlow<Set<Trackable>> {
+        connectCallsCount++
+        isConnected = true
+        return trackables
+    }
 
     override suspend fun addTrackable(
         trackableId: String,
@@ -42,6 +50,6 @@ class FakeAssetTracker : AssetTracker {
     }
 
     override suspend fun disconnect() {
-        //no-op
+        isConnected = false
     }
 }

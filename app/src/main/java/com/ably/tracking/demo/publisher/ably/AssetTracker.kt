@@ -7,6 +7,8 @@ import kotlinx.coroutines.flow.StateFlow
 
 interface AssetTracker {
 
+    val isConnected: Boolean
+
     fun connect(clientId: String): SharedFlow<Set<Trackable>>
 
     suspend fun addTrackable(
@@ -17,7 +19,7 @@ interface AssetTracker {
 
     suspend fun track(trackableId: String)
 
-    fun getTrackableState(trackableId: String) :  StateFlow<TrackableState>?
+    fun getTrackableState(trackableId: String): StateFlow<TrackableState>?
 
     suspend fun remove(trackableId: String)
 

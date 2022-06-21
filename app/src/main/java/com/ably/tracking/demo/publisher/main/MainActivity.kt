@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.core.content.ContextCompat
 import com.ably.tracking.demo.publisher.PublisherService
 import com.ably.tracking.demo.publisher.common.PermissionHelper
+import com.ably.tracking.demo.publisher.common.PermissionHelper.hasBackgroundLocationPermission
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
@@ -17,10 +18,15 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent { MainScreen(viewModel) }
 
-        PermissionHelper.ensureLocationPermission(this) {
-            viewModel.beginTracking()
-        }
-
+        PermissionHelper.ensureLocationPermission(this)
         ContextCompat.startForegroundService(this, Intent(this, PublisherService::class.java))
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (hasBackgroundLocationPermission(this)) {
+            viewModel.onResumeWithLocationPermission()
+        }
     }
 }

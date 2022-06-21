@@ -28,6 +28,9 @@ class AssetTrackerImpl(
 ) : AssetTracker {
     private var publisher: Publisher? = null
 
+    override val isConnected: Boolean
+        get() = publisher != null
+
     override fun connect(clientId: String): SharedFlow<Set<Trackable>> {
         if (publisher == null) {
             establishNewConnection(clientId)
