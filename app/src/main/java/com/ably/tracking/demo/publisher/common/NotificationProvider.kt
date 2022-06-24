@@ -20,8 +20,8 @@ class NotificationProvider(private val context: Context) {
         createNotificationChannel(context)
         return NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("My notification")
-            .setContentText("Much longer text that cannot fit one line...")
+            .setContentTitle("Rider app")
+            .setContentText("Tracking running in the background")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .build()
     }

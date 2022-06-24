@@ -24,7 +24,7 @@ class MainViewModel(private val assetTracker: AssetTracker, coroutineScope: Coro
 
     private val trackableStates = mutableMapOf<String, StateFlow<TrackableState>>()
 
-    fun beginTracking() = launch {
+    fun onResumeWithLocationPermission() = launch {
         assetTracker.connect(clientId)
             .map { it.mapToOrders() }
             .collect { trackables ->
