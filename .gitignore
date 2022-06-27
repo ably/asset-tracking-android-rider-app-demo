@@ -57,3 +57,5 @@ tools/scripts/exec/testsSmoke
 
 #Google services config
 /app/google-services.json
+/app/release/output-metadata.json
+/app/release_keystore.jks

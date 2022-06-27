@@ -1,8 +1,6 @@
 buildscript {
     ext {
         compose_version = '1.1.1'
-        localProperties = new Properties()
-        localProperties.load(new FileInputStream(rootProject.file("local.properties")))
     }
     repositories {
         google()
@@ -32,7 +30,7 @@ allprojects {
             }
             credentials {
                 username = "mapbox"
-                password = localProperties['MAPBOX_DOWNLOADS_TOKEN']
+                password = findProperty('MAPBOX_DOWNLOADS_TOKEN')
             }
         }
         maven {
@@ -43,7 +41,7 @@ allprojects {
             }
             credentials {
                 username = "mapbox"
-                password = localProperties['MAPBOX_DOWNLOADS_TOKEN']
+                password = findProperty('MAPBOX_DOWNLOADS_TOKEN')
             }
         }
     }

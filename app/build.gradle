@@ -21,14 +21,22 @@ android {
             useSupportLibrary true
         }
 
-        buildConfigField("String", "ABLY_API_KEY", "\"${localProperties["ABLY_API_KEY"]}\"")
-        buildConfigField("String", "MAPBOX_ACCESS_TOKEN", "\"${localProperties["MAPBOX_ACCESS_TOKEN"]}\"")
+        buildConfigField("String", "ABLY_API_KEY", "\"${findProperty("ABLY_API_KEY")}\"")
+        buildConfigField("String", "MAPBOX_ACCESS_TOKEN", "\"${findProperty("MAPBOX_ACCESS_TOKEN")}\"")
+    }
+
+    signingConfigs {
+        release {//for local usage only
+            storeFile file('release_keystore.jks')
+            keyAlias findProperty("SIGNING_KEY_ALIAS")
+            keyPassword findProperty("SIGNING_KEY_PASSWORD")
+            storePassword findProperty("SIGNING_STORE_PASSWORD")
+        }
     }
 
     buildTypes {
         release {
             minifyEnabled true
-            signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
