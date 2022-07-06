@@ -41,10 +41,6 @@ class AssetTrackerImpl(
 
     @SuppressLint("MissingPermission")
     private fun establishNewConnection(clientId: String) {
-        // Prepare the default resolution for the Resolution Policy
-        val defaultResolution =
-            Resolution(Accuracy.BALANCED, desiredInterval = 1000L, minimumDisplacement = 1.0)
-
         publisher = Publisher.publishers() // get the Publisher builder in default state
             .connection(
                 ConnectionConfiguration(
@@ -58,7 +54,7 @@ class AssetTrackerImpl(
             .androidContext(context) // provide Android runtime context
             .resolutionPolicy(
                 DefaultResolutionPolicyFactory(
-                    defaultResolution,
+                    getDefaultResolution(),
                     context
                 )
             ) // provide either the default resolution policy factory or your custom implementation
@@ -86,11 +82,14 @@ class AssetTrackerImpl(
             it.add(trackable)
         }
 
+    private fun getDefaultResolution() =
+        Resolution(Accuracy.BALANCED, desiredInterval = 1000L, minimumDisplacement = 1000.0)
+
     private fun getOrderResolutionConstraints() =
         DefaultResolutionConstraints(
             resolutions = getResolutionSet(),
-            proximityThreshold = DefaultProximity(spatial = 1.0),
-            batteryLevelThreshold = 15.0f,
+            proximityThreshold = DefaultProximity(spatial = 1000.0),
+            batteryLevelThreshold = 50.0f,
             lowBatteryMultiplier = 5.0f
         )
 
