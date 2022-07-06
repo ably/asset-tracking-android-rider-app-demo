@@ -9,18 +9,26 @@ import androidx.core.app.ActivityCompat
 
 object PermissionHelper {
 
-    fun ensureLocationPermission(activity: ComponentActivity, action: () -> Unit) {
+    fun ensureLocationPermission(
+        activity: ComponentActivity,
+        onDenied: () -> Unit,
+        action: () -> Unit
+    ) {
         if (hasForegroundLocationPermission(activity)) {
             action()
         } else {
-            requestLocationPermission(activity, action)
+            requestLocationPermission(activity, onDenied, action)
         }
     }
 
-    private fun requestLocationPermission(activity: ComponentActivity, action: () -> Unit) {
+    private fun requestLocationPermission(
+        activity: ComponentActivity,
+        onDenied: () -> Unit,
+        action: () -> Unit
+    ) {
         val requestPermissionLauncher =
             activity.registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-                onLocationPermissionResult(it, activity, action)
+                onLocationPermissionResult(it, onDenied, action)
             }
 
         requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
@@ -28,13 +36,13 @@ object PermissionHelper {
 
     private fun onLocationPermissionResult(
         isGranted: Boolean,
-        activity: ComponentActivity,
+        onDenied: () -> Unit,
         action: () -> Unit
     ) {
         if (isGranted) {
             action()
         } else {
-            activity.finish()
+            onDenied()
         }
     }
 
