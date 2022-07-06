@@ -17,12 +17,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent { MainScreen(viewModel) }
         ContextCompat.startForegroundService(this, Intent(this, PublisherService::class.java))
-    }
 
-    override fun onResume() {
-        super.onResume()
         PermissionHelper.ensureLocationPermission(this) {
-            viewModel.onResumeWithLocationPermission()
+            viewModel.onLocationPermissionGranted()
         }
     }
 }
