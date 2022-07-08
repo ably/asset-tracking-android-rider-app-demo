@@ -91,9 +91,11 @@ desiredInterval provided in milliseconds
 |------|:-----------------:|:--------------:|
 | far  |        2000       |      1000      |
 | near |        1000       |       500      |
+
 ## Known Limitations
 
 For the sake of simplicity, the demo app does not handle the following cases:
 
 - keeping Wi-Fi connection awake - when a phone with the rider app running has a locked screen, the OS will disable the Wi-Fi connection to preserve the battery power after some time. If the phone has no other connection to the internet, the tracking will stop. It will resume automatically once the connection is re-established
 - location permission denial - when a user denies the permission app will simply close
+- 
