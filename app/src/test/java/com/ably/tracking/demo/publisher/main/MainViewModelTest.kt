@@ -23,7 +23,7 @@ internal class MainViewModelTest : BaseViewModelTest() {
     fun `after calling add on view model new order is created`() = runTest {
         //given
         val orderName = "Hawaii pizza"
-        viewModel.onResumeWithLocationPermission()
+        viewModel.onLocationPermissionGranted()
 
         //when
         viewModel.addOrder(orderName, destinationLatitude, destinationLongitude)
@@ -39,7 +39,7 @@ internal class MainViewModelTest : BaseViewModelTest() {
         runTest {
             //given
             val orderName = "Sushi"
-            viewModel.onResumeWithLocationPermission()
+            viewModel.onLocationPermissionGranted()
             viewModel.addOrder(orderName, destinationLatitude, destinationLongitude)
 
             //when
@@ -55,7 +55,7 @@ internal class MainViewModelTest : BaseViewModelTest() {
         runTest {
             //given
             val orderName = "Pancake"
-            viewModel.onResumeWithLocationPermission()
+            viewModel.onLocationPermissionGranted()
             viewModel.addOrder(orderName, destinationLatitude, destinationLongitude)
 
             //when
@@ -70,7 +70,7 @@ internal class MainViewModelTest : BaseViewModelTest() {
         runTest {
             //given
             val orderName = "Pancake"
-            viewModel.onResumeWithLocationPermission()
+            viewModel.onLocationPermissionGranted()
             viewModel.addOrder(orderName, destinationLatitude, destinationLongitude)
 
             //when
