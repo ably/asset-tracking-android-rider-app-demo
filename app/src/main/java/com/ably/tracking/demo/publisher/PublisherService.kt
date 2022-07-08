@@ -11,7 +11,6 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
-
 class PublisherService : Service() {
     // SupervisorJob() is used to keep the scope working after any of its children fail
     private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
