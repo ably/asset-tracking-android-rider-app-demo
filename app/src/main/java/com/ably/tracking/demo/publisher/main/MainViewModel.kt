@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import java.util.*
+import java.util.UUID
 
 class MainViewModel(private val assetTracker: AssetTracker, coroutineScope: CoroutineDispatcher) :
     BaseViewModel(coroutineScope) {

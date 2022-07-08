@@ -21,14 +21,14 @@ internal class MainViewModelTest : BaseViewModelTest() {
 
     @Test
     fun `after calling add on view model new order is created`() = runTest {
-        //given
+        // given
         val orderName = "Hawaii pizza"
         viewModel.onLocationPermissionGranted()
 
-        //when
+        // when
         viewModel.addOrder(orderName, destinationLatitude, destinationLongitude)
 
-        //then
+        // then
         val order = viewModel.state.value.orders.firstOrNull { it.name == orderName }
         assertThat(order).isNotNull()
         assertThat(order!!.state).isEqualTo(R.string.trackable_state_offline)
@@ -37,15 +37,15 @@ internal class MainViewModelTest : BaseViewModelTest() {
     @Test
     fun `after updating order state in asset manager view model state is updated`() =
         runTest {
-            //given
+            // given
             val orderName = "Sushi"
             viewModel.onLocationPermissionGranted()
             viewModel.addOrder(orderName, destinationLatitude, destinationLongitude)
 
-            //when
+            // when
             assetTracker.trackableStates[orderName]?.emit(TrackableState.Publishing)
 
-            //then
+            // then
             val order = viewModel.state.value.orders.first { it.name == orderName }
             assertThat(order.state).isEqualTo(R.string.trackable_state_publishing)
         }
@@ -53,30 +53,30 @@ internal class MainViewModelTest : BaseViewModelTest() {
     @Test
     fun `onTrack clicked selected trackable is tracked`() =
         runTest {
-            //given
+            // given
             val orderName = "Pancake"
             viewModel.onLocationPermissionGranted()
             viewModel.addOrder(orderName, destinationLatitude, destinationLongitude)
 
-            //when
+            // when
             viewModel.state.value.orders.first().onTrackClicked()
 
-            //then
+            // then
             assertThat(assetTracker.trackedTrackableId).isEqualTo(orderName)
         }
 
     @Test
     fun `on remove clicked selected trackable is removed`() =
         runTest {
-            //given
+            // given
             val orderName = "Pancake"
             viewModel.onLocationPermissionGranted()
             viewModel.addOrder(orderName, destinationLatitude, destinationLongitude)
 
-            //when
+            // when
             viewModel.state.value.orders.first().onRemoveClicked()
 
-            //then
+            // then
             assertThat(assetTracker.trackableStates[orderName]).isNull()
             assertThat(viewModel.state.value.orders).isEmpty()
         }
