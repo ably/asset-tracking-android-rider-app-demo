@@ -41,9 +41,61 @@ MAPBOX_DOWNLOADS_TOKEN=create_token_with_downloads_read_secret_scope
 MAPBOX_ACCESS_TOKEN=create_token_with_downloads_read_secret_scope
 ```
 
+## Resolutions
+
+The app is configured to publish the updates with variable frequency depending on device battery level, distance to the destination, and subscriber presence. For more information, see the [Ably Asset Tracking SDKs for Android  documentation](https://github.com/ably/ably-asset-tracking-android#resolution-policies).
+
+
+### Default publisher resolution
+
+Those properties are used as a fallback, when no other configuration is provided
+
+| property            |   value  |
+|---------------------|:--------:|
+| accuracy            | BALANCED |
+| desiredInterval     |   1000   |
+| minimumDisplacement |  1000.0  |
+
+
+### Trackable resolution constraints
+
+When creating new asset to track, we are providing a more detailed resolution configuration. Those can vary between the assets, this demo app uses the following configuration for every asset.
+
+| property              |       value      |
+|-----------------------|:----------------:|
+| proximityThreshold    | spatial = 1000.0 |
+| batteryLevelThreshold |       50.0       |
+| lowBatteryMultiplier  |        5.0       |
+| resolutions           |     see below    |
+
+
+#### Trackable resolution set
+
+accuracy - one of the enum values defined in the SDK, other available values are `LOW`, `MAXIMUM`.
+
+|      | withoutSubscriber | withSubscriber |
+|------|:-----------------:|:--------------:|
+| far  |      MINIMUM      |    BALANCED    |
+| near |      BALANCED     |      HIGH      |
+
+minimumDisplacement provided in meters
+
+|      | withoutSubscriber | withSubscriber |
+|------|:-----------------:|:--------------:|
+| far  |       100.0       |      10.0      |
+| near |        10.0       |       1.0      |
+
+desiredInterval provided in milliseconds
+
+|      | withoutSubscriber | withSubscriber |
+|------|:-----------------:|:--------------:|
+| far  |        2000       |      1000      |
+| near |        1000       |       500      |
+
 ## Known Limitations
 
 For the sake of simplicity, the demo app does not handle the following cases:
 
 - keeping Wi-Fi connection awake - when a phone with the rider app running has a locked screen, the OS will disable the Wi-Fi connection to preserve the battery power after some time. If the phone has no other connection to the internet, the tracking will stop. It will resume automatically once the connection is re-established
 - location permission denial - when a user denies the permission app will simply close
+- 
