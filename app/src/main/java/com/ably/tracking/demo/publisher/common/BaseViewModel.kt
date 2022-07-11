@@ -1,11 +1,11 @@
 package com.ably.tracking.demo.publisher.common
 
 import androidx.lifecycle.ViewModel
+import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelChildren
-import kotlin.coroutines.CoroutineContext
 
 abstract class BaseViewModel(private val baseCoroutineDispatcher: CoroutineDispatcher) :
     ViewModel(),
