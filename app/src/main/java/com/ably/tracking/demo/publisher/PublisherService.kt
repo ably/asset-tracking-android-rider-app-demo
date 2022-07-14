@@ -2,6 +2,7 @@ package com.ably.tracking.demo.publisher
 
 import android.app.Service
 import android.content.Intent
+import android.os.Binder
 import android.os.IBinder
 import com.ably.tracking.demo.publisher.ably.AssetTracker
 import com.ably.tracking.demo.publisher.common.NotificationProvider
@@ -20,10 +21,6 @@ class PublisherService : Service() {
     private val notificationProvider: NotificationProvider by inject()
 
     private val assetTracker: AssetTracker by inject()
-
-    inner class Binder : android.os.Binder() {
-        fun getService(): PublisherService = this@PublisherService
-    }
 
     override fun onBind(intent: Intent?): IBinder = binder
 
