@@ -9,7 +9,7 @@ interface AssetTracker {
 
     val isConnected: Boolean
 
-    fun connect(clientId: String): SharedFlow<Set<Trackable>>
+    suspend fun connect(clientId: String): SharedFlow<Set<Trackable>>
 
     suspend fun addTrackable(
         trackableId: String,

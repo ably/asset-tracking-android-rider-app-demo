@@ -19,10 +19,12 @@ import com.ably.tracking.publisher.RoutingProfile
 import com.ably.tracking.publisher.Trackable
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 
 class AssetTrackerImpl(
     private val context: Context,
     private val notificationProvider: NotificationProvider,
+    private val locationLogger: LocationLogger,
     private val mapBoxAccessToken: String,
     private val ablyApiKey: String
 ) : AssetTracker {
@@ -31,7 +33,7 @@ class AssetTrackerImpl(
     override val isConnected: Boolean
         get() = publisher != null
 
-    override fun connect(clientId: String): SharedFlow<Set<Trackable>> {
+    override suspend fun connect(clientId: String): SharedFlow<Set<Trackable>> {
         if (publisher == null) {
             establishNewConnection(clientId)
         }
@@ -40,7 +42,7 @@ class AssetTrackerImpl(
     }
 
     @SuppressLint("MissingPermission")
-    private fun establishNewConnection(clientId: String) {
+    private suspend fun establishNewConnection(clientId: String) {
         publisher = Publisher.publishers() // get the Publisher builder in default state
             .connection(
                 ConnectionConfiguration(
@@ -65,6 +67,10 @@ class AssetTrackerImpl(
                 notificationProvider.notificationId
             )
             .start()
+
+        publisher?.locations?.collect {
+            locationLogger.logLocationUpdate(it)
+        }
     }
 
     override suspend fun addTrackable(

@@ -2,7 +2,7 @@ package com.ably.tracking.demo.publisher.main
 
 import com.ably.tracking.TrackableState
 import com.ably.tracking.demo.publisher.BaseViewModelTest
-import com.ably.tracking.demo.publisher.FakeAssetTracker
+import com.ably.tracking.demo.publisher.ably.FakeAssetTracker
 import com.ably.tracking.demo.publisher.R
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi

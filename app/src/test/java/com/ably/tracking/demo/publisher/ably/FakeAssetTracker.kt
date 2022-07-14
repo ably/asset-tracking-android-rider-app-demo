@@ -1,7 +1,6 @@
-package com.ably.tracking.demo.publisher
+package com.ably.tracking.demo.publisher.ably
 
 import com.ably.tracking.TrackableState
-import com.ably.tracking.demo.publisher.ably.AssetTracker
 import com.ably.tracking.publisher.Trackable
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -17,7 +16,7 @@ class FakeAssetTracker : AssetTracker {
 
     val trackables = MutableStateFlow(emptySet<Trackable>())
 
-    override fun connect(clientId: String): SharedFlow<Set<Trackable>> {
+    override suspend fun connect(clientId: String): SharedFlow<Set<Trackable>> {
         isConnected = true
         return trackables
     }
