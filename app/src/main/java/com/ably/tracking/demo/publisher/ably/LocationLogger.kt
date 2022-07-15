@@ -12,10 +12,13 @@ class LocationLogger(private val fileWriter: LogFileWriter) {
     companion object {
         private const val LOG_TIME_FORMATTER_PATTERN = "HH:mm:ss"
         private const val FILE_NAME_FORMATTER_PATTERN = "dd.MM_HH:mm:ss"
-        private const val FILE_NAME_SUFFIX = "_location.log"
+        private const val LOG_FILE_NAME_SUFFIX = "_location.log"
+        private const val HISTORY_FILE_NAME_SUFFIX = "_history.log"
         private const val LOG_DIRECTORY = "riderLogs"
         private const val SPACE = " "
     }
+
+    private var sessionStart: Long = 0
 
     private val logTimeFormatter by lazy {
         SimpleDateFormat(LOG_TIME_FORMATTER_PATTERN, Locale.getDefault())
@@ -29,9 +32,8 @@ class LocationLogger(private val fileWriter: LogFileWriter) {
 
     private fun ensureLogFileExists(location: Location) {
         if (!fileWriter.isReady) {
-            val formatter = SimpleDateFormat(FILE_NAME_FORMATTER_PATTERN, Locale.getDefault())
-            val date = Date(location.time)
-            val fileName = formatter.format(date) + FILE_NAME_SUFFIX
+            sessionStart = location.time
+            val fileName = sessionStart.toFileName() + LOG_FILE_NAME_SUFFIX
 
             fileWriter.prepare(LOG_DIRECTORY, fileName)
         }
@@ -42,11 +44,21 @@ class LocationLogger(private val fileWriter: LogFileWriter) {
         fileWriter.writeLine(logTimeFormatter.format(date) + SPACE + location)
     }
 
-    fun close() {
+    fun logLocationHistoryDataAndClose(locationHistoryData: LocationHistoryData) {
+        //close locations logs writer
         fileWriter.close()
+
+        //prepare location history writer
+        val fileName = sessionStart.toFileName() + HISTORY_FILE_NAME_SUFFIX
+        fileWriter.prepare(LOG_DIRECTORY, fileName)
+        fileWriter.writeLine(locationHistoryData.toString())
+        fileWriter.close()
+
     }
 
-    fun logLocationHistoryData(locationHistoryData: LocationHistoryData) {
-        TODO("Not yet implemented")
+    private fun Long.toFileName(): String {
+        val formatter = SimpleDateFormat(FILE_NAME_FORMATTER_PATTERN, Locale.getDefault())
+        val date = Date(this)
+        return formatter.format(date)
     }
 }

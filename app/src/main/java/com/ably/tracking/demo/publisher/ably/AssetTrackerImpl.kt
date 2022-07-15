@@ -83,7 +83,7 @@ class AssetTrackerImpl(
 
 
         publisher?.locationHistory //raw location history, emitted on stop
-            ?.onEach { locationLogger.logLocationHistoryData(it) }
+            ?.onEach { locationLogger.logLocationHistoryDataAndClose(it) }
             ?.launchIn(coroutineScope)
 
     }
@@ -153,7 +153,5 @@ class AssetTrackerImpl(
     override suspend fun disconnect() {
         publisher?.stop()
         publisher = null
-        locationLogger.close()
-        coroutineScope.cancel()
     }
 }
