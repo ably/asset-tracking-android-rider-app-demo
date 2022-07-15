@@ -6,7 +6,7 @@ import com.ably.tracking.demo.publisher.ably.LogFileWriterImpl
 import com.ably.tracking.demo.publisher.ably.LogFileWriter
 import com.ably.tracking.demo.publisher.ably.LocationLogger
 import com.ably.tracking.demo.publisher.common.NotificationProvider
-import com.ably.tracking.demo.publisher.main.MainViewModel
+import com.ably.tracking.demo.publisher.ui.main.MainViewModel
 import kotlinx.coroutines.Dispatchers
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind

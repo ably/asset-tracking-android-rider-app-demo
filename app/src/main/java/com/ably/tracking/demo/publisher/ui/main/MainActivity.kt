@@ -1,4 +1,4 @@
-package com.ably.tracking.demo.publisher.main
+package com.ably.tracking.demo.publisher.ui.main
 
 import android.app.AlertDialog
 import android.content.Intent

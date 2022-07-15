@@ -19,7 +19,7 @@
         android:theme="@style/Theme.AATPublisherDemo"
         tools:targetApi="31">
         <activity
-            android:name=".main.MainActivity"
+            android:name="com.ably.tracking.demo.publisher.ui.main.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.AATPublisherDemo">
             <intent-filter>

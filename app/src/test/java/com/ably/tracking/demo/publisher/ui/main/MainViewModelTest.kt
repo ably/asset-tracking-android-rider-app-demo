@@ -1,4 +1,4 @@
-package com.ably.tracking.demo.publisher.main
+package com.ably.tracking.demo.publisher.ui.main
 
 import com.ably.tracking.TrackableState
 import com.ably.tracking.demo.publisher.BaseViewModelTest
