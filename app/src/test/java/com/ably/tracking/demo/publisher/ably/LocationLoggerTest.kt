@@ -15,7 +15,7 @@ internal class LocationLoggerTest {
         const val WROCLAW_LONGITUDE = 17.0312766
     }
 
-    private val fileWriter = FakeFileWriter()
+    private val fileWriter = FakeLogFileWriter()
 
     private val locationLogger = LocationLogger(fileWriter)
 

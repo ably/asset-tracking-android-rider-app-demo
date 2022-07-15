@@ -15,7 +15,8 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val assetTracker: AssetTracker, coroutineScope: CoroutineDispatcher) :
+class MainViewModel(private val assetTracker: AssetTracker,
+                    coroutineScope: CoroutineDispatcher) :
     BaseViewModel(coroutineScope) {
 
     private val clientId: String = UUID.randomUUID().toString()

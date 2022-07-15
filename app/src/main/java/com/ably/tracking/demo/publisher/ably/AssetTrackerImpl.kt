@@ -17,17 +17,26 @@ import com.ably.tracking.publisher.MapConfiguration
 import com.ably.tracking.publisher.Publisher
 import com.ably.tracking.publisher.RoutingProfile
 import com.ably.tracking.publisher.Trackable
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 class AssetTrackerImpl(
     private val context: Context,
+    coroutineDispatcher: CoroutineDispatcher,
     private val notificationProvider: NotificationProvider,
     private val locationLogger: LocationLogger,
     private val mapBoxAccessToken: String,
     private val ablyApiKey: String
 ) : AssetTracker {
+
+    private val coroutineScope = CoroutineScope(coroutineDispatcher + Job())
+
     private var publisher: Publisher? = null
 
     override val isConnected: Boolean
@@ -42,7 +51,7 @@ class AssetTrackerImpl(
     }
 
     @SuppressLint("MissingPermission")
-    private suspend fun establishNewConnection(clientId: String) {
+    private fun establishNewConnection(clientId: String) {
         publisher = Publisher.publishers() // get the Publisher builder in default state
             .connection(
                 ConnectionConfiguration(
@@ -68,9 +77,15 @@ class AssetTrackerImpl(
             )
             .start()
 
-        publisher?.locations?.collect {
-            locationLogger.logLocationUpdate(it)
-        }
+        publisher?.locations //enhanced location as soon as they arrive from mapbox
+            ?.onEach { locationLogger.logLocationUpdate(it) }
+            ?.launchIn(coroutineScope)
+
+
+        publisher?.locationHistory //raw location history, emitted on stop
+            ?.onEach { locationLogger.logLocationHistoryData(it) }
+            ?.launchIn(coroutineScope)
+
     }
 
     override suspend fun addTrackable(
@@ -138,5 +153,7 @@ class AssetTrackerImpl(
     override suspend fun disconnect() {
         publisher?.stop()
         publisher = null
+        locationLogger.close()
+        coroutineScope.cancel()
     }
 }
