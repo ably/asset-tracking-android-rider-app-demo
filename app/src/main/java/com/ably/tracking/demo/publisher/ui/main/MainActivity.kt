@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import com.ably.tracking.demo.publisher.PublisherService
 import com.ably.tracking.demo.publisher.R
 import com.ably.tracking.demo.publisher.common.PermissionHelper
+import com.ably.tracking.demo.publisher.ui.debug.DebugActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
@@ -18,7 +19,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { MainScreen(viewModel) }
+        setContent { MainScreen(viewModel,::openSettings) }
         ContextCompat.startForegroundService(this, Intent(this, PublisherService::class.java))
 
         PermissionHelper.ensureLocationPermission(this, this::showPermissionRequiredDialog) {
@@ -41,5 +42,10 @@ class MainActivity : ComponentActivity() {
             .setPositiveButton(R.string.ok) { _, _ -> onOk() }
             .setCancelable(false)
             .show()
+    }
+
+    private fun openSettings() {
+        val intent = Intent(this, DebugActivity::class.java)
+        startActivity(intent)
     }
 }

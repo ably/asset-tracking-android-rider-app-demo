@@ -2,11 +2,14 @@ package com.ably.tracking.demo.publisher
 
 import com.ably.tracking.demo.publisher.ably.AssetTracker
 import com.ably.tracking.demo.publisher.ably.AssetTrackerImpl
-import com.ably.tracking.demo.publisher.ably.LogFileWriterImpl
-import com.ably.tracking.demo.publisher.ably.LogFileWriter
-import com.ably.tracking.demo.publisher.ably.LocationLogger
+import com.ably.tracking.demo.publisher.ably.log.FileManager
+import com.ably.tracking.demo.publisher.ably.log.LogFileWriterImpl
+import com.ably.tracking.demo.publisher.ably.log.LogFileWriter
+import com.ably.tracking.demo.publisher.ably.log.LocationLogger
 import com.ably.tracking.demo.publisher.common.NotificationProvider
+import com.ably.tracking.demo.publisher.ui.debug.DebugActionsProvider
 import com.ably.tracking.demo.publisher.ui.main.MainViewModel
+import java.util.UUID
 import kotlinx.coroutines.Dispatchers
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
@@ -25,11 +28,17 @@ val appModule = module {
         )
     } bind AssetTracker::class
 
-    factory { LocationLogger(get()) }
+    single { UUID.randomUUID().toString() }
+
+    factory { params -> DebugActionsProvider(get(), get(), params.get(), get()) }
+
+    factory { LocationLogger(get(), get()) }
 
     factory { LogFileWriterImpl(get()) } bind LogFileWriter::class
 
+    factory { FileManager(get()) }
+
     single { NotificationProvider(get()) }
 
-    viewModel { MainViewModel(get(), Dispatchers.Main) }
+    viewModel { MainViewModel(get(), get(), Dispatchers.Main) }
 }

@@ -1,4 +1,4 @@
-package com.ably.tracking.demo.publisher.ably
+package com.ably.tracking.demo.publisher.ably.log
 
 interface LogFileWriter {
 

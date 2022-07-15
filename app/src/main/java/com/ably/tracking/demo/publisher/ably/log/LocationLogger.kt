@@ -1,4 +1,4 @@
-package com.ably.tracking.demo.publisher.ably
+package com.ably.tracking.demo.publisher.ably.log
 
 import com.ably.tracking.Location
 import com.ably.tracking.LocationUpdate
@@ -7,7 +7,10 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class LocationLogger(private val fileWriter: LogFileWriter) {
+class LocationLogger(
+    private val fileWriter: LogFileWriter,
+    private val fileManager: FileManager
+) {
 
     companion object {
         private const val LOG_TIME_FORMATTER_PATTERN = "HH:mm:ss"
@@ -60,5 +63,11 @@ class LocationLogger(private val fileWriter: LogFileWriter) {
         val formatter = SimpleDateFormat(FILE_NAME_FORMATTER_PATTERN, Locale.getDefault())
         val date = Date(this)
         return formatter.format(date)
+    }
+
+    fun getLogFiles() = fileManager.getFiles(LOG_DIRECTORY)
+
+    fun removeLogFiles() {
+        fileManager.removeDirectory(LOG_DIRECTORY)
     }
 }

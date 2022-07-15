@@ -18,16 +18,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AATPublisherDemo"
         tools:targetApi="31">
-        <activity
-            android:name="com.ably.tracking.demo.publisher.ui.main.MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AATPublisherDemo">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+      <activity
+        android:name="com.ably.tracking.demo.publisher.ui.main.MainActivity"
+        android:exported="true"
+        android:theme="@style/Theme.AATPublisherDemo">
+        <intent-filter>
+          <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+          <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+      </activity>
+      <activity
+        android:name="com.ably.tracking.demo.publisher.ui.debug.DebugActivity"
+        android:exported="true"
+        android:theme="@style/Theme.AATPublisherDemo"/>
+
+      <provider
+        android:name="androidx.core.content.FileProvider"
+        android:authorities="com.ably.tracking.demo.publisher.fileprovider"
+        android:grantUriPermissions="true"
+        android:exported="false">
+        <meta-data
+          android:name="android.support.FILE_PROVIDER_PATHS"
+          android:resource="@xml/shared_filepaths" />
+      </provider>
 
         <service
             android:name=".PublisherService"

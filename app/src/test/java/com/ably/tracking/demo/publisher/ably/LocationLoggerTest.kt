@@ -2,6 +2,7 @@ package com.ably.tracking.demo.publisher.ably
 
 import com.ably.tracking.Location
 import com.ably.tracking.LocationUpdate
+import com.ably.tracking.demo.publisher.ably.log.LocationLogger
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest

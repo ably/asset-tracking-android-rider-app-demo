@@ -16,10 +16,10 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val assetTracker: AssetTracker,
+                    private val clientId: String,
                     coroutineScope: CoroutineDispatcher) :
     BaseViewModel(coroutineScope) {
 
-    private val clientId: String = UUID.randomUUID().toString()
 
     val state: MutableStateFlow<MainScreenState> = MutableStateFlow(MainScreenState())
 

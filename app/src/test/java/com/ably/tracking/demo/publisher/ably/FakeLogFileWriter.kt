@@ -1,5 +1,7 @@
 package com.ably.tracking.demo.publisher.ably
 
+import com.ably.tracking.demo.publisher.ably.log.LogFileWriter
+
 class FakeLogFileWriter : LogFileWriter {
 
     var fileName: String? = null
