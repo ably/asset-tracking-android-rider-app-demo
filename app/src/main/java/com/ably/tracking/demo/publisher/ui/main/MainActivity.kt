@@ -2,7 +2,9 @@ package com.ably.tracking.demo.publisher.ui.main
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.StringRes
@@ -31,7 +33,7 @@ class MainActivity : ComponentActivity() {
         showOkDialog(
             title = R.string.location_permission_denied_dialog_title,
             message = R.string.location_permission_denied_dialog_message,
-            onOk = this::finish
+            onOk = this::navigateToAppSettingsScreen
         )
     }
 
@@ -46,6 +48,13 @@ class MainActivity : ComponentActivity() {
 
     private fun openSettings() {
         val intent = Intent(this, SettingsActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun navigateToAppSettingsScreen() {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        val uri: Uri = Uri.fromParts("package", packageName, null)
+        intent.data = uri
         startActivity(intent)
     }
 }
