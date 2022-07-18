@@ -35,7 +35,6 @@ fun MainScreen(viewModel: MainViewModel, openSettings: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
-                // Provide Title
                 title = {
                     Text(text = stringResource(R.string.main_screen_title), color = Color.White)
                 },

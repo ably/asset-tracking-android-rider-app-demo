@@ -23,11 +23,9 @@ fun SettingsScreen(onClose: () -> Unit = {}, debugActionsProvider: SettingsActio
     Scaffold(
         topBar = {
             TopAppBar(
-                // Provide Title
                 title = {
                     Text(text = stringResource(R.string.settings_screen_title), color = Color.White)
                 },
-                // Provide the navigation Icon (Icon on the left to toggle drawer)
                 navigationIcon = {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
