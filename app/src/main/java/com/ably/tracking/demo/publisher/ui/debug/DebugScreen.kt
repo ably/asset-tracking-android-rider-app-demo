@@ -51,6 +51,8 @@ fun DebugScreenContent(debugActionsProvider: SettingsActionsProvider) {
         TextButton(text = R.string.settings_screen_export_logs_button_text) { debugActionsProvider.exportLogs() }
         TextButton(text = R.string.settings_screen_remove_logs_button_text) { debugActionsProvider.removeLogs() }
         TextButton(text = R.string.settings_screen_start_session_button_text) { debugActionsProvider.startSession() }
-        TextButton(text = R.string.settings_screen_restart_app_button_text) { debugActionsProvider.restartApplication() }
+        TextButton(text = R.string.settings_screen_restart_app_button_text) {
+            debugActionsProvider.restartApplication()
+        }
     }
 }
