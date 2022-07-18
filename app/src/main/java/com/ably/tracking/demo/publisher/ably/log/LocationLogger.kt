@@ -3,13 +3,15 @@ package com.ably.tracking.demo.publisher.ably.log
 import com.ably.tracking.Location
 import com.ably.tracking.LocationUpdate
 import com.ably.tracking.publisher.LocationHistoryData
+import com.google.gson.Gson
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
 class LocationLogger(
     private val fileWriter: LogFileWriter,
-    private val fileManager: FileManager
+    private val fileManager: FileManager,
+    private val gson: Gson
 ) {
 
     companion object {
@@ -54,7 +56,8 @@ class LocationLogger(
         //prepare location history writer
         val fileName = sessionStart.toFileName() + HISTORY_FILE_NAME_SUFFIX
         fileWriter.prepare(LOG_DIRECTORY, fileName)
-        fileWriter.writeLine(locationHistoryData.toString())
+        val locationHistoryDataJson = gson.toJson(locationHistoryData)
+        fileWriter.writeLine(locationHistoryDataJson)
         fileWriter.close()
 
     }

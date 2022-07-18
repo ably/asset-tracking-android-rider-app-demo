@@ -10,6 +10,7 @@ import com.ably.tracking.demo.publisher.ably.log.LocationLogger
 import com.ably.tracking.demo.publisher.common.NotificationProvider
 import com.ably.tracking.demo.publisher.ui.debug.DebugActionsProvider
 import com.ably.tracking.demo.publisher.ui.main.MainViewModel
+import com.google.gson.Gson
 import java.util.UUID
 import kotlinx.coroutines.Dispatchers
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -33,7 +34,9 @@ val appModule = module {
 
     factory { params -> DebugActionsProvider(get(), get(), params.get(), get()) }
 
-    factory { LocationLogger(get(), get()) }
+    factory { Gson() }
+
+    factory { LocationLogger(get(), get(), get()) }
 
     factory { LogFileWriterImpl(get()) } bind LogFileWriter::class
 

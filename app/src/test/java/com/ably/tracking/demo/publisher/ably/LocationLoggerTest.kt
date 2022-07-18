@@ -3,7 +3,12 @@ package com.ably.tracking.demo.publisher.ably
 import com.ably.tracking.Location
 import com.ably.tracking.LocationUpdate
 import com.ably.tracking.demo.publisher.ably.log.LocationLogger
+import com.ably.tracking.publisher.GeoJsonGeometry
+import com.ably.tracking.publisher.GeoJsonMessage
+import com.ably.tracking.publisher.GeoJsonProperties
+import com.ably.tracking.publisher.LocationHistoryData
 import com.google.common.truth.Truth.assertThat
+import com.google.gson.Gson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
@@ -20,7 +25,9 @@ internal class LocationLoggerTest {
 
     private val fileManager = FakeFileManager()
 
-    private val locationLogger = LocationLogger(fileWriter, fileManager)
+    private val gson = Gson()
+
+    private val locationLogger = LocationLogger(fileWriter, fileManager, gson)
 
     @Test
     fun `on first call to logLocationUpdate file is created`() = runTest {
@@ -34,7 +41,6 @@ internal class LocationLoggerTest {
         assertThat(fileWriter.fileName)
             .isEqualTo("14.07_09:06:16_location.log")
     }
-
 
     @Test
     fun `on call to logLocationUpdate location log is formatted and appended to the file`() =
@@ -53,6 +59,63 @@ internal class LocationLoggerTest {
             assertThat(fileWriter.fileLines[1])
                 .isEqualTo("09:06:17 ${secondLocationUpdate.location}")
         }
+
+    @Test
+    fun `call to logLocationHistoryDataAndClose writes JSON-serialized data to a file`() = runTest {
+        //given
+        val locationUpdate = prepareLocationUpdate(time = 1657782376167L)
+        locationLogger.logLocationUpdate(locationUpdate)
+
+        val locationHistoryData = LocationHistoryData(
+            listOf(
+                GeoJsonMessage(
+                    type = "Feature",
+                    geometry = GeoJsonGeometry(
+                        type = "Point",
+                        coordinates = listOf(17.032827, 51.1052855, 0.0)
+                    ),
+                    properties = GeoJsonProperties(
+                        accuracyHorizontal = 699.999f,
+                        bearing = 100f,
+                        speed = 50.0f,
+                        time = 1231244123.0
+                    )
+                )
+            )
+        )
+        val locationHistoryDataJson =
+            "{" +
+                "\"events\":[" +
+                "{" +
+                "\"type\":\"Feature\"," +
+                "\"geometry\":{" +
+                "\"type\":\"Point\"," +
+                "\"coordinates\":[" +
+                "17.032827," +
+                "51.1052855," +
+                "0.0" +
+                "]" +
+                "}," +
+                "\"properties\":{" +
+                "\"accuracyHorizontal\":699.999," +
+                "\"bearing\":100.0," +
+                "\"speed\":50.0," +
+                "\"time\":1.231244123E9" +
+                "}" +
+                "}" +
+                "]," +
+                "\"version\":1" +
+                "}"
+
+        //when
+        locationLogger.logLocationHistoryDataAndClose(
+            locationHistoryData
+        )
+
+        //then
+        assertThat(fileWriter.fileLines[1])
+            .isEqualTo(locationHistoryDataJson)
+    }
 
     private fun prepareLocationUpdate(time: Long) = LocationUpdate(
         Location(
