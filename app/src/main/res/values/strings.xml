@@ -23,4 +23,6 @@
     <string name="debug_screen_remove_logs_button_text">Remove logs</string>
     <string name="debug_screen_start_session_button_text">Start session</string>
     <string name="debug_screen_restart_app_button_text">Restart application</string>
+    <string name="log_share_header">Ably Rider logs</string>
+    <string name="log_share_dialog_title">Share logs</string>
 </resources>

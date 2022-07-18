@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Process
+import com.ably.tracking.demo.publisher.R
 import com.ably.tracking.demo.publisher.ably.AssetTracker
 import com.ably.tracking.demo.publisher.ably.log.LocationLogger
 import kotlinx.coroutines.GlobalScope
@@ -35,14 +36,15 @@ class DebugActionsProvider(
     }
 
     private fun share(logFiles: ArrayList<Uri>) {
+        val header = activity.getString(R.string.log_share_header)
         val intent = Intent(Intent.ACTION_SEND_MULTIPLE)
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         intent.type = "text/html"
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Header")
-        intent.putExtra(Intent.EXTRA_TEXT, "Body")
+        intent.putExtra(Intent.EXTRA_SUBJECT, header)
         intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, logFiles)
 
-        activity.startActivity(Intent.createChooser(intent, "Share Files"))
+        val title = activity.getString(R.string.log_share_dialog_title)
+        activity.startActivity(Intent.createChooser(intent, title))
     }
 
     fun removeLogs() {
