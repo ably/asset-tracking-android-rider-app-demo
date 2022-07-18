@@ -53,7 +53,7 @@ fun MainScreen(viewModel: MainViewModel, openSettings: () -> Unit) {
                 actions = {
                     Icon(
                         imageVector = Icons.Default.Settings,
-                        contentDescription = stringResource(R.string.debug_screen_back_description),
+                        contentDescription = stringResource(R.string.settings_screen_back_description),
                         modifier = Modifier.clickable(onClick = openSettings),
                         tint = Color.White
                     )

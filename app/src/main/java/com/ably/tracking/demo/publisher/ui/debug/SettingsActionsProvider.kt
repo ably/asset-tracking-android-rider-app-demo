@@ -11,7 +11,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
-class DebugActionsProvider(
+class SettingsActionsProvider(
     private val assetTracker: AssetTracker,
     private val locationLogger: LocationLogger,
     private val activity: Activity,

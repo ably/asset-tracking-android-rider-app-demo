@@ -19,19 +19,19 @@ import com.ably.tracking.demo.publisher.ui.widget.TextButton
 
 
 @Composable
-fun DebugScreen(onClose: () -> Unit = {}, debugActionsProvider: DebugActionsProvider) {
+fun SettingsScreen(onClose: () -> Unit = {}, debugActionsProvider: SettingsActionsProvider) {
     Scaffold(
         topBar = {
             TopAppBar(
                 // Provide Title
                 title = {
-                    Text(text = stringResource(R.string.debug_screen_title), color = Color.White)
+                    Text(text = stringResource(R.string.settings_screen_title), color = Color.White)
                 },
                 // Provide the navigation Icon (Icon on the left to toggle drawer)
                 navigationIcon = {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
-                        contentDescription = stringResource(R.string.debug_screen_back_description),
+                        contentDescription = stringResource(R.string.settings_screen_back_description),
                         modifier = Modifier.clickable(onClick = onClose)
                     )
                 }
@@ -43,14 +43,14 @@ fun DebugScreen(onClose: () -> Unit = {}, debugActionsProvider: DebugActionsProv
 }
 
 @Composable
-fun DebugScreenContent(debugActionsProvider: DebugActionsProvider) {
+fun DebugScreenContent(debugActionsProvider: SettingsActionsProvider) {
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
-        TextButton(text = R.string.debug_screen_close_session_button_text) { debugActionsProvider.closeSession() }
-        TextButton(text = R.string.debug_screen_export_logs_button_text) { debugActionsProvider.exportLogs() }
-        TextButton(text = R.string.debug_screen_remove_logs_button_text) { debugActionsProvider.removeLogs() }
-        TextButton(text = R.string.debug_screen_start_session_button_text) { debugActionsProvider.startSession() }
-        TextButton(text = R.string.debug_screen_restart_app_button_text) { debugActionsProvider.restartApplication() }
+        TextButton(text = R.string.settings_screen_close_session_button_text) { debugActionsProvider.closeSession() }
+        TextButton(text = R.string.settings_screen_export_logs_button_text) { debugActionsProvider.exportLogs() }
+        TextButton(text = R.string.settings_screen_remove_logs_button_text) { debugActionsProvider.removeLogs() }
+        TextButton(text = R.string.settings_screen_start_session_button_text) { debugActionsProvider.startSession() }
+        TextButton(text = R.string.settings_screen_restart_app_button_text) { debugActionsProvider.restartApplication() }
     }
 }

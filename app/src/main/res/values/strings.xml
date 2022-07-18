@@ -16,13 +16,13 @@
     <string name="trackable_state_publishing">Publishing</string>
     <string name="trackable_state_offline">Offline</string>
     <string name="trackable_state_failed">Failed</string>
-    <string name="debug_screen_title">Debug Settings</string>
-    <string name="debug_screen_back_description">Back</string>
-    <string name="debug_screen_close_session_button_text">Close session and save logs</string>
-    <string name="debug_screen_export_logs_button_text">Export logs</string>
-    <string name="debug_screen_remove_logs_button_text">Remove logs</string>
-    <string name="debug_screen_start_session_button_text">Start session</string>
-    <string name="debug_screen_restart_app_button_text">Restart application</string>
+    <string name="settings_screen_title">Debug Settings</string>
+    <string name="settings_screen_back_description">Back</string>
+    <string name="settings_screen_close_session_button_text">Close session and save logs</string>
+    <string name="settings_screen_export_logs_button_text">Export logs</string>
+    <string name="settings_screen_remove_logs_button_text">Remove logs</string>
+    <string name="settings_screen_start_session_button_text">Start session</string>
+    <string name="settings_screen_restart_app_button_text">Restart application</string>
     <string name="log_share_header">Ably Rider logs</string>
     <string name="log_share_dialog_title">Share logs</string>
 </resources>

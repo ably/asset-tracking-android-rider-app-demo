@@ -6,13 +6,13 @@ import androidx.activity.compose.setContent
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-class DebugActivity : ComponentActivity() {
+class SettingsActivity : ComponentActivity() {
 
-    private val debugActionsProvider: DebugActionsProvider by inject { parametersOf(this) }
+    private val settingsActionsProvider: SettingsActionsProvider by inject { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { DebugScreen(::finish, debugActionsProvider) }
+        setContent { SettingsScreen(::finish, settingsActionsProvider) }
     }
 
 }

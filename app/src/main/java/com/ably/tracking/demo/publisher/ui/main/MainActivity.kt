@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat
 import com.ably.tracking.demo.publisher.PublisherService
 import com.ably.tracking.demo.publisher.R
 import com.ably.tracking.demo.publisher.common.PermissionHelper
-import com.ably.tracking.demo.publisher.ui.debug.DebugActivity
+import com.ably.tracking.demo.publisher.ui.debug.SettingsActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun openSettings() {
-        val intent = Intent(this, DebugActivity::class.java)
+        val intent = Intent(this, SettingsActivity::class.java)
         startActivity(intent)
     }
 }
