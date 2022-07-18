@@ -19,7 +19,7 @@ fun TextButton(@StringRes text: Int, onClick: () -> Unit) {
         modifier = Modifier
             .background(MaterialTheme.colors.background)
             .fillMaxWidth()
-            .padding(8.dp),
+            .padding(horizontal = 8.dp),
         onClick = onClick
     ) {
         Text(stringResource(text))
