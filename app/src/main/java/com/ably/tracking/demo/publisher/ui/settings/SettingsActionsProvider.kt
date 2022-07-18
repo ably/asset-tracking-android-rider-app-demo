@@ -1,4 +1,4 @@
-package com.ably.tracking.demo.publisher.ui.debug
+package com.ably.tracking.demo.publisher.ui.settings
 
 import android.app.Activity
 import android.content.Intent

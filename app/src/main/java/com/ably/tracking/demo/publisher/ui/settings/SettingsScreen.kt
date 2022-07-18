@@ -1,4 +1,4 @@
-package com.ably.tracking.demo.publisher.ui.debug
+package com.ably.tracking.demo.publisher.ui.settings
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column

@@ -29,7 +29,7 @@
         </intent-filter>
       </activity>
       <activity
-        android:name="com.ably.tracking.demo.publisher.ui.debug.SettingsActivity"
+        android:name="com.ably.tracking.demo.publisher.ui.settings.SettingsActivity"
         android:exported="true"
         android:theme="@style/Theme.AATPublisherDemo"/>
 

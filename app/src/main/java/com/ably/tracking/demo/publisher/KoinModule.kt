@@ -8,7 +8,7 @@ import com.ably.tracking.demo.publisher.ably.log.LogFileWriterImpl
 import com.ably.tracking.demo.publisher.ably.log.LogFileWriter
 import com.ably.tracking.demo.publisher.ably.log.LocationLogger
 import com.ably.tracking.demo.publisher.common.NotificationProvider
-import com.ably.tracking.demo.publisher.ui.debug.SettingsActionsProvider
+import com.ably.tracking.demo.publisher.ui.settings.SettingsActionsProvider
 import com.ably.tracking.demo.publisher.ui.main.MainViewModel
 import com.google.gson.Gson
 import java.util.UUID

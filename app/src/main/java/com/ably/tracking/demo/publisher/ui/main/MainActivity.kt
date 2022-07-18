@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat
 import com.ably.tracking.demo.publisher.PublisherService
 import com.ably.tracking.demo.publisher.R
 import com.ably.tracking.demo.publisher.common.PermissionHelper
-import com.ably.tracking.demo.publisher.ui.debug.SettingsActivity
+import com.ably.tracking.demo.publisher.ui.settings.SettingsActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
