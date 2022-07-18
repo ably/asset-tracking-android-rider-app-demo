@@ -18,7 +18,9 @@ internal class LocationLoggerTest {
 
     private val fileWriter = FakeLogFileWriter()
 
-    private val locationLogger = LocationLogger(fileWriter)
+    private val fileManager = FakeFileManager()
+
+    private val locationLogger = LocationLogger(fileWriter, fileManager)
 
     @Test
     fun `on first call to logLocationUpdate file is created`() = runTest {

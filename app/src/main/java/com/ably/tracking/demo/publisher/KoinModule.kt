@@ -3,6 +3,7 @@ package com.ably.tracking.demo.publisher
 import com.ably.tracking.demo.publisher.ably.AssetTracker
 import com.ably.tracking.demo.publisher.ably.AssetTrackerImpl
 import com.ably.tracking.demo.publisher.ably.log.FileManager
+import com.ably.tracking.demo.publisher.ably.log.FileManagerImpl
 import com.ably.tracking.demo.publisher.ably.log.LogFileWriterImpl
 import com.ably.tracking.demo.publisher.ably.log.LogFileWriter
 import com.ably.tracking.demo.publisher.ably.log.LocationLogger
@@ -36,7 +37,7 @@ val appModule = module {
 
     factory { LogFileWriterImpl(get()) } bind LogFileWriter::class
 
-    factory { FileManager(get()) }
+    factory { FileManagerImpl(get()) } bind FileManager::class
 
     single { NotificationProvider(get()) }
 
