@@ -2,7 +2,7 @@ package com.ably.tracking.demo.publisher.ably.log
 
 import java.io.FileWriter
 
-class LogFileWriterImpl(private val fileManager: FileManagerImpl) : LogFileWriter {
+class DefaultLogFileWriter(private val fileManager: DefaultFileManager) : LogFileWriter {
 
     private var fileWriter: FileWriter? = null
 

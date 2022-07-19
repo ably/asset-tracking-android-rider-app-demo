@@ -5,7 +5,7 @@ import android.net.Uri
 import androidx.core.content.FileProvider
 import java.io.File
 
-class FileManagerImpl(private val context: Context) : FileManager {
+class DefaultFileManager(private val context: Context) : FileManager {
 
     override fun createFile(directoryName: String, fileName: String): File {
         ensureDirectoryExists(directoryName)

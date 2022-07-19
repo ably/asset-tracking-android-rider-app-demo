@@ -1,10 +1,10 @@
 package com.ably.tracking.demo.publisher
 
 import com.ably.tracking.demo.publisher.ably.AssetTracker
-import com.ably.tracking.demo.publisher.ably.AssetTrackerImpl
+import com.ably.tracking.demo.publisher.ably.DefaultAssetTracker
 import com.ably.tracking.demo.publisher.ably.log.FileManager
-import com.ably.tracking.demo.publisher.ably.log.FileManagerImpl
-import com.ably.tracking.demo.publisher.ably.log.LogFileWriterImpl
+import com.ably.tracking.demo.publisher.ably.log.DefaultFileManager
+import com.ably.tracking.demo.publisher.ably.log.DefaultLogFileWriter
 import com.ably.tracking.demo.publisher.ably.log.LogFileWriter
 import com.ably.tracking.demo.publisher.ably.log.LocationLogger
 import com.ably.tracking.demo.publisher.common.NotificationProvider
@@ -20,7 +20,7 @@ import org.koin.dsl.module
 val appModule = module {
 
     single {
-        AssetTrackerImpl(
+        DefaultAssetTracker(
             context = get(),
             coroutineDispatcher = Dispatchers.IO,
             notificationProvider = get(),
@@ -38,9 +38,9 @@ val appModule = module {
 
     factory { LocationLogger(get(), get(), get()) }
 
-    factory { LogFileWriterImpl(get()) } bind LogFileWriter::class
+    factory { DefaultLogFileWriter(get()) } bind LogFileWriter::class
 
-    factory { FileManagerImpl(get()) } bind FileManager::class
+    factory { DefaultFileManager(get()) } bind FileManager::class
 
     single { NotificationProvider(get()) }
 

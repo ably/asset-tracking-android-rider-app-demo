@@ -26,7 +26,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
-class AssetTrackerImpl(
+class DefaultAssetTracker(
     private val context: Context,
     coroutineDispatcher: CoroutineDispatcher,
     private val notificationProvider: NotificationProvider,
