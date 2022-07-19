@@ -16,7 +16,7 @@ class LocationLogger(
 
     companion object {
         private const val LOG_TIME_FORMATTER_PATTERN = "HH:mm:ss"
-        private const val FILE_NAME_FORMATTER_PATTERN = "dd.MM_HH:mm:ss"
+        private const val FILE_NAME_FORMATTER_PATTERN = "dd_MM_HH:mm:ss"
         private const val LOG_FILE_NAME_SUFFIX = "_location.log"
         private const val HISTORY_FILE_NAME_SUFFIX = "_history.log"
         private const val LOG_DIRECTORY = "riderLogs"
