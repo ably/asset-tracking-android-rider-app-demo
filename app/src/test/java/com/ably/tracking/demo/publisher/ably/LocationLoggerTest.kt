@@ -39,7 +39,7 @@ internal class LocationLoggerTest {
 
         // then
         assertThat(fileWriter.fileName)
-            .isEqualTo("14.07_09:06:16_location.log")
+            .isEqualTo("14_07_09:06:16_location.log")
     }
 
     @Test
