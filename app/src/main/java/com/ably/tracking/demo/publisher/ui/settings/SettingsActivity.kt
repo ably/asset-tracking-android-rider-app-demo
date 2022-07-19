@@ -14,5 +14,4 @@ class SettingsActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent { SettingsScreen(::finish, settingsActionsProvider) }
     }
-
 }

@@ -50,10 +50,10 @@ class LocationLogger(
     }
 
     fun logLocationHistoryDataAndClose(locationHistoryData: LocationHistoryData) {
-        //close locations logs writer
+        // close locations logs writer
         closeFileWriter()
 
-        //prepare location history writer
+        // prepare location history writer
         val fileName = sessionStart.toFileName() + HISTORY_FILE_NAME_SUFFIX
         fileWriter.prepare(LOG_DIRECTORY, fileName)
         val locationHistoryDataJson = gson.toJson(locationHistoryData)

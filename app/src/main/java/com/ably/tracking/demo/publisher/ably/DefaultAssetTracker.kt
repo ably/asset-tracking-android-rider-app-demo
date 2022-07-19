@@ -77,15 +77,13 @@ class DefaultAssetTracker(
             )
             .start()
 
-        publisher?.locations //enhanced location as soon as they arrive from mapbox
+        publisher?.locations // enhanced location as soon as they arrive from mapbox
             ?.onEach { locationLogger.logLocationUpdate(it) }
             ?.launchIn(coroutineScope)
 
-
-        publisher?.locationHistory //raw location history, emitted on stop
+        publisher?.locationHistory // raw location history, emitted on stop
             ?.onEach { locationLogger.logLocationHistoryDataAndClose(it) }
             ?.launchIn(coroutineScope)
-
     }
 
     override suspend fun addTrackable(

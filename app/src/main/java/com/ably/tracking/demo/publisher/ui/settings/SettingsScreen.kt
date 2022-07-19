@@ -17,7 +17,6 @@ import androidx.compose.ui.res.stringResource
 import com.ably.tracking.demo.publisher.R
 import com.ably.tracking.demo.publisher.ui.widget.TextButton
 
-
 @Composable
 fun SettingsScreen(onClose: () -> Unit = {}, debugActionsProvider: SettingsActionsProvider) {
     Scaffold(
