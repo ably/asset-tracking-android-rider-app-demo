@@ -31,13 +31,13 @@ internal class LocationLoggerTest {
 
     @Test
     fun `on first call to logLocationUpdate file is created`() = runTest {
-        //given
+        // given
         val locationUpdate = prepareLocationUpdate(time = 1657782376167L)
 
-        //when
+        // when
         locationLogger.logLocationUpdate(locationUpdate)
 
-        //then
+        // then
         assertThat(fileWriter.fileName)
             .isEqualTo("14.07_09:06:16_location.log")
     }
@@ -45,15 +45,15 @@ internal class LocationLoggerTest {
     @Test
     fun `on call to logLocationUpdate location log is formatted and appended to the file`() =
         runTest {
-            //given
+            // given
             val firstLocationUpdate = prepareLocationUpdate(time = 1657782376167L)
             val secondLocationUpdate = prepareLocationUpdate(time = 1657782377167L)
 
-            //when
+            // when
             locationLogger.logLocationUpdate(firstLocationUpdate)
             locationLogger.logLocationUpdate(secondLocationUpdate)
 
-            //then
+            // then
             assertThat(fileWriter.fileLines[0])
                 .isEqualTo("09:06:16 ${firstLocationUpdate.location}")
             assertThat(fileWriter.fileLines[1])
@@ -62,7 +62,7 @@ internal class LocationLoggerTest {
 
     @Test
     fun `call to logLocationHistoryDataAndClose writes JSON-serialized data to a file`() = runTest {
-        //given
+        // given
         val locationUpdate = prepareLocationUpdate(time = 1657782376167L)
         locationLogger.logLocationUpdate(locationUpdate)
 
@@ -107,12 +107,12 @@ internal class LocationLoggerTest {
                 "\"version\":1" +
                 "}"
 
-        //when
+        // when
         locationLogger.logLocationHistoryDataAndClose(
             locationHistoryData
         )
 
-        //then
+        // then
         assertThat(fileWriter.fileLines[1])
             .isEqualTo(locationHistoryDataJson)
     }
@@ -126,6 +126,7 @@ internal class LocationLoggerTest {
             speed = 0.0f,
             bearing = 0.0f,
             time = time
-        ), emptyList()
+        ),
+        emptyList()
     )
 }
