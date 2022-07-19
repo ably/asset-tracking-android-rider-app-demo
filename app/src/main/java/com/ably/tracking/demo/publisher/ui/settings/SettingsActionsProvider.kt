@@ -10,7 +10,6 @@ import com.ably.tracking.demo.publisher.ably.log.LocationLogger
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-
 class SettingsActionsProvider(
     private val assetTracker: AssetTracker,
     private val locationLogger: LocationLogger,

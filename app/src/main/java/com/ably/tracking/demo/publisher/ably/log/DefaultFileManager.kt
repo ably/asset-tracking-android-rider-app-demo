@@ -49,5 +49,4 @@ class DefaultFileManager(private val context: Context) : FileManager {
     }
 
     private fun getDirectoryPath(directoryName: String) = context.filesDir.path + "/$directoryName/"
-
 }

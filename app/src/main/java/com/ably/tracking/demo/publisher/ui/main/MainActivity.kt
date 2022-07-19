@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { MainScreen(viewModel,::openSettings) }
+        setContent { MainScreen(viewModel, ::openSettings) }
         ContextCompat.startForegroundService(this, Intent(this, PublisherService::class.java))
 
         PermissionHelper.ensureLocationPermission(this, this::showPermissionRequiredDialog) {

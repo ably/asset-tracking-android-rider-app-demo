@@ -5,7 +5,6 @@ import com.ably.tracking.demo.publisher.ably.AssetTracker
 import com.ably.tracking.demo.publisher.common.BaseViewModel
 import com.ably.tracking.demo.publisher.common.toStringRes
 import com.ably.tracking.publisher.Trackable
-import java.util.UUID
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,11 +14,12 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val assetTracker: AssetTracker,
-                    private val clientId: String,
-                    coroutineScope: CoroutineDispatcher) :
+class MainViewModel(
+    private val assetTracker: AssetTracker,
+    private val clientId: String,
+    coroutineScope: CoroutineDispatcher
+) :
     BaseViewModel(coroutineScope) {
-
 
     val state: MutableStateFlow<MainScreenState> = MutableStateFlow(MainScreenState())
 

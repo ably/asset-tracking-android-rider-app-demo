@@ -2,14 +2,14 @@ package com.ably.tracking.demo.publisher
 
 import com.ably.tracking.demo.publisher.ably.AssetTracker
 import com.ably.tracking.demo.publisher.ably.DefaultAssetTracker
-import com.ably.tracking.demo.publisher.ably.log.FileManager
 import com.ably.tracking.demo.publisher.ably.log.DefaultFileManager
 import com.ably.tracking.demo.publisher.ably.log.DefaultLogFileWriter
-import com.ably.tracking.demo.publisher.ably.log.LogFileWriter
+import com.ably.tracking.demo.publisher.ably.log.FileManager
 import com.ably.tracking.demo.publisher.ably.log.LocationLogger
+import com.ably.tracking.demo.publisher.ably.log.LogFileWriter
 import com.ably.tracking.demo.publisher.common.NotificationProvider
-import com.ably.tracking.demo.publisher.ui.settings.SettingsActionsProvider
 import com.ably.tracking.demo.publisher.ui.main.MainViewModel
+import com.ably.tracking.demo.publisher.ui.settings.SettingsActionsProvider
 import com.google.gson.Gson
 import java.util.UUID
 import kotlinx.coroutines.Dispatchers
