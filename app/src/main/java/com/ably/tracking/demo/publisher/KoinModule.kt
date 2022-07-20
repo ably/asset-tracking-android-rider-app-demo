@@ -11,6 +11,8 @@ import com.ably.tracking.demo.publisher.common.NotificationProvider
 import com.ably.tracking.demo.publisher.ui.main.MainViewModel
 import com.ably.tracking.demo.publisher.ui.settings.SettingsActionsProvider
 import com.google.gson.Gson
+import java.util.Locale
+import java.util.TimeZone
 import java.util.UUID
 import kotlinx.coroutines.Dispatchers
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -36,7 +38,11 @@ val appModule = module {
 
     factory { Gson() }
 
-    factory { LocationLogger(get(), get(), get()) }
+    factory { Locale.getDefault() }
+
+    factory { TimeZone.getDefault() }
+
+    factory { LocationLogger(get(), get(), get(), get(), get()) }
 
     factory { DefaultLogFileWriter(get()) } bind LogFileWriter::class
 
