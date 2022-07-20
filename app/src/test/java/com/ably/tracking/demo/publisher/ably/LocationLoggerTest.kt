@@ -29,7 +29,10 @@ internal class LocationLoggerTest {
 
     private val gson = Gson()
 
-    private val locationLogger = LocationLogger(fileWriter, fileManager, gson, Locale.CANADA, TimeZone.getTimeZone("UTC"))
+    private val locationLogger = LocationLogger(
+        fileWriter, fileManager, gson,
+        Locale.CANADA, TimeZone.getTimeZone("UTC")
+    )
 
     @Test
     fun `on first call to logLocationUpdate file is created`() = runTest {
