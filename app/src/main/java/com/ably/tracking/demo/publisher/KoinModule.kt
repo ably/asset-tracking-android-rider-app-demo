@@ -11,7 +11,7 @@ import com.ably.tracking.demo.publisher.ably.log.LogFileWriter
 import com.ably.tracking.demo.publisher.common.NotificationProvider
 import com.ably.tracking.demo.publisher.ui.main.MainViewModel
 import com.ably.tracking.demo.publisher.ui.settings.SettingsActionsProvider
-import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import java.util.Locale
 import java.util.TimeZone
 import java.util.UUID
@@ -37,7 +37,7 @@ val appModule = module {
 
     factory { params -> SettingsActionsProvider(get(), get(), params.get(), get()) }
 
-    factory { Gson() }
+    factory { GsonBuilder().setPrettyPrinting().create() }
 
     factory { Locale.getDefault() }
 

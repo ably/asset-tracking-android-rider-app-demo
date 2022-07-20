@@ -9,7 +9,7 @@ import com.ably.tracking.publisher.GeoJsonMessage
 import com.ably.tracking.publisher.GeoJsonProperties
 import com.ably.tracking.publisher.LocationHistoryData
 import com.google.common.truth.Truth.assertThat
-import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import java.util.Locale
 import java.util.TimeZone
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -28,7 +28,7 @@ internal class LocationLoggerTest {
 
     private val fileManager = FakeFileManager()
 
-    private val gson = Gson()
+    private val gson = GsonBuilder().setPrettyPrinting().create()
 
     private val dateFormatterFactory =
         DateFormatterFactory(Locale.UK, TimeZone.getTimeZone("UTC"))
@@ -90,28 +90,31 @@ internal class LocationLoggerTest {
             )
         )
         val locationHistoryDataJson =
-            "{" +
-                "\"events\":[" +
-                "{" +
-                "\"type\":\"Feature\"," +
-                "\"geometry\":{" +
-                "\"type\":\"Point\"," +
-                "\"coordinates\":[" +
-                "17.032827," +
-                "51.1052855," +
-                "0.0" +
-                "]" +
-                "}," +
-                "\"properties\":{" +
-                "\"accuracyHorizontal\":699.999," +
-                "\"bearing\":100.0," +
-                "\"speed\":50.0," +
-                "\"time\":1.231244123E9" +
-                "}" +
-                "}" +
-                "]," +
-                "\"version\":1" +
-                "}"
+            """
+                {
+                  "events": [
+                    {
+                      "type": "Feature",
+                      "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                          17.032827,
+                          51.1052855,
+                          0.0
+                        ]
+                      },
+                      "properties": {
+                        "accuracyHorizontal": 699.999,
+                        "bearing": 100.0,
+                        "speed": 50.0,
+                        "time": 1.231244123E9
+                      }
+                    }
+                  ],
+                  "version": 1
+                }
+            """
+                .trimIndent()
 
         // when
         locationLogger.logLocationHistoryDataAndClose(
