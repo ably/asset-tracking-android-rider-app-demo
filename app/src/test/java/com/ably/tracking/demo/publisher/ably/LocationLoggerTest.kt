@@ -2,6 +2,7 @@ package com.ably.tracking.demo.publisher.ably
 
 import com.ably.tracking.Location
 import com.ably.tracking.LocationUpdate
+import com.ably.tracking.demo.publisher.ably.log.DateFormatterFactory
 import com.ably.tracking.demo.publisher.ably.log.LocationLogger
 import com.ably.tracking.publisher.GeoJsonGeometry
 import com.ably.tracking.publisher.GeoJsonMessage
@@ -29,10 +30,10 @@ internal class LocationLoggerTest {
 
     private val gson = Gson()
 
-    private val locationLogger = LocationLogger(
-        fileWriter, fileManager, gson,
-        Locale.CANADA, TimeZone.getTimeZone("UTC")
-    )
+    private val dateFormatterFactory =
+        DateFormatterFactory(Locale.UK, TimeZone.getTimeZone("UTC"))
+
+    private val locationLogger = LocationLogger(fileWriter, fileManager, gson, dateFormatterFactory)
 
     @Test
     fun `on first call to logLocationUpdate file is created`() = runTest {

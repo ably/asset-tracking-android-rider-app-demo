@@ -2,6 +2,7 @@ package com.ably.tracking.demo.publisher
 
 import com.ably.tracking.demo.publisher.ably.AssetTracker
 import com.ably.tracking.demo.publisher.ably.DefaultAssetTracker
+import com.ably.tracking.demo.publisher.ably.log.DateFormatterFactory
 import com.ably.tracking.demo.publisher.ably.log.DefaultFileManager
 import com.ably.tracking.demo.publisher.ably.log.DefaultLogFileWriter
 import com.ably.tracking.demo.publisher.ably.log.FileManager
@@ -42,7 +43,9 @@ val appModule = module {
 
     factory { TimeZone.getDefault() }
 
-    factory { LocationLogger(get(), get(), get(), get(), get()) }
+    factory { DateFormatterFactory(get(), get()) }
+
+    factory { LocationLogger(get(), get(), get(), get()) }
 
     factory { DefaultLogFileWriter(get()) } bind LogFileWriter::class
 
