@@ -11,7 +11,8 @@ import java.util.Locale
 class LocationLogger(
     private val fileWriter: LogFileWriter,
     private val fileManager: FileManager,
-    private val gson: Gson
+    private val gson: Gson,
+    private val locale: Locale
 ) {
 
     companion object {
@@ -26,7 +27,7 @@ class LocationLogger(
     private var sessionStart: Long = 0
 
     private val logTimeFormatter by lazy {
-        SimpleDateFormat(LOG_TIME_FORMATTER_PATTERN, Locale.getDefault())
+        SimpleDateFormat(LOG_TIME_FORMATTER_PATTERN, locale)
     }
 
     fun logLocationUpdate(locationUpdate: LocationUpdate) {
@@ -66,7 +67,7 @@ class LocationLogger(
     }
 
     private fun Long.toFileName(): String {
-        val formatter = SimpleDateFormat(FILE_NAME_FORMATTER_PATTERN, Locale.getDefault())
+        val formatter = SimpleDateFormat(FILE_NAME_FORMATTER_PATTERN, locale)
         val date = Date(this)
         return formatter.format(date)
     }

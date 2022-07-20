@@ -9,6 +9,7 @@ import com.ably.tracking.publisher.GeoJsonProperties
 import com.ably.tracking.publisher.LocationHistoryData
 import com.google.common.truth.Truth.assertThat
 import com.google.gson.Gson
+import java.util.Locale
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
@@ -27,7 +28,7 @@ internal class LocationLoggerTest {
 
     private val gson = Gson()
 
-    private val locationLogger = LocationLogger(fileWriter, fileManager, gson)
+    private val locationLogger = LocationLogger(fileWriter, fileManager, gson, Locale.UK)
 
     @Test
     fun `on first call to logLocationUpdate file is created`() = runTest {
