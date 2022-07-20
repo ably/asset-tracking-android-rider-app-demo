@@ -73,6 +73,14 @@ ktlint {
     outputColorName = 'RED' // easier to spot failures in console output
 }
 
+tasks.withType(Test) {
+    testLogging {
+        exceptionFormat "full"
+        events "started", "skipped", "passed", "failed"
+        showStandardStreams true
+    }
+}
+
 dependencies {
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.activity:activity-compose:1.4.0'
@@ -96,6 +104,9 @@ dependencies {
 
     // Koin for Android
     implementation "io.insert-koin:koin-android:3.2.0"
+
+    //GSON
+    implementation 'com.google.code.gson:gson:2.9.0'
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1"
