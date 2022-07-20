@@ -10,6 +10,7 @@ import com.ably.tracking.publisher.LocationHistoryData
 import com.google.common.truth.Truth.assertThat
 import com.google.gson.Gson
 import java.util.Locale
+import java.util.TimeZone
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
@@ -28,7 +29,7 @@ internal class LocationLoggerTest {
 
     private val gson = Gson()
 
-    private val locationLogger = LocationLogger(fileWriter, fileManager, gson, Locale.UK)
+    private val locationLogger = LocationLogger(fileWriter, fileManager, gson, Locale.CANADA, TimeZone.getTimeZone("UTC"))
 
     @Test
     fun `on first call to logLocationUpdate file is created`() = runTest {
@@ -40,7 +41,7 @@ internal class LocationLoggerTest {
 
         // then
         assertThat(fileWriter.fileName)
-            .isEqualTo("14_07_09:06:16_location.log")
+            .isEqualTo("14_07_07:06:16_location.log")
     }
 
     @Test
@@ -56,9 +57,9 @@ internal class LocationLoggerTest {
 
             // then
             assertThat(fileWriter.fileLines[0])
-                .isEqualTo("09:06:16 ${firstLocationUpdate.location}")
+                .isEqualTo("07:06:16 ${firstLocationUpdate.location}")
             assertThat(fileWriter.fileLines[1])
-                .isEqualTo("09:06:17 ${secondLocationUpdate.location}")
+                .isEqualTo("07:06:17 ${secondLocationUpdate.location}")
         }
 
     @Test
