@@ -73,6 +73,14 @@ ktlint {
     outputColorName = 'RED' // easier to spot failures in console output
 }
 
+tasks.withType(Test) {
+    testLogging {
+        exceptionFormat "full"
+        events "started", "skipped", "passed", "failed"
+        showStandardStreams true
+    }
+}
+
 dependencies {
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.activity:activity-compose:1.4.0'
