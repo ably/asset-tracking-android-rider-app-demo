@@ -67,9 +67,16 @@ class LocationLogger(
     }
 
     private fun Long.toFileName(): String {
+        println("TDEB: toFileName")
+        println("TDEB: time: $this")
+
         val formatter = SimpleDateFormat(FILE_NAME_FORMATTER_PATTERN, locale)
         val date = Date(this)
-        return formatter.format(date)
+        println("TDEB: date: $date")
+
+        val fileName = formatter.format(date)
+        println("TDEB: fileName: $fileName")
+        return fileName
     }
 
     fun getLogFiles() = fileManager.getFiles(LOG_DIRECTORY)
