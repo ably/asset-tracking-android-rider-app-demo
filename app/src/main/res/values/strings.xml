@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">AATPublisherDemo</string>
+    <string name="main_screen_title">Ride Demo App</string>
     <string name="add_order_button">Add order</string>
     <string name="track_order_button">Start tracking</string>
     <string name="remove_order_button">Remove order</string>
@@ -15,4 +16,13 @@
     <string name="trackable_state_publishing">Publishing</string>
     <string name="trackable_state_offline">Offline</string>
     <string name="trackable_state_failed">Failed</string>
+    <string name="settings_screen_title">Debug Settings</string>
+    <string name="settings_screen_back_description">Back</string>
+    <string name="settings_screen_close_session_button_text">Close session and save logs</string>
+    <string name="settings_screen_export_logs_button_text">Export logs</string>
+    <string name="settings_screen_remove_logs_button_text">Remove logs</string>
+    <string name="settings_screen_start_session_button_text">Start session</string>
+    <string name="settings_screen_restart_app_button_text">Restart application</string>
+    <string name="log_share_header">Ably Rider logs</string>
+    <string name="log_share_dialog_title">Share logs</string>
 </resources>
