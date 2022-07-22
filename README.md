@@ -96,7 +96,7 @@ desiredInterval provided in milliseconds
 
 To export location logs from the current session, enter the settings screen by clicking the cog icon on the main screen. Logs for each session are stored in two files named by time and date of the first location logged, for example, `14_07_07:06:16_location.log`. Note that location logging starts after adding a trackable.
 - `*_location.log` - contains location reading. Consequent readings are appended to the file as soon as they arrive
-- `*__history.log` - contains location history from the session and is available only after the publisher disconnects
+- `*_history.log` - contains location history from the session and is available only after the publisher disconnects
 
 There are the following options available on the settings menu:
 - "Close session and save logs" - disconnects current publisher and exports
