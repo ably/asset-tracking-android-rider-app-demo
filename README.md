@@ -92,6 +92,19 @@ desiredInterval provided in milliseconds
 | far  |        2000       |      1000      |
 | near |        1000       |       500      |
 
+## Location logs
+
+To export location logs from the current session, enter the settings screen by clicking the cog icon on the main screen. Logs for each session are stored in two files named by time and date of the first location logged, for example, `14_07_07:06:16_location.log`. Note that location logging starts after adding a trackable.
+- `*_location.log` - contains location reading. Consequent readings are appended to the file as soon as they arrive
+- `*__history.log` - contains location history from the session and is available only after the publisher disconnects
+
+There are the following options available on the settings menu:
+- "Close session and save logs" - disconnects current publisher and exports
+- "Export logs" - shares all files present in the log directory inside the app's private storage
+- "Remove logs" - removes all files present in the log directory inside the app's private storage
+- "Start session" - creates a new publisher and connects it to Ably
+- "Restart application" - restarts the application process. Will restart all publishers as well as background services
+
 ## Known Limitations
 
 For the sake of simplicity, the demo app does not handle the following cases:
