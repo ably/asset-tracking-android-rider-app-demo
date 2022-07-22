@@ -99,11 +99,11 @@ To export location logs from the current session, enter the settings screen by c
 - `*_history.log` - contains location history from the session and is available only after the publisher disconnects
 
 There are the following options available on the settings menu:
-- "Close session and save logs" - disconnects current publisher and exports
-- "Export logs" - shares all files present in the log directory inside the app's private storage
+- "Close session and save logs" - disconnects current publisher and exports location history logs
+- "Export logs" - shares all files present in the log directory inside the app's private storage using Android share intent
 - "Remove logs" - removes all files present in the log directory inside the app's private storage
 - "Start session" - creates a new publisher and connects it to Ably
-- "Restart application" - restarts the application process. Will restart all publishers as well as background services
+- "Restart application" - restarts the application process. Will force shut all publishers as well as background services and recreate them. A new logging session will start, and location reading logs from the previous session will be available in the app storage, but location history logs will not be available.
 
 ## Known Limitations
 
