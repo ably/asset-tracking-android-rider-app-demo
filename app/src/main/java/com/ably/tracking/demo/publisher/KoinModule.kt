@@ -8,6 +8,10 @@ import com.ably.tracking.demo.publisher.ably.log.DefaultLogFileWriter
 import com.ably.tracking.demo.publisher.ably.log.FileManager
 import com.ably.tracking.demo.publisher.ably.log.LocationLogger
 import com.ably.tracking.demo.publisher.ably.log.LogFileWriter
+import com.ably.tracking.demo.publisher.api.DeliveryServiceApiSource
+import com.ably.tracking.demo.publisher.api.buildDeliveryServiceApi
+import com.ably.tracking.demo.publisher.api.buildOkHttpClient
+import com.ably.tracking.demo.publisher.api.buildRetrofit
 import com.ably.tracking.demo.publisher.common.NotificationProvider
 import com.ably.tracking.demo.publisher.ui.main.MainViewModel
 import com.ably.tracking.demo.publisher.ui.settings.SettingsActionsProvider
@@ -52,6 +56,14 @@ val appModule = module {
     factory { DefaultFileManager(get()) } bind FileManager::class
 
     single { NotificationProvider(get()) }
+
+    factory { buildOkHttpClient() }
+
+    factory { buildRetrofit(get(), BuildConfig.FIREBASE_REGION, BuildConfig.FIREBASE_PROJECT_NAME) }
+
+    factory { buildDeliveryServiceApi(get()) }
+
+    factory { DeliveryServiceApiSource(get()) }
 
     viewModel { MainViewModel(get(), get(), Dispatchers.Main) }
 }

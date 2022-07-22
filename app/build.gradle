@@ -24,6 +24,9 @@ android {
 
         buildConfigField("String", "ABLY_API_KEY", "\"${findProperty("ABLY_API_KEY")}\"")
         buildConfigField("String", "MAPBOX_ACCESS_TOKEN", "\"${findProperty("MAPBOX_ACCESS_TOKEN")}\"")
+        buildConfigField("String", "AUTHORIZATION_HEADER_BASE_64", "\"${findProperty("AUTHORIZATION_HEADER_BASE_64")}\"")
+        buildConfigField("String", "FIREBASE_REGION", "\"${findProperty("FIREBASE_REGION")}\"")
+        buildConfigField("String", "FIREBASE_PROJECT_NAME", "\"${findProperty("FIREBASE_PROJECT_NAME")}\"")
     }
 
     signingConfigs {
@@ -104,6 +107,11 @@ dependencies {
 
     // Koin for Android
     implementation "io.insert-koin:koin-android:3.2.0"
+
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
 
     //GSON
     implementation 'com.google.code.gson:gson:2.9.0'
