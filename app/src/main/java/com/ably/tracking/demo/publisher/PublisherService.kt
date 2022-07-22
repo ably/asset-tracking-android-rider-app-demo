@@ -16,13 +16,11 @@ class PublisherService : Service() {
     // SupervisorJob() is used to keep the scope working after any of its children fail
     private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
 
-    private val binder = Binder()
-
     private val notificationProvider: NotificationProvider by inject()
 
     private val assetTracker: AssetTracker by inject()
 
-    override fun onBind(intent: Intent?): IBinder = binder
+    override fun onBind(intent: Intent?): IBinder = Binder()
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         startForeground(notificationProvider.notificationId, notificationProvider.notification)
