@@ -15,6 +15,7 @@ import com.ably.tracking.demo.publisher.api.buildRetrofit
 import com.ably.tracking.demo.publisher.common.NotificationProvider
 import com.ably.tracking.demo.publisher.ui.main.MainViewModel
 import com.ably.tracking.demo.publisher.ui.settings.SettingsActionsProvider
+import com.ably.tracking.demo.publisher.ui.splash.SplashViewModel
 import com.google.gson.GsonBuilder
 import java.util.Locale
 import java.util.TimeZone
@@ -66,4 +67,6 @@ val appModule = module {
     factory { DeliveryServiceApiSource(get()) }
 
     viewModel { MainViewModel(get(), get(), Dispatchers.Main) }
+
+    viewModel { SplashViewModel(Dispatchers.Main) }
 }
