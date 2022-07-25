@@ -8,7 +8,7 @@ import com.ably.tracking.demo.publisher.ably.log.DefaultLogFileWriter
 import com.ably.tracking.demo.publisher.ably.log.FileManager
 import com.ably.tracking.demo.publisher.ably.log.LocationLogger
 import com.ably.tracking.demo.publisher.ably.log.LogFileWriter
-import com.ably.tracking.demo.publisher.api.DeliveryServiceApiSource
+import com.ably.tracking.demo.publisher.api.DefaultDeliveryServiceApiSource
 import com.ably.tracking.demo.publisher.api.buildDeliveryServiceApi
 import com.ably.tracking.demo.publisher.api.buildOkHttpClient
 import com.ably.tracking.demo.publisher.api.buildRetrofit
@@ -64,7 +64,7 @@ val appModule = module {
 
     factory { buildDeliveryServiceApi(get()) }
 
-    factory { DeliveryServiceApiSource(get()) }
+    factory { DefaultDeliveryServiceApiSource(get()) }
 
     viewModel { MainViewModel(get(), get(), Dispatchers.Main) }
 
