@@ -12,7 +12,8 @@ internal class InMemorySecretsManagerTest {
 
     private val deliveryServiceApiSource = FakeDeliveryServiceApiSource()
 
-    private val inMemorySecretsManager = InMemorySecretsManager(deliveryServiceApiSource, BuildConfig.AUTHORIZATION_HEADER_BASE_64)
+    private val inMemorySecretsManager =
+        InMemorySecretsManager(deliveryServiceApiSource, BuildConfig.AUTHORIZATION_HEADER_BASE_64)
 
     @Test
     fun `getMapboxToken return token from api after loadSecrets`() = runTest {

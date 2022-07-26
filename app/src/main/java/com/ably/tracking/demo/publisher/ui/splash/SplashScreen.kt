@@ -12,9 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
-
 @Composable
-fun SplashScreen(viewModel: SplashViewModel, openMainScreen: () -> Unit) {
+@Preview
+fun SplashScreen() {
     Scaffold(
         content = { SplashScreenContent() },
         modifier = Modifier.fillMaxSize(),

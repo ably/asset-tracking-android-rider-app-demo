@@ -12,9 +12,6 @@ import org.junit.Test
 @ExperimentalCoroutinesApi
 internal class SplashViewModelTest : BaseViewModelTest() {
 
-    private val destinationLatitude = "51.1065859"
-    private val destinationLongitude = "17.0312766"
-
     private val navigator = FakeNavigator()
 
     private val secretsManager = FakeSecretsManager()
