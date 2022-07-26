@@ -8,11 +8,16 @@ import com.ably.tracking.demo.publisher.ably.log.DefaultLogFileWriter
 import com.ably.tracking.demo.publisher.ably.log.FileManager
 import com.ably.tracking.demo.publisher.ably.log.LocationLogger
 import com.ably.tracking.demo.publisher.ably.log.LogFileWriter
-import com.ably.tracking.demo.publisher.api.DefaultDeliveryServiceApiSource
+import com.ably.tracking.demo.publisher.api.RetrofitDeliveryServiceApiSource
+import com.ably.tracking.demo.publisher.api.DeliveryServiceApiSource
 import com.ably.tracking.demo.publisher.api.buildDeliveryServiceApi
 import com.ably.tracking.demo.publisher.api.buildOkHttpClient
 import com.ably.tracking.demo.publisher.api.buildRetrofit
 import com.ably.tracking.demo.publisher.common.NotificationProvider
+import com.ably.tracking.demo.publisher.secrets.InMemorySecretsManager
+import com.ably.tracking.demo.publisher.secrets.SecretsManager
+import com.ably.tracking.demo.publisher.ui.ActivityNavigator
+import com.ably.tracking.demo.publisher.ui.Navigator
 import com.ably.tracking.demo.publisher.ui.main.MainViewModel
 import com.ably.tracking.demo.publisher.ui.settings.SettingsActionsProvider
 import com.ably.tracking.demo.publisher.ui.splash.SplashViewModel
@@ -23,6 +28,7 @@ import java.util.UUID
 import kotlinx.coroutines.Dispatchers
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
+import org.koin.dsl.binds
 import org.koin.dsl.module
 
 val appModule = module {
@@ -39,6 +45,8 @@ val appModule = module {
     } bind AssetTracker::class
 
     single { UUID.randomUUID().toString() }
+
+    single { ActivityNavigator() } binds arrayOf(ActivityNavigator::class, Navigator::class)
 
     factory { params -> SettingsActionsProvider(get(), get(), params.get(), get()) }
 
@@ -64,9 +72,16 @@ val appModule = module {
 
     factory { buildDeliveryServiceApi(get()) }
 
-    factory { DefaultDeliveryServiceApiSource(get()) }
+    factory { RetrofitDeliveryServiceApiSource(get()) } bind DeliveryServiceApiSource::class
+
+    single {
+        InMemorySecretsManager(
+            get(),
+            BuildConfig.AUTHORIZATION_HEADER_BASE_64
+        )
+    } bind SecretsManager::class
 
     viewModel { MainViewModel(get(), get(), Dispatchers.Main) }
 
-    viewModel { SplashViewModel(Dispatchers.Main) }
+    viewModel { SplashViewModel(get(), get(), Dispatchers.Main) }
 }

@@ -1,6 +1,6 @@
 package com.ably.tracking.demo.publisher.api
 
-class DefaultDeliveryServiceApiSource(private val deliveryServiceApi: DeliveryServiceApi) :
+class RetrofitDeliveryServiceApiSource(private val deliveryServiceApi: DeliveryServiceApi) :
     DeliveryServiceApiSource {
 
     companion object {

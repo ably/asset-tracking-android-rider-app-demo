@@ -8,11 +8,11 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-internal class SecretsManagerTest {
+internal class InMemorySecretsManagerTest {
 
     private val deliveryServiceApiSource = FakeDeliveryServiceApiSource()
 
-    private val secretsManager = SecretsManager(deliveryServiceApiSource, BuildConfig.AUTHORIZATION_HEADER_BASE_64)
+    private val inMemorySecretsManager = InMemorySecretsManager(deliveryServiceApiSource, BuildConfig.AUTHORIZATION_HEADER_BASE_64)
 
     @Test
     fun `getMapboxToken return token from api after loadSecrets`() = runTest {
@@ -20,8 +20,8 @@ internal class SecretsManagerTest {
         deliveryServiceApiSource.mapboxToken = "notARealMapboxToken"
 
         // when
-        secretsManager.loadSecrets()
-        val mapboxToken = secretsManager.getMapboxToken()
+        inMemorySecretsManager.loadSecrets()
+        val mapboxToken = inMemorySecretsManager.getMapboxToken()
 
         // then
         Truth.assertThat(mapboxToken)
@@ -34,8 +34,8 @@ internal class SecretsManagerTest {
         deliveryServiceApiSource.ablyToken = "notARealAblyToken"
 
         // when
-        secretsManager.loadSecrets()
-        val mapboxToken = secretsManager.getAblyToken()
+        inMemorySecretsManager.loadSecrets()
+        val mapboxToken = inMemorySecretsManager.getAblyToken()
 
         // then
         Truth.assertThat(mapboxToken)

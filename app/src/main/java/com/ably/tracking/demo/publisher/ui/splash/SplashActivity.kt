@@ -14,6 +14,8 @@ class SplashActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent { SplashScreen(viewModel, ::openMainScreen) }
+
+        viewModel.onCreate()
     }
 
     private fun openMainScreen() {
