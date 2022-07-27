@@ -12,5 +12,4 @@ class RetrofitDeliveryServiceApiSource(private val deliveryServiceApi: DeliveryS
 
     override suspend fun getAblyToken(authBase64: String) =
         deliveryServiceApi.getAblyToken(AUTHORIZATION_HEADER_PREFIX + authBase64).token
-
 }

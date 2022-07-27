@@ -22,7 +22,7 @@ fun buildRetrofit(
 ): Retrofit =
     Retrofit.Builder()
         .client(okHttpClient)
-        .baseUrl("https://${firebaseRegion}-${firebaseProjectName}.cloudfunctions.net/deliveryService/")
+        .baseUrl("https://$firebaseRegion-$firebaseProjectName.cloudfunctions.net/deliveryService/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
