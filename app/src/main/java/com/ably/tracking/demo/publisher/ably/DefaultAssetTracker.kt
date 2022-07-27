@@ -103,19 +103,19 @@ class DefaultAssetTracker(
             val trackable =
                 Trackable(
                     id = trackableId,
-                    Destination(destinationLatitude, destinationLongitude),
+                    destination = Destination(destinationLatitude, destinationLongitude),
                     constraints = getOrderResolutionConstraints()
                 )
             it.add(trackable)
         }
 
     private fun getDefaultResolution() =
-        Resolution(Accuracy.BALANCED, desiredInterval = 1000L, minimumDisplacement = 1000.0)
+        Resolution(Accuracy.BALANCED, desiredInterval = 1_000L, minimumDisplacement = 1_000.0)
 
     private fun getOrderResolutionConstraints() =
         DefaultResolutionConstraints(
             resolutions = getResolutionSet(),
-            proximityThreshold = DefaultProximity(spatial = 1000.0),
+            proximityThreshold = DefaultProximity(spatial = 1_000.0),
             batteryLevelThreshold = 50.0f,
             lowBatteryMultiplier = 5.0f
         )
@@ -124,17 +124,17 @@ class DefaultAssetTracker(
         DefaultResolutionSet(
             farWithoutSubscriber = Resolution(
                 accuracy = Accuracy.MINIMUM,
-                desiredInterval = 2000L,
+                desiredInterval = 2_000L,
                 minimumDisplacement = 100.0
             ),
             farWithSubscriber = Resolution(
                 accuracy = Accuracy.BALANCED,
-                desiredInterval = 1000L,
+                desiredInterval = 1_000L,
                 minimumDisplacement = 10.0
             ),
             nearWithoutSubscriber = Resolution(
                 accuracy = Accuracy.BALANCED,
-                desiredInterval = 1000L,
+                desiredInterval = 1_000L,
                 minimumDisplacement = 10.0
             ),
             nearWithSubscriber = Resolution(
@@ -147,13 +147,18 @@ class DefaultAssetTracker(
     override fun getTrackableState(trackableId: String) = publisher!!.getTrackableState(trackableId)
 
     override suspend fun track(trackableId: String) {
-        val trackable = publisher!!.trackables.replayCache.last().first { it.id == trackableId }
+        val trackable = getTrackableForId(trackableId)
         publisher!!.track(trackable)
     }
 
     override suspend fun remove(trackableId: String) {
-        val trackable = publisher!!.trackables.replayCache.last().first { it.id == trackableId }
+        val trackable = getTrackableForId(trackableId)
         publisher!!.remove(trackable)
+    }
+
+    private fun getTrackableForId(trackableId: String): Trackable {
+        val trackablesSet = publisher!!.trackables.replayCache.last()
+        return trackablesSet.first { it.id == trackableId }
     }
 
     override suspend fun disconnect() {
