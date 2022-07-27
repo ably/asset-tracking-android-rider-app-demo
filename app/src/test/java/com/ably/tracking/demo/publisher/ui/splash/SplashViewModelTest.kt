@@ -28,4 +28,17 @@ internal class SplashViewModelTest : BaseViewModelTest() {
         // then
         Truth.assertThat(navigator.navigationPath[0]).isEqualTo(MainActivity::class.java)
     }
+
+    @Test
+    fun `when fetching secrets throws exception show message`() = runTest {
+        // given
+        secretsManager.loadSecretsException = RuntimeException("loading secrets failed")
+
+        // when
+        viewModel.onCreate()
+
+        // then
+        val state = viewModel.state.value
+        Truth.assertThat(state.showFetchingSecretsFailedDialog).isEqualTo(true)
+    }
 }

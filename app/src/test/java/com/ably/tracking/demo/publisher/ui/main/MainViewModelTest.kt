@@ -4,6 +4,7 @@ import com.ably.tracking.TrackableState
 import com.ably.tracking.demo.publisher.BaseViewModelTest
 import com.ably.tracking.demo.publisher.R
 import com.ably.tracking.demo.publisher.ably.FakeAssetTracker
+import com.ably.tracking.demo.publisher.ui.FakeNavigator
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -17,7 +18,9 @@ internal class MainViewModelTest : BaseViewModelTest() {
 
     private val assetTracker = FakeAssetTracker()
 
-    private val viewModel = MainViewModel(assetTracker, baseTestCoroutineDispatcher)
+    private val navigator = FakeNavigator()
+
+    private val viewModel = MainViewModel(assetTracker, navigator, baseTestCoroutineDispatcher)
 
     @Test
     fun `after calling add on view model new order is created`() = runTest {

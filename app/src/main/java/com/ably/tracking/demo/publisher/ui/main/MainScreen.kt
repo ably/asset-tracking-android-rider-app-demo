@@ -27,7 +27,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ably.tracking.demo.publisher.R
-import com.ably.tracking.demo.publisher.main.AddOrderDialog
 import com.ably.tracking.demo.publisher.ui.widget.TextButton
 
 @Composable

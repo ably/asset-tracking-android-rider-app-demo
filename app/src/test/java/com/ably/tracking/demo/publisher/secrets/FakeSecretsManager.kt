@@ -8,8 +8,12 @@ class FakeSecretsManager : SecretsManager {
 
     var usernameValue: String? = null
 
+    var loadSecretsException: Exception? = null
+
     override suspend fun loadSecrets() {
-        // no-op
+        loadSecretsException?.let {
+            throw it
+        }
     }
 
     override fun getUsername() = usernameValue!!

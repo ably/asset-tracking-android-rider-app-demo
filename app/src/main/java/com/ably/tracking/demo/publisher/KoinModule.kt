@@ -78,7 +78,7 @@ val appModule = module {
         )
     } bind SecretsManager::class
 
-    viewModel { MainViewModel(get(), Dispatchers.Main) }
+    viewModel { MainViewModel(get(), get(), Dispatchers.Main) }
 
     viewModel { SplashViewModel(get(), get(), Dispatchers.Main) }
 }
