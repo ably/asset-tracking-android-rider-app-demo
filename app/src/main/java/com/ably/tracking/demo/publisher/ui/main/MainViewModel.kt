@@ -4,6 +4,7 @@ import com.ably.tracking.TrackableState
 import com.ably.tracking.demo.publisher.ably.AssetTracker
 import com.ably.tracking.demo.publisher.common.BaseViewModel
 import com.ably.tracking.demo.publisher.common.toStringRes
+import com.ably.tracking.demo.publisher.ui.Navigator
 import com.ably.tracking.publisher.Trackable
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(
     private val assetTracker: AssetTracker,
+    private val navigator: Navigator,
     coroutineScope: CoroutineDispatcher
 ) :
     BaseViewModel(coroutineScope) {
@@ -97,5 +99,9 @@ class MainViewModel(
 
     private suspend fun updateState(update: (MainScreenState) -> MainScreenState) {
         state.emit(update(state.value))
+    }
+
+    fun onSettingsClicked() {
+        navigator.openSettings()
     }
 }

@@ -31,7 +31,7 @@ import com.ably.tracking.demo.publisher.main.AddOrderDialog
 import com.ably.tracking.demo.publisher.ui.widget.TextButton
 
 @Composable
-fun MainScreen(viewModel: MainViewModel, openSettings: () -> Unit) {
+fun MainScreen(viewModel: MainViewModel) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -42,7 +42,7 @@ fun MainScreen(viewModel: MainViewModel, openSettings: () -> Unit) {
                     Icon(
                         imageVector = Icons.Default.Settings,
                         contentDescription = stringResource(R.string.settings_screen_back_description),
-                        modifier = Modifier.clickable(onClick = openSettings),
+                        modifier = Modifier.clickable(onClick = viewModel::onSettingsClicked),
                         tint = Color.White
                     )
                 }
