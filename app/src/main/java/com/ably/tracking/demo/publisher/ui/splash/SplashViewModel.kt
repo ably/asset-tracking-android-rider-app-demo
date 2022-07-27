@@ -17,7 +17,7 @@ class SplashViewModel(
         launch {
             secretsManager.loadSecrets()
             navigator.openMain()
+            navigator.closeCurrentScreen()
         }
     }
-
 }

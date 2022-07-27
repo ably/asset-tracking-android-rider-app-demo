@@ -31,10 +31,10 @@ the project root:
 - `MAPBOX_ACCESS_TOKEN`: On
   the [Mapbox Access Tokens page](https://account.mapbox.com/access-tokens/), create a token with
   public scopes.
--`AUTHORIZATION_HEADER_BASE_64`: Base64 encoded "user:password" used to authorize with the backend service. For more details see [Ably Asset Tracking Backend Demo](https://github.com/ably/asset-tracking-backend-demo)
--`FIREBASE_REGION`: Firebase region to which the backend is deployed, used to determine api host
--`FIREBASE_PROJECT_NAME`: Backend Firebase project name, used to determine api host
-
+- `AUTHORIZATION_HEADER_BASE_64`: Base64 encoded "user:password" used to authorize with the backend service. For more details see [Ably Asset Tracking Backend Demo](https://github.com/ably/asset-tracking-backend-demo)
+- `AUTHORIZATION_USERNAME`: username used to authorize with the backend service and as clientId
+- `FIREBASE_REGION`: Firebase region to which the backend is deployed, used to determine api host
+- `FIREBASE_PROJECT_NAME`: Backend Firebase project name, used to determine api host
 
 To do this, create a file in the project root (if it doesn't exist already) named `local.properties`
 , and add the following values:
@@ -43,6 +43,10 @@ To do this, create a file in the project root (if it doesn't exist already) name
 ABLY_API_KEY=get_value_from_ably_dashboard
 MAPBOX_DOWNLOADS_TOKEN=create_token_with_downloads_read_secret_scope
 MAPBOX_ACCESS_TOKEN=create_token_with_downloads_read_secret_scope
+AUTHORIZATION_HEADER_BASE_64=create_user_in_firestore
+AUTHORIZATION_USERNAME=create_user_in_firestore
+FIREBASE_REGION=create_firebase_action
+FIREBASE_PROJECT_NAME=create_firebase_action
 ```
 
 ## Resolutions

@@ -8,8 +8,8 @@ import com.ably.tracking.demo.publisher.ably.log.DefaultLogFileWriter
 import com.ably.tracking.demo.publisher.ably.log.FileManager
 import com.ably.tracking.demo.publisher.ably.log.LocationLogger
 import com.ably.tracking.demo.publisher.ably.log.LogFileWriter
-import com.ably.tracking.demo.publisher.api.RetrofitDeliveryServiceApiSource
 import com.ably.tracking.demo.publisher.api.DeliveryServiceApiSource
+import com.ably.tracking.demo.publisher.api.RetrofitDeliveryServiceApiSource
 import com.ably.tracking.demo.publisher.api.buildDeliveryServiceApi
 import com.ably.tracking.demo.publisher.api.buildOkHttpClient
 import com.ably.tracking.demo.publisher.api.buildRetrofit
@@ -24,7 +24,6 @@ import com.ably.tracking.demo.publisher.ui.splash.SplashViewModel
 import com.google.gson.GsonBuilder
 import java.util.Locale
 import java.util.TimeZone
-import java.util.UUID
 import kotlinx.coroutines.Dispatchers
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
@@ -39,16 +38,13 @@ val appModule = module {
             coroutineDispatcher = Dispatchers.IO,
             notificationProvider = get(),
             locationLogger = get(),
-            mapBoxAccessToken = BuildConfig.MAPBOX_ACCESS_TOKEN,
-            ablyApiKey = BuildConfig.ABLY_API_KEY
+            secretsManager = get()
         )
     } bind AssetTracker::class
 
-    single { UUID.randomUUID().toString() }
-
     single { ActivityNavigator() } binds arrayOf(ActivityNavigator::class, Navigator::class)
 
-    factory { params -> SettingsActionsProvider(get(), get(), params.get(), get()) }
+    factory { params -> SettingsActionsProvider(get(), get(), params.get()) }
 
     factory { GsonBuilder().setPrettyPrinting().create() }
 
@@ -77,11 +73,12 @@ val appModule = module {
     single {
         InMemorySecretsManager(
             get(),
-            BuildConfig.AUTHORIZATION_HEADER_BASE_64
+            BuildConfig.AUTHORIZATION_HEADER_BASE_64,
+            BuildConfig.AUTHORIZATION_USERNAME
         )
     } bind SecretsManager::class
 
-    viewModel { MainViewModel(get(), get(), Dispatchers.Main) }
+    viewModel { MainViewModel(get(), Dispatchers.Main) }
 
     viewModel { SplashViewModel(get(), get(), Dispatchers.Main) }
 }

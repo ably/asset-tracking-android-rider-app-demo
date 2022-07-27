@@ -8,7 +8,7 @@ import com.ably.tracking.demo.publisher.ui.settings.SettingsActivity
 
 class ActivityNavigator : Navigator, ActivityLifecycleCallbacksAdapter() {
 
-    var currentActivity: Activity? = null
+    private var currentActivity: Activity? = null
 
     override fun openMain() {
         navigateToActivity(MainActivity::class.java)
@@ -23,6 +23,10 @@ class ActivityNavigator : Navigator, ActivityLifecycleCallbacksAdapter() {
             val intent = Intent(it, activityClass)
             it.startActivity(intent)
         }
+    }
+
+    override fun closeCurrentScreen() {
+        currentActivity?.finish()
     }
 
     override fun onActivityResumed(activity: Activity) {

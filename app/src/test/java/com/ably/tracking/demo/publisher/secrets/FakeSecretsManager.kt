@@ -6,11 +6,15 @@ class FakeSecretsManager : SecretsManager {
 
     var ablyTokenValue: String? = null
 
+    var usernameValue: String? = null
+
     override suspend fun loadSecrets() {
-        //no-op
+        // no-op
     }
 
-    override fun getMapboxToken() = mapboxTokenValue
+    override fun getUsername() = usernameValue!!
 
-    override fun getAblyToken() = ablyTokenValue
+    override fun getMapboxToken() = mapboxTokenValue!!
+
+    override fun getAblyToken() = ablyTokenValue!!
 }

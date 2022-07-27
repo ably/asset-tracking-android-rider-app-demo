@@ -22,9 +22,8 @@ android {
             useSupportLibrary true
         }
 
-        buildConfigField("String", "ABLY_API_KEY", "\"${findProperty("ABLY_API_KEY")}\"")
-        buildConfigField("String", "MAPBOX_ACCESS_TOKEN", "\"${findProperty("MAPBOX_ACCESS_TOKEN")}\"")
         buildConfigField("String", "AUTHORIZATION_HEADER_BASE_64", "\"${findProperty("AUTHORIZATION_HEADER_BASE_64")}\"")
+        buildConfigField("String", "AUTHORIZATION_USERNAME", "\"${findProperty("AUTHORIZATION_USERNAME")}\"")
         buildConfigField("String", "FIREBASE_REGION", "\"${findProperty("FIREBASE_REGION")}\"")
         buildConfigField("String", "FIREBASE_PROJECT_NAME", "\"${findProperty("FIREBASE_PROJECT_NAME")}\"")
     }

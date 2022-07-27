@@ -13,13 +13,12 @@ import kotlinx.coroutines.launch
 class SettingsActionsProvider(
     private val assetTracker: AssetTracker,
     private val locationLogger: LocationLogger,
-    private val activity: Activity,
-    private val clientId: String
+    private val activity: Activity
 ) {
 
     fun startSession() {
         GlobalScope.launch {
-            assetTracker.connect(clientId)
+            assetTracker.connect()
         }
     }
 

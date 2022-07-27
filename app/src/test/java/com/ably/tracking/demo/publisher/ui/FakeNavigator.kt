@@ -14,4 +14,8 @@ class FakeNavigator : Navigator {
     override fun openSettings() {
         navigationPath.add(SettingsActivity::class.java)
     }
+
+    override fun closeCurrentScreen() {
+        // no-op
+    }
 }

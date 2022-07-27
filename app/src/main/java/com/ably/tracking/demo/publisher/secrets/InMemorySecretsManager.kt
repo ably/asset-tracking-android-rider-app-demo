@@ -4,7 +4,8 @@ import com.ably.tracking.demo.publisher.api.DeliveryServiceApiSource
 
 class InMemorySecretsManager(
     private val deliveryServiceApiSource: DeliveryServiceApiSource,
-    private val authBase64: String
+    private val authBase64: String,
+    private val authUsername: String
 ) : SecretsManager {
 
     companion object {
@@ -19,7 +20,9 @@ class InMemorySecretsManager(
         secrets[ALBY_TOKEN_KEY] = deliveryServiceApiSource.getAblyToken(authBase64)
     }
 
-    override fun getMapboxToken(): String? = secrets[MAPBOX_TOKEN_KEY]
+    override fun getUsername(): String = authUsername
 
-    override fun getAblyToken(): String? = secrets[ALBY_TOKEN_KEY]
+    override fun getMapboxToken(): String = secrets[MAPBOX_TOKEN_KEY] ?: ""
+
+    override fun getAblyToken(): String = secrets[ALBY_TOKEN_KEY] ?: ""
 }

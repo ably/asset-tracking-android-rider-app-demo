@@ -16,7 +16,7 @@ class FakeAssetTracker : AssetTracker {
 
     val trackables = MutableStateFlow(emptySet<Trackable>())
 
-    override fun connect(clientId: String): SharedFlow<Set<Trackable>> {
+    override fun connect(): SharedFlow<Set<Trackable>> {
         isConnected = true
         return trackables
     }

@@ -16,7 +16,6 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(
     private val assetTracker: AssetTracker,
-    private val clientId: String,
     coroutineScope: CoroutineDispatcher
 ) :
     BaseViewModel(coroutineScope) {
@@ -26,7 +25,7 @@ class MainViewModel(
     private val trackableStates = mutableMapOf<String, StateFlow<TrackableState>>()
 
     fun onLocationPermissionGranted() = launch {
-        assetTracker.connect(clientId)
+        assetTracker.connect()
             .map { it.mapToOrders() }
             .collect { trackables ->
                 updateState {

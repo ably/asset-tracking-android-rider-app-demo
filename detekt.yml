@@ -2,6 +2,8 @@ complexity:
   LongParameterList:
     functionThreshold: 24
     ignoreDefaultParameters: true
+  TooManyFunctions:
+    ignorePrivate: true
 
 naming:
   FunctionNaming:

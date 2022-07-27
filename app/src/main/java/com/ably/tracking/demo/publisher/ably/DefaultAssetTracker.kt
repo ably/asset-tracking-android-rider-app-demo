@@ -9,6 +9,7 @@ import com.ably.tracking.connection.Authentication
 import com.ably.tracking.connection.ConnectionConfiguration
 import com.ably.tracking.demo.publisher.ably.log.LocationLogger
 import com.ably.tracking.demo.publisher.common.NotificationProvider
+import com.ably.tracking.demo.publisher.secrets.SecretsManager
 import com.ably.tracking.publisher.DefaultProximity
 import com.ably.tracking.publisher.DefaultResolutionConstraints
 import com.ably.tracking.publisher.DefaultResolutionPolicyFactory
@@ -25,14 +26,14 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.runBlocking
 
 class DefaultAssetTracker(
     private val context: Context,
     coroutineDispatcher: CoroutineDispatcher,
     private val notificationProvider: NotificationProvider,
     private val locationLogger: LocationLogger,
-    private val mapBoxAccessToken: String,
-    private val ablyApiKey: String
+    private val secretsManager: SecretsManager
 ) : AssetTracker {
 
     private val coroutineScope = CoroutineScope(coroutineDispatcher + Job())
@@ -42,26 +43,28 @@ class DefaultAssetTracker(
     override val isConnected: Boolean
         get() = publisher != null
 
-    override fun connect(clientId: String): SharedFlow<Set<Trackable>> {
+    override fun connect(): SharedFlow<Set<Trackable>> {
         if (publisher == null) {
-            establishNewConnection(clientId)
+            establishNewConnection()
         }
 
         return publisher!!.trackables
     }
 
     @SuppressLint("MissingPermission")
-    private fun establishNewConnection(clientId: String) {
+    private fun establishNewConnection() {
+        val mapboxToken = secretsManager.getMapboxToken()
+        val username = secretsManager.getUsername()
+
         publisher = Publisher.publishers() // get the Publisher builder in default state
             .connection(
                 ConnectionConfiguration(
-                    Authentication.basic(
-                        clientId,
-                        ablyApiKey
-                    )
+                    Authentication.jwt(username) {
+                        authorize()
+                    }
                 )
             ) // provide Ably configuration with credentials
-            .map(MapConfiguration(mapBoxAccessToken)) // provide Mapbox configuration with credentials
+            .map(MapConfiguration(mapboxToken)) // provide Mapbox configuration with credentials
             .androidContext(context) // provide Android runtime context
             .resolutionPolicy(
                 DefaultResolutionPolicyFactory(
@@ -85,6 +88,11 @@ class DefaultAssetTracker(
             ?.onEach { locationLogger.logLocationHistoryDataAndClose(it) }
             ?.launchIn(coroutineScope)
     }
+
+    private fun authorize(): String =
+        runBlocking {
+            secretsManager.getAblyToken()
+        }
 
     override suspend fun addTrackable(
         trackableId: String,
