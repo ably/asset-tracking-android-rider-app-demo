@@ -4,9 +4,14 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 
 interface DeliveryServiceApi {
+
+    companion object {
+        private const val AUTHORIZATION_HEADER_NAME = "Authorization"
+    }
+
     @GET("mapbox")
-    suspend fun getMapboxToken(@Header("Authorization") authorizationHeader: String): TokenResponse
+    suspend fun getMapboxToken(@Header(AUTHORIZATION_HEADER_NAME) authorizationHeader: String): TokenResponse
 
     @GET("ably")
-    suspend fun getAblyToken(@Header("Authorization") authorizationHeader: String): TokenResponse
+    suspend fun getAblyToken(@Header(AUTHORIZATION_HEADER_NAME) authorizationHeader: String): TokenResponse
 }
