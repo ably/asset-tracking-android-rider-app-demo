@@ -19,7 +19,7 @@ internal class SplashViewModelTest : BaseViewModelTest() {
     private val viewModel = SplashViewModel(secretsManager, navigator, baseTestCoroutineDispatcher)
 
     @Test
-    fun `after calling add on view model new order is created`() = runTest {
+    fun `after calling onCreate on view model navigates to main`() = runTest {
         // given
 
         // when

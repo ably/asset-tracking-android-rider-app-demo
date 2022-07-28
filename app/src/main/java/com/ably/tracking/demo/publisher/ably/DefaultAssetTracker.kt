@@ -60,7 +60,7 @@ class DefaultAssetTracker(
             .connection(
                 ConnectionConfiguration(
                     Authentication.jwt(username) {
-                        authorize()
+                        getAuthorizationToken()
                     }
                 )
             ) // provide Ably configuration with credentials
@@ -89,7 +89,7 @@ class DefaultAssetTracker(
             ?.launchIn(coroutineScope)
     }
 
-    private fun authorize(): String =
+    private fun getAuthorizationToken(): String =
         runBlocking {
             secretsManager.getAblyToken()
         }

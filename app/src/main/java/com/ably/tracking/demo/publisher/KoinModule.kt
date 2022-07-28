@@ -62,13 +62,13 @@ val appModule = module {
 
     single { NotificationProvider(get()) }
 
-    factory { buildOkHttpClient() }
+    single { buildOkHttpClient() }
 
-    factory { buildRetrofit(get(), BuildConfig.FIREBASE_REGION, BuildConfig.FIREBASE_PROJECT_NAME) }
+    single { buildRetrofit(get(), BuildConfig.FIREBASE_REGION, BuildConfig.FIREBASE_PROJECT_NAME) }
 
-    factory { buildDeliveryServiceApi(get()) }
+    single { buildDeliveryServiceApi(get()) }
 
-    factory { RetrofitDeliveryServiceApiSource(get()) } bind DeliveryServiceApiSource::class
+    single { RetrofitDeliveryServiceApiSource(get()) } bind DeliveryServiceApiSource::class
 
     single {
         InMemorySecretsManager(
