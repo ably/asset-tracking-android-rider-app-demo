@@ -40,9 +40,6 @@ class DefaultAssetTracker(
 
     private var publisher: Publisher? = null
 
-    override val isConnected: Boolean
-        get() = publisher != null
-
     override fun connect(): SharedFlow<Set<Trackable>> {
         if (publisher == null) {
             establishNewConnection()
