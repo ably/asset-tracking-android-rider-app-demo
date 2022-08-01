@@ -9,7 +9,7 @@ import org.junit.Test
 
 @ExperimentalCoroutinesApi
 @Ignore("Ignoring as those tests perform actual api calls")
-internal class RetrofitDeliveryServiceApiSourceTest {
+internal class ApiDeliveryServiceDataSourceTest {
 
     private val okHttpClient = buildOkHttpClient()
 
@@ -18,7 +18,7 @@ internal class RetrofitDeliveryServiceApiSourceTest {
 
     private val deliveryServiceApi = buildDeliveryServiceApi(retrofit)
 
-    private val deliveryServiceApiSource = RetrofitDeliveryServiceApiSource(deliveryServiceApi)
+    private val deliveryServiceApiSource = ApiDeliveryServiceDataSource(deliveryServiceApi)
 
     private val authorizationHeader = BuildConfig.AUTHORIZATION_HEADER_BASE_64
 

@@ -1,7 +1,7 @@
 package com.ably.tracking.demo.publisher.api
 
-class RetrofitDeliveryServiceApiSource(private val deliveryServiceApi: DeliveryServiceApi) :
-    DeliveryServiceApiSource {
+class ApiDeliveryServiceDataSource(private val deliveryServiceApi: DeliveryServiceApi) :
+    DeliveryServiceDataSource {
 
     companion object {
         private const val AUTHORIZATION_HEADER_PREFIX = "Basic "

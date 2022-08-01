@@ -1,7 +1,7 @@
 package com.ably.tracking.demo.publisher.secrets
 
 import com.ably.tracking.demo.publisher.BuildConfig
-import com.ably.tracking.demo.publisher.api.FakeDeliveryServiceApiSource
+import com.ably.tracking.demo.publisher.api.FakeDeliveryServiceDataSource
 import com.google.common.truth.Truth
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -10,7 +10,7 @@ import org.junit.Test
 @ExperimentalCoroutinesApi
 internal class InMemorySecretsManagerTest {
 
-    private val deliveryServiceApiSource = FakeDeliveryServiceApiSource()
+    private val deliveryServiceApiSource = FakeDeliveryServiceDataSource()
 
     private val inMemorySecretsManager =
         InMemorySecretsManager(
