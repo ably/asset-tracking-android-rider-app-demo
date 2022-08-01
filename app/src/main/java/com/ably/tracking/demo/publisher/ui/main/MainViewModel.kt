@@ -2,8 +2,10 @@ package com.ably.tracking.demo.publisher.ui.main
 
 import com.ably.tracking.TrackableState
 import com.ably.tracking.demo.publisher.ably.AssetTracker
+import com.ably.tracking.demo.publisher.api.DeliveryServiceApiSource
 import com.ably.tracking.demo.publisher.common.BaseViewModel
 import com.ably.tracking.demo.publisher.common.toStringRes
+import com.ably.tracking.demo.publisher.domain.OrderInteractor
 import com.ably.tracking.demo.publisher.ui.Navigator
 import com.ably.tracking.publisher.Trackable
 import kotlinx.coroutines.CoroutineDispatcher
@@ -16,7 +18,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class MainViewModel(
-    private val assetTracker: AssetTracker,
+    private val orderInteractor: OrderInteractor,
     private val navigator: Navigator,
     coroutineScope: CoroutineDispatcher
 ) :
@@ -27,7 +29,7 @@ class MainViewModel(
     private val trackableStates = mutableMapOf<String, StateFlow<TrackableState>>()
 
     fun onLocationPermissionGranted() = launch {
-        assetTracker.connect()
+        orderInteractor.connect()
             .map { it.mapToOrders() }
             .collect { trackables ->
                 updateState {
@@ -51,22 +53,22 @@ class MainViewModel(
         }
 
     private fun Trackable.getState(): TrackableState {
-        val trackableStateFlow = trackableStates[id] ?: assetTracker.getTrackableState(id)
+        val trackableStateFlow = trackableStates[id] ?: orderInteractor.getTrackableState(id)
         return trackableStateFlow?.value ?: TrackableState.Offline()
     }
 
     private fun onTrackCLicked(trackableId: String) = launch {
-        assetTracker.track(trackableId)
+        orderInteractor.track(trackableId)
     }
 
     private fun onRemoveClicked(trackableId: String) = launch {
-        assetTracker.remove(trackableId)
+        orderInteractor.remove(trackableId)
         trackableStates.remove(trackableId)
     }
 
     fun addOrder(orderName: String, destinationLatitude: String, destinationLongitude: String) =
         launch {
-            val trackableStateFlow = assetTracker.addTrackable(
+            val trackableStateFlow = orderInteractor.addTrackable(
                 orderName,
                 destinationLatitude.toDouble(),
                 destinationLongitude.toDouble()

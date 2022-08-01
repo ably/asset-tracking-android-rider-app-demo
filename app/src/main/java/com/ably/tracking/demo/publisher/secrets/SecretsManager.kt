@@ -4,5 +4,5 @@ interface SecretsManager {
     suspend fun loadSecrets()
     fun getUsername(): String
     fun getMapboxToken(): String
-    fun getAblyToken(): String
+    suspend fun getAblyToken(): String
 }

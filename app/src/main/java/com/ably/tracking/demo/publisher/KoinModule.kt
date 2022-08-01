@@ -14,6 +14,7 @@ import com.ably.tracking.demo.publisher.api.buildDeliveryServiceApi
 import com.ably.tracking.demo.publisher.api.buildOkHttpClient
 import com.ably.tracking.demo.publisher.api.buildRetrofit
 import com.ably.tracking.demo.publisher.common.NotificationProvider
+import com.ably.tracking.demo.publisher.domain.OrderInteractor
 import com.ably.tracking.demo.publisher.secrets.InMemorySecretsManager
 import com.ably.tracking.demo.publisher.secrets.SecretsManager
 import com.ably.tracking.demo.publisher.ui.ActivityNavigator
@@ -61,6 +62,14 @@ val appModule = module {
     factory { DefaultFileManager(get()) } bind FileManager::class
 
     single { NotificationProvider(get()) }
+
+    single {
+        OrderInteractor(
+            get(),
+            get(),
+            BuildConfig.AUTHORIZATION_HEADER_BASE_64
+        )
+    }
 
     single { buildOkHttpClient() }
 

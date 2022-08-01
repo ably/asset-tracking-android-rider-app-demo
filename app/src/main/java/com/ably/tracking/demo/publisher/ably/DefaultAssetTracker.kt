@@ -96,15 +96,15 @@ class DefaultAssetTracker(
         destinationLatitude: Double,
         destinationLongitude: Double
     ): StateFlow<TrackableState> =
-        publisher!!.let {
-            val trackable =
-                Trackable(
-                    id = trackableId,
-                    destination = Destination(destinationLatitude, destinationLongitude),
-                    constraints = getOrderResolutionConstraints()
-                )
-            it.add(trackable)
-        }
+            publisher!!.let {
+                val trackable =
+                    Trackable(
+                        id = trackableId,
+                        destination = Destination(destinationLatitude, destinationLongitude),
+                        constraints = getOrderResolutionConstraints()
+                    )
+                it.add(trackable)
+            }
 
     private fun getDefaultResolution() =
         Resolution(Accuracy.BALANCED, desiredInterval = 1_000L, minimumDisplacement = 1_000.0)

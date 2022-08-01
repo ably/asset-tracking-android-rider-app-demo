@@ -20,5 +20,5 @@ class FakeSecretsManager : SecretsManager {
 
     override fun getMapboxToken() = mapboxTokenValue!!
 
-    override fun getAblyToken() = ablyTokenValue!!
+    override suspend fun getAblyToken() = ablyTokenValue!!
 }
