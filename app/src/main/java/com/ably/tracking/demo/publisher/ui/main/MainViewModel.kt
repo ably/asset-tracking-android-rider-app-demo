@@ -1,8 +1,6 @@
 package com.ably.tracking.demo.publisher.ui.main
 
 import com.ably.tracking.TrackableState
-import com.ably.tracking.demo.publisher.ably.AssetTracker
-import com.ably.tracking.demo.publisher.api.DeliveryServiceApiSource
 import com.ably.tracking.demo.publisher.common.BaseViewModel
 import com.ably.tracking.demo.publisher.common.toStringRes
 import com.ably.tracking.demo.publisher.domain.OrderInteractor

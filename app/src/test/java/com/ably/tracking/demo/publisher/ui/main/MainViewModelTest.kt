@@ -4,6 +4,7 @@ import com.ably.tracking.TrackableState
 import com.ably.tracking.demo.publisher.BaseViewModelTest
 import com.ably.tracking.demo.publisher.R
 import com.ably.tracking.demo.publisher.ably.FakeAssetTracker
+import com.ably.tracking.demo.publisher.domain.OrderInteractor
 import com.ably.tracking.demo.publisher.ui.FakeNavigator
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi

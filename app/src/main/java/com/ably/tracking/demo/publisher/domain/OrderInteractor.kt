@@ -2,14 +2,14 @@ package com.ably.tracking.demo.publisher.domain
 
 import com.ably.tracking.TrackableState
 import com.ably.tracking.demo.publisher.ably.AssetTracker
-import com.ably.tracking.demo.publisher.api.DeliveryServiceApi
+import com.ably.tracking.demo.publisher.api.DeliveryServiceDataSource
 import com.ably.tracking.publisher.Trackable
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class OrderInteractor(
     private val assetTracker: AssetTracker,
-    private val deliveryServiceApi: DeliveryServiceApi,
+    private val deliveryServiceDataSource: DeliveryServiceDataSource,
     private val authorizationHeaderBase64: String
 ) {
 
@@ -21,7 +21,7 @@ class OrderInteractor(
         destinationLatitude: Double,
         destinationLongitude: Double
     ): StateFlow<TrackableState> {
-        deliveryServiceApi.assignOrder(authorizationHeaderBase64, trackableId.toLong())
+        deliveryServiceDataSource.assignOrder(authorizationHeaderBase64, trackableId.toLong())
         return assetTracker.addTrackable(trackableId, destinationLatitude, destinationLongitude)
     }
 
