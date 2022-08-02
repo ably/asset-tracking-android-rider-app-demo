@@ -8,8 +8,8 @@ import com.ably.tracking.demo.publisher.ably.log.DefaultLogFileWriter
 import com.ably.tracking.demo.publisher.ably.log.FileManager
 import com.ably.tracking.demo.publisher.ably.log.LocationLogger
 import com.ably.tracking.demo.publisher.ably.log.LogFileWriter
-import com.ably.tracking.demo.publisher.api.DeliveryServiceApiSource
-import com.ably.tracking.demo.publisher.api.RetrofitDeliveryServiceApiSource
+import com.ably.tracking.demo.publisher.api.ApiDeliveryServiceDataSource
+import com.ably.tracking.demo.publisher.api.DeliveryServiceDataSource
 import com.ably.tracking.demo.publisher.api.buildDeliveryServiceApi
 import com.ably.tracking.demo.publisher.api.buildOkHttpClient
 import com.ably.tracking.demo.publisher.api.buildRetrofit
@@ -77,7 +77,7 @@ val appModule = module {
 
     single { buildDeliveryServiceApi(get()) }
 
-    single { RetrofitDeliveryServiceApiSource(get()) } bind DeliveryServiceApiSource::class
+    single { ApiDeliveryServiceDataSource(get()) } bind DeliveryServiceDataSource::class
 
     single {
         InMemorySecretsManager(

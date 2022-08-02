@@ -1,9 +1,9 @@
 package com.ably.tracking.demo.publisher.secrets
 
-import com.ably.tracking.demo.publisher.api.DeliveryServiceApiSource
+import com.ably.tracking.demo.publisher.api.DeliveryServiceDataSource
 
 class InMemorySecretsManager(
-    private val deliveryServiceApiSource: DeliveryServiceApiSource,
+    private val deliveryServiceDataSource: DeliveryServiceDataSource,
     private val authBase64: String,
     private val authUsername: String
 ) : SecretsManager {
@@ -15,12 +15,12 @@ class InMemorySecretsManager(
     private val secrets = mutableMapOf<String, String>()
 
     override suspend fun loadSecrets() {
-        secrets[MAPBOX_TOKEN_KEY] = deliveryServiceApiSource.getMapboxToken(authBase64)
+        secrets[MAPBOX_TOKEN_KEY] = deliveryServiceDataSource.getMapboxToken(authBase64)
     }
 
     override fun getUsername(): String = authUsername
 
     override fun getMapboxToken(): String = secrets[MAPBOX_TOKEN_KEY] ?: ""
 
-    override suspend fun getAblyToken(): String = deliveryServiceApiSource.getAblyToken(authBase64)
+    override suspend fun getAblyToken(): String = deliveryServiceDataSource.getAblyToken(authBase64)
 }

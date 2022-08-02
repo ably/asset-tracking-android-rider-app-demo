@@ -1,6 +1,6 @@
 package com.ably.tracking.demo.publisher.api
 
-class FakeDeliveryServiceApiSource : DeliveryServiceApiSource {
+class FakeDeliveryServiceDataSource : DeliveryServiceDataSource {
 
     var mapboxToken: String = ""
 
