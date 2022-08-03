@@ -69,17 +69,17 @@ class MainViewModel(
     }
 
     private fun onTrackCLicked(trackableId: String) = launch {
-        orderInteractor.track(trackableId)
+        orderInteractor.pickUpOrder(trackableId)
     }
 
     private fun onRemoveClicked(trackableId: String) = launch {
-        orderInteractor.remove(trackableId)
+        orderInteractor.removeOrder(trackableId)
         trackableStates.remove(trackableId)
     }
 
     fun addOrder(orderName: String, destinationLatitude: String, destinationLongitude: String) =
         launch {
-            orderInteractor.addTrackable(
+            orderInteractor.assignOrder(
                 orderName,
                 destinationLatitude.toDouble(),
                 destinationLongitude.toDouble()

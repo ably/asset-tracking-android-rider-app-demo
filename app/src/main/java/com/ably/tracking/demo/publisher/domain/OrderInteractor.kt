@@ -17,20 +17,39 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
-class OrderInteractor(
+interface OrderInteractor {
+    val orders: MutableStateFlow<List<Order>>
+
+    fun connect()
+
+    suspend fun assignOrder(
+        orderId: String,
+        destinationLatitude: Double,
+        destinationLongitude: Double
+    )
+
+    suspend fun pickUpOrder(orderId: String)
+
+    suspend fun removeOrder(orderId: String)
+
+    suspend fun disconnect()
+
+}
+
+class DefaultOrderInteractor(
     private val assetTracker: AssetTracker,
     private val deliveryServiceDataSource: DeliveryServiceDataSource,
     private val authorizationHeaderBase64: String,
     coroutineDispatcher: CoroutineDispatcher
-) : CoroutineScope {
+) : OrderInteractor, CoroutineScope {
 
     override val coroutineContext: CoroutineContext = SupervisorJob() + coroutineDispatcher
 
     private val trackableStateFlows = mutableMapOf<String, StateFlow<TrackableState>>()
 
-    val orders: MutableStateFlow<List<Order>> = MutableStateFlow(emptyList())
+    override val orders: MutableStateFlow<List<Order>> = MutableStateFlow(emptyList())
 
-    fun connect() {
+    override fun connect() {
         launch {
             assetTracker.connect().map { it.mapToOrders() }
                 .collect { trackables ->
@@ -53,28 +72,29 @@ class OrderInteractor(
         return trackableStateFlow?.value ?: TrackableState.Offline()
     }
 
-    suspend fun addTrackable(
-        trackableId: String,
+
+    override suspend fun assignOrder(
+        orderId: String,
         destinationLatitude: Double,
         destinationLongitude: Double
     ) {
-        deliveryServiceDataSource.assignOrder(authorizationHeaderBase64, trackableId.toLong())
-        addOrder(trackableId, destinationLatitude, destinationLongitude)
+        deliveryServiceDataSource.assignOrder(authorizationHeaderBase64, orderId.toLong())
+        addOrder(orderId, destinationLatitude, destinationLongitude)
     }
 
     private suspend fun addOrder(
-        trackableId: String,
+        orderId: String,
         destinationLatitude: Double,
         destinationLongitude: Double
     ) {
         val trackableStateFlow =
-            assetTracker.addTrackable(trackableId, destinationLatitude, destinationLongitude)
+            assetTracker.addTrackable(orderId, destinationLatitude, destinationLongitude)
 
-        trackableStateFlows[trackableId] = trackableStateFlow
+        trackableStateFlows[orderId] = trackableStateFlow
 
         trackableStateFlow
             .onEach { state ->
-                updateOrders { it.updateOrders(trackableId, state) }
+                updateOrders { it.updateOrders(orderId, state) }
             }
             .launchIn(this)
     }
@@ -102,12 +122,14 @@ class OrderInteractor(
     private fun getTrackableState(trackableId: String): StateFlow<TrackableState>? =
         assetTracker.getTrackableState(trackableId)
 
-    suspend fun track(trackableId: String) = assetTracker.track(trackableId)
-
-    suspend fun remove(trackableId: String) {
-        assetTracker.remove(trackableId)
-        trackableStateFlows.remove(trackableId)
+    override suspend fun pickUpOrder(orderId: String) {
+        assetTracker.track(orderId)
     }
 
-    suspend fun disconnect() = assetTracker.disconnect()
+    override suspend fun removeOrder(orderId: String) {
+        assetTracker.remove(orderId)
+        trackableStateFlows.remove(orderId)
+    }
+
+    override suspend fun disconnect() = assetTracker.disconnect()
 }
