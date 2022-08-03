@@ -3,6 +3,7 @@ package com.ably.tracking.demo.publisher.domain
 import com.ably.tracking.TrackableState
 import com.ably.tracking.demo.publisher.ably.AssetTracker
 import com.ably.tracking.demo.publisher.api.DeliveryServiceDataSource
+import com.ably.tracking.demo.publisher.common.copyAndReplaceElementAt
 import com.ably.tracking.demo.publisher.common.toOrderState
 import com.ably.tracking.publisher.Trackable
 import kotlin.coroutines.CoroutineContext
@@ -108,12 +109,9 @@ class DefaultOrderInteractor(
             this
         } else {
             val updatedOrder = this[orderIndex].copy(state = state.toOrderState())
-            copyAndReplaceOrderAt(orderIndex, updatedOrder)
+            copyAndReplaceElementAt(orderIndex, updatedOrder)
         }
     }
-
-    private fun List<Order>.copyAndReplaceOrderAt(index: Int, order: Order) =
-        subList(0, index) + order + subList(index, size - 1)
 
     private suspend fun updateOrders(update: (List<Order>) -> List<Order>) {
         orders.emit(update(orders.value))

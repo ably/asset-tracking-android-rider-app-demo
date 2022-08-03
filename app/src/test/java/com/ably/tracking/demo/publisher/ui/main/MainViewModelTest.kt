@@ -1,10 +1,9 @@
 package com.ably.tracking.demo.publisher.ui.main
 
-import com.ably.tracking.TrackableState
 import com.ably.tracking.demo.publisher.BaseViewModelTest
 import com.ably.tracking.demo.publisher.R
-import com.ably.tracking.demo.publisher.ably.FakeAssetTracker
-import com.ably.tracking.demo.publisher.domain.OrderInteractor
+import com.ably.tracking.demo.publisher.domain.FakeOrderInteractor
+import com.ably.tracking.demo.publisher.domain.OrderState
 import com.ably.tracking.demo.publisher.ui.FakeNavigator
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -17,11 +16,11 @@ internal class MainViewModelTest : BaseViewModelTest() {
     private val destinationLatitude = "51.1065859"
     private val destinationLongitude = "17.0312766"
 
-    private val assetTracker = FakeAssetTracker()
-
     private val navigator = FakeNavigator()
 
-    private val viewModel = MainViewModel(assetTracker, navigator, baseTestCoroutineDispatcher)
+    private val orderInteractor = FakeOrderInteractor()
+
+    private val viewModel = MainViewModel(orderInteractor, navigator, baseTestCoroutineDispatcher)
 
     @Test
     fun `after calling add on view model new order is created`() = runTest {
@@ -47,7 +46,7 @@ internal class MainViewModelTest : BaseViewModelTest() {
             viewModel.addOrder(orderName, destinationLatitude, destinationLongitude)
 
             // when
-            assetTracker.trackableStates[orderName]?.emit(TrackableState.Publishing)
+            orderInteractor.updateOrderState(orderName, OrderState.Publishing)
 
             // then
             val order = viewModel.state.value.orders.first { it.name == orderName }
@@ -66,7 +65,7 @@ internal class MainViewModelTest : BaseViewModelTest() {
             viewModel.state.value.orders.first().onTrackClicked()
 
             // then
-            assertThat(assetTracker.trackedTrackableId).isEqualTo(orderName)
+            assertThat(orderInteractor.trackedOrderId).isEqualTo(orderName)
         }
 
     @Test
@@ -81,7 +80,6 @@ internal class MainViewModelTest : BaseViewModelTest() {
             viewModel.state.value.orders.first().onRemoveClicked()
 
             // then
-            assertThat(assetTracker.trackableStates[orderName]).isNull()
             assertThat(viewModel.state.value.orders).isEmpty()
         }
 }
