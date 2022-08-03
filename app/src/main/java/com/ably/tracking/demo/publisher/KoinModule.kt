@@ -15,7 +15,7 @@ import com.ably.tracking.demo.publisher.api.buildOkHttpClient
 import com.ably.tracking.demo.publisher.api.buildRetrofit
 import com.ably.tracking.demo.publisher.common.NotificationProvider
 import com.ably.tracking.demo.publisher.domain.DefaultOrderInteractor
-import com.ably.tracking.demo.publisher.domain.OrderInteractor
+import com.ably.tracking.demo.publisher.domain.OrderManager
 import com.ably.tracking.demo.publisher.secrets.InMemorySecretsManager
 import com.ably.tracking.demo.publisher.secrets.SecretsManager
 import com.ably.tracking.demo.publisher.ui.ActivityNavigator
@@ -71,7 +71,7 @@ val appModule = module {
             BuildConfig.AUTHORIZATION_HEADER_BASE_64,
             Dispatchers.Default
         )
-    } bind OrderInteractor::class
+    } bind OrderManager::class
 
     single { buildOkHttpClient() }
 

@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
 import com.ably.tracking.demo.publisher.common.NotificationProvider
-import com.ably.tracking.demo.publisher.domain.OrderInteractor
+import com.ably.tracking.demo.publisher.domain.OrderManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -18,7 +18,7 @@ class PublisherService : Service() {
 
     private val notificationProvider: NotificationProvider by inject()
 
-    private val orderInteractor: OrderInteractor by inject()
+    private val orderManager: OrderManager by inject()
 
     override fun onBind(intent: Intent?): IBinder = Binder()
 
@@ -28,7 +28,7 @@ class PublisherService : Service() {
     }
 
     override fun onDestroy() {
-        scope.launch { orderInteractor.disconnect() }
+        scope.launch { orderManager.disconnect() }
         super.onDestroy()
     }
 }

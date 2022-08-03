@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
-interface OrderInteractor {
+interface OrderManager {
     val orders: MutableStateFlow<List<Order>>
 
     fun connect()
@@ -41,7 +41,7 @@ class DefaultOrderInteractor(
     private val deliveryServiceDataSource: DeliveryServiceDataSource,
     private val authorizationHeaderBase64: String,
     coroutineDispatcher: CoroutineDispatcher
-) : OrderInteractor, CoroutineScope {
+) : OrderManager, CoroutineScope {
 
     override val coroutineContext: CoroutineContext = SupervisorJob() + coroutineDispatcher
 

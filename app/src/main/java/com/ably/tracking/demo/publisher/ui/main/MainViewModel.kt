@@ -5,7 +5,7 @@ import com.ably.tracking.TrackableState
 import com.ably.tracking.demo.publisher.R
 import com.ably.tracking.demo.publisher.common.BaseViewModel
 import com.ably.tracking.demo.publisher.domain.Order
-import com.ably.tracking.demo.publisher.domain.OrderInteractor
+import com.ably.tracking.demo.publisher.domain.OrderManager
 import com.ably.tracking.demo.publisher.domain.OrderState
 import com.ably.tracking.demo.publisher.ui.Navigator
 import kotlinx.coroutines.CoroutineDispatcher
@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class MainViewModel(
-    private val orderInteractor: OrderInteractor,
+    private val orderManager: OrderManager,
     private val navigator: Navigator,
     coroutineScope: CoroutineDispatcher
 ) :
@@ -28,7 +28,7 @@ class MainViewModel(
 
     init {
         launch {
-            orderInteractor.orders
+            orderManager.orders
                 .map { it.mapToViewItems() }
                 .collect { orders ->
                     updateState {
@@ -65,21 +65,21 @@ class MainViewModel(
     }
 
     fun onLocationPermissionGranted() = launch {
-        orderInteractor.connect()
+        orderManager.connect()
     }
 
     private fun onTrackCLicked(trackableId: String) = launch {
-        orderInteractor.pickUpOrder(trackableId)
+        orderManager.pickUpOrder(trackableId)
     }
 
     private fun onRemoveClicked(trackableId: String) = launch {
-        orderInteractor.removeOrder(trackableId)
+        orderManager.removeOrder(trackableId)
         trackableStates.remove(trackableId)
     }
 
     fun addOrder(orderName: String, destinationLatitude: String, destinationLongitude: String) =
         launch {
-            orderInteractor.assignOrder(
+            orderManager.assignOrder(
                 orderName,
                 destinationLatitude.toDouble(),
                 destinationLongitude.toDouble()

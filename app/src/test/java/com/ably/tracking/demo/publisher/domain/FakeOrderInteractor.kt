@@ -3,7 +3,7 @@ package com.ably.tracking.demo.publisher.domain
 import com.ably.tracking.demo.publisher.common.copyAndReplaceElementAt
 import kotlinx.coroutines.flow.MutableStateFlow
 
-class FakeOrderInteractor : OrderInteractor {
+class FakeOrderInteractor : OrderManager {
 
     override val orders: MutableStateFlow<List<Order>> = MutableStateFlow(emptyList())
 
