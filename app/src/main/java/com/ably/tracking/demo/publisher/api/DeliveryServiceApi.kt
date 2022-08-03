@@ -1,6 +1,5 @@
 package com.ably.tracking.demo.publisher.api
 
-import com.google.gson.JsonObject
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header

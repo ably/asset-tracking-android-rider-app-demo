@@ -34,7 +34,6 @@ interface OrderInteractor {
     suspend fun removeOrder(orderId: String)
 
     suspend fun disconnect()
-
 }
 
 class DefaultOrderInteractor(
@@ -67,12 +66,10 @@ class DefaultOrderInteractor(
             )
         }
 
-
     private fun Trackable.getState(): TrackableState {
         val trackableStateFlow = trackableStateFlows[id] ?: getTrackableState(id)
         return trackableStateFlow?.value ?: TrackableState.Offline()
     }
-
 
     override suspend fun assignOrder(
         orderId: String,
