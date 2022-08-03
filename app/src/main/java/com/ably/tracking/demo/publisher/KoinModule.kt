@@ -67,7 +67,8 @@ val appModule = module {
         OrderInteractor(
             get(),
             get(),
-            BuildConfig.AUTHORIZATION_HEADER_BASE_64
+            BuildConfig.AUTHORIZATION_HEADER_BASE_64,
+            Dispatchers.Default
         )
     }
 
