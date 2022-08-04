@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 interface OrderManager {
-    val orders: MutableStateFlow<List<Order>>
+    val orders: StateFlow<List<Order>>
 
     fun connect()
 
