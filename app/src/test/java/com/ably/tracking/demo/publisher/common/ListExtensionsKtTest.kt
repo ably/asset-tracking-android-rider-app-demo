@@ -17,6 +17,6 @@ internal class ListExtensionsKtTest {
         val output = input.copyAndReplaceElementAt(index = 2, element = 9)
 
         // then
-        assertThat(output).isEqualTo(listOf(1, 2, 9, 3, 4, 5, 6))
+        assertThat(output).isEqualTo(listOf(1, 2, 9, 4, 5, 6))
     }
 }
