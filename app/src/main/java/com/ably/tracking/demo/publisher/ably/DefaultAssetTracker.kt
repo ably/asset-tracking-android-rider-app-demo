@@ -26,7 +26,6 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.runBlocking
 
 class DefaultAssetTracker(
     private val context: Context,
@@ -39,9 +38,6 @@ class DefaultAssetTracker(
     private val coroutineScope = CoroutineScope(coroutineDispatcher + Job())
 
     private var publisher: Publisher? = null
-
-    override val isConnected: Boolean
-        get() = publisher != null
 
     override fun connect(): SharedFlow<Set<Trackable>> {
         if (publisher == null) {
@@ -60,7 +56,7 @@ class DefaultAssetTracker(
             .connection(
                 ConnectionConfiguration(
                     Authentication.jwt(username) {
-                        getAuthorizationToken()
+                        secretsManager.getAblyToken()
                     }
                 )
             ) // provide Ably configuration with credentials
@@ -88,11 +84,6 @@ class DefaultAssetTracker(
             ?.onEach { locationLogger.logLocationHistoryDataAndClose(it) }
             ?.launchIn(coroutineScope)
     }
-
-    private fun getAuthorizationToken(): String =
-        runBlocking {
-            secretsManager.getAblyToken()
-        }
 
     override suspend fun addTrackable(
         trackableId: String,

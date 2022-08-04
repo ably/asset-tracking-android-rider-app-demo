@@ -45,4 +45,28 @@ internal class ApiDeliveryServiceDataSourceTest {
         assertThat(ablyToken)
             .isNotEmpty()
     }
+
+    @Test
+    fun `call to assignOrder returns non-empty value`() = runTest {
+        // given
+
+        // when
+        val result = deliveryServiceApiSource.assignOrder(authorizationHeader, 5)
+
+        // then
+        assertThat(result)
+            .isNotNull()
+    }
+
+    @Test
+    fun `call to deleteOrder returns non-empty value`() = runTest {
+        // given
+
+        // when
+        val result = deliveryServiceApiSource.deleteOrder(authorizationHeader, 5)
+
+        // then
+        assertThat(result)
+            .isNotNull()
+    }
 }

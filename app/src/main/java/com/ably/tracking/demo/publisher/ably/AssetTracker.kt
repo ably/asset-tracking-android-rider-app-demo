@@ -7,8 +7,6 @@ import kotlinx.coroutines.flow.StateFlow
 
 interface AssetTracker {
 
-    val isConnected: Boolean
-
     fun connect(): SharedFlow<Set<Trackable>>
 
     suspend fun addTrackable(

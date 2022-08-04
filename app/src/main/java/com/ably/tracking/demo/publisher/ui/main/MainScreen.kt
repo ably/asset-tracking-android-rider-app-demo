@@ -77,7 +77,7 @@ fun MainScreenContent(state: MainScreenState, onAddTrackable: (String, String, S
 }
 
 @Composable
-fun OrderRow(order: Order) {
+fun OrderRow(order: OrderViewItem) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
@@ -97,7 +97,7 @@ fun OrderRow(order: Order) {
 @Preview(showBackground = true)
 @Composable
 fun OrderRowPreview() {
-    val order = Order(name = "Burger", R.string.trackable_state_online, {}, {})
+    val order = OrderViewItem(name = "Burger", R.string.trackable_state_online, {}, {})
     OrderRow(order = order)
 }
 
@@ -106,9 +106,9 @@ fun OrderRowPreview() {
 fun MainScreenContentPreview() {
     val state = MainScreenState(
         listOf(
-            Order(name = "Burger", R.string.trackable_state_online, {}, {}),
-            Order(name = "Pizza", R.string.trackable_state_offline, {}, {}),
-            Order(name = "Sushi", R.string.trackable_state_publishing, {}, {})
+            OrderViewItem(name = "Burger", R.string.trackable_state_online, {}, {}),
+            OrderViewItem(name = "Pizza", R.string.trackable_state_offline, {}, {}),
+            OrderViewItem(name = "Sushi", R.string.trackable_state_publishing, {}, {})
         )
     )
     MainScreenContent(state) { _, _, _ -> }
