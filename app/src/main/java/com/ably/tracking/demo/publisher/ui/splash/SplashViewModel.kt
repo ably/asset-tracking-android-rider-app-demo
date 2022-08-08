@@ -33,4 +33,16 @@ class SplashViewModel(
     fun onFetchingSecretsFailedDialogClosed() {
         navigator.closeCurrentScreen()
     }
+
+    fun onUsernameChanged(value: String) {
+
+    }
+
+    fun onPasswordChanged(value: String) {
+
+    }
+
+    fun onContinueClicked() {
+
+    }
 }

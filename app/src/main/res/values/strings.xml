@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">AATPublisherDemo</string>
+    <string name="username_label">Enter username</string>
+    <string name="password_label">Enter password</string>
+    <string name="continue_button">Continue</string>
     <string name="main_screen_title">Ride Demo App</string>
     <string name="add_order_button">Add order</string>
     <string name="track_order_button">Start tracking</string>
