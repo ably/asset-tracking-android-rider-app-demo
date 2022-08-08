@@ -22,10 +22,12 @@ internal class InMemorySecretsManagerTest {
     @Test
     fun `getMapboxToken return token from api after loadSecrets`() = runTest {
         // given
+        val username = "rider"
+        val password = "password"
         deliveryServiceApiSource.mapboxToken = "notARealMapboxToken"
 
         // when
-        inMemorySecretsManager.loadSecrets()
+        inMemorySecretsManager.loadSecrets(username, password)
         val mapboxToken = inMemorySecretsManager.getMapboxToken()
 
         // then
@@ -36,14 +38,16 @@ internal class InMemorySecretsManagerTest {
     @Test
     fun `getAblyToken return token from api after loadSecrets`() = runTest {
         // given
+        val username = "rider"
+        val password = "password"
         deliveryServiceApiSource.ablyToken = "notARealAblyToken"
 
         // when
-        inMemorySecretsManager.loadSecrets()
-        val mapboxToken = inMemorySecretsManager.getAblyToken()
+        inMemorySecretsManager.loadSecrets(username, password)
+        val ablyToken = inMemorySecretsManager.getAblyToken()
 
         // then
-        Truth.assertThat(mapboxToken)
+        Truth.assertThat(ablyToken)
             .isEqualTo("notARealAblyToken")
     }
 }

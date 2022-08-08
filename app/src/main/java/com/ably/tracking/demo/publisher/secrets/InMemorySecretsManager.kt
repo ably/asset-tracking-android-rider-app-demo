@@ -14,7 +14,7 @@ class InMemorySecretsManager(
 
     private val secrets = mutableMapOf<String, String>()
 
-    override suspend fun loadSecrets() {
+    override suspend fun loadSecrets(username: String, password: String) {
         secrets[MAPBOX_TOKEN_KEY] = deliveryServiceDataSource.getMapboxToken(authBase64)
     }
 

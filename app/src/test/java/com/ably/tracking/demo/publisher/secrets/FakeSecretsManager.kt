@@ -10,7 +10,7 @@ class FakeSecretsManager : SecretsManager {
 
     var loadSecretsException: Exception? = null
 
-    override suspend fun loadSecrets() {
+    override suspend fun loadSecrets(username: String, password: String) {
         loadSecretsException?.let {
             throw it
         }

@@ -16,33 +16,41 @@ class SplashViewModel(
 
     val state: MutableStateFlow<SplashScreenState> = MutableStateFlow(SplashScreenState())
 
-    fun onCreate() = launch {
-        tryLoadSecrets()
-    }
-
-    private suspend fun tryLoadSecrets() {
-        try {
-            secretsManager.loadSecrets()
-            navigator.openMain()
-            navigator.closeCurrentScreen()
-        } catch (_: Exception) {
-            state.emit(state.value.copy(showFetchingSecretsFailedDialog = true))
-        }
-    }
-
     fun onFetchingSecretsFailedDialogClosed() {
         navigator.closeCurrentScreen()
     }
 
-    fun onUsernameChanged(value: String) {
-
+    fun onUsernameChanged(value: String) = launch {
+        updateState {
+            it.copy(username = value)
+        }
     }
 
-    fun onPasswordChanged(value: String) {
-
+    fun onPasswordChanged(value: String) = launch {
+        updateState {
+            it.copy(password = value)
+        }
     }
 
-    fun onContinueClicked() {
+    fun onContinueClicked() = launch {
+        val stateValue = state.value
+        tryLoadSecrets(stateValue.username, stateValue.password)
+    }
 
+    private suspend fun tryLoadSecrets(username: String, password: String) {
+        updateState { it.copy(showProgress = true) }
+        try {
+            secretsManager.loadSecrets(username, password)
+            navigator.openMain()
+            navigator.closeCurrentScreen()
+        } catch (_: Exception) {
+            updateState { it.copy(showFetchingSecretsFailedDialog = true) }
+        } finally {
+            updateState { it.copy(showProgress = false) }
+        }
+    }
+
+    private suspend fun updateState(update: (SplashScreenState) -> SplashScreenState) {
+        state.emit(update(state.value))
     }
 }

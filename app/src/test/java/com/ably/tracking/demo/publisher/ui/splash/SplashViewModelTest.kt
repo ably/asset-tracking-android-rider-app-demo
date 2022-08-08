@@ -19,11 +19,11 @@ internal class SplashViewModelTest : BaseViewModelTest() {
     private val viewModel = SplashViewModel(secretsManager, navigator, baseTestCoroutineDispatcher)
 
     @Test
-    fun `after calling onCreate on view model navigates to main`() = runTest {
+    fun `after calling onContinueClicked view model navigates to main`() = runTest {
         // given
 
         // when
-        viewModel.onCreate()
+        viewModel.onContinueClicked()
 
         // then
         Truth.assertThat(navigator.navigationPath[0]).isEqualTo(MainActivity::class.java)
@@ -35,10 +35,37 @@ internal class SplashViewModelTest : BaseViewModelTest() {
         secretsManager.loadSecretsException = RuntimeException("loading secrets failed")
 
         // when
-        viewModel.onCreate()
+        viewModel.onContinueClicked()
 
         // then
         val state = viewModel.state.value
         Truth.assertThat(state.showFetchingSecretsFailedDialog).isEqualTo(true)
+        Truth.assertThat(state.showProgress).isEqualTo(false)
+    }
+
+    @Test
+    fun `after calling onUsernameChanged username in state is updated`() = runTest {
+        // given
+
+
+        // when
+        viewModel.onUsernameChanged("rider")
+
+        // then
+        val state = viewModel.state.value
+        Truth.assertThat(state.username).isEqualTo("rider")
+    }
+
+    @Test
+    fun `after calling onPasswordChanged password in state is updated`() = runTest {
+        // given
+
+
+        // when
+        viewModel.onPasswordChanged("password")
+
+        // then
+        val state = viewModel.state.value
+        Truth.assertThat(state.password).isEqualTo("password")
     }
 }
