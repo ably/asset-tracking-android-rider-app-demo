@@ -5,6 +5,7 @@ import com.ably.tracking.demo.publisher.ably.AssetTracker
 import com.ably.tracking.demo.publisher.api.DeliveryServiceDataSource
 import com.ably.tracking.demo.publisher.common.copyAndReplaceElementAt
 import com.ably.tracking.demo.publisher.common.toOrderState
+import com.ably.tracking.demo.publisher.secrets.SecretsManager
 import com.ably.tracking.publisher.Trackable
 import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineDispatcher
@@ -39,7 +40,7 @@ interface OrderManager {
 class DefaultOrderInteractor(
     private val assetTracker: AssetTracker,
     private val deliveryServiceDataSource: DeliveryServiceDataSource,
-    private val authorizationHeaderBase64: String,
+    private val secretsManager: SecretsManager,
     coroutineDispatcher: CoroutineDispatcher
 ) : OrderManager, CoroutineScope {
 
@@ -76,7 +77,7 @@ class DefaultOrderInteractor(
         destinationLatitude: Double,
         destinationLongitude: Double
     ) {
-        deliveryServiceDataSource.assignOrder(authorizationHeaderBase64, orderId.toLong())
+        deliveryServiceDataSource.assignOrder(secretsManager.getAuthorizationHeader()!!, orderId.toLong())
         addOrder(orderId, destinationLatitude, destinationLongitude)
     }
 
