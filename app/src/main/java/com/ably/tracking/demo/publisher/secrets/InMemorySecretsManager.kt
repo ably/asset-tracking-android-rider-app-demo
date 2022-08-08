@@ -14,7 +14,7 @@ class InMemorySecretsManager(
 
     private val secrets = mutableMapOf<String, String>()
 
-    override suspend fun loadSecrets(username: String, password: String) {
+    override suspend fun loadSecrets(username: String, password: String?) {
         secretsStorage.writeUsername(username)
 
         val encodedAuthorization = base64Encoder.encode("$username:$password")

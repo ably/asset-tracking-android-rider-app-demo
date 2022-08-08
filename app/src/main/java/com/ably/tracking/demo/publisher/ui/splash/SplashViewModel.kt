@@ -16,6 +16,15 @@ class SplashViewModel(
 
     val state: MutableStateFlow<SplashScreenState> = MutableStateFlow(SplashScreenState())
 
+    fun onCreated() = launch {
+        val username = secretsManager.getUsername() ?: ""
+        updateState { it.copy(username = username) }
+
+        if (secretsManager.hasAuthorizationSecrets()) {
+            tryLoadSecrets(username, secretsManager.getAuthorizationHeader())
+        }
+    }
+
     fun onFetchingSecretsFailedDialogClosed() {
         navigator.closeCurrentScreen()
     }
@@ -37,7 +46,7 @@ class SplashViewModel(
         tryLoadSecrets(stateValue.username, stateValue.password)
     }
 
-    private suspend fun tryLoadSecrets(username: String, password: String) {
+    private suspend fun tryLoadSecrets(username: String, password: String?) {
         updateState { it.copy(showProgress = true) }
         try {
             secretsManager.loadSecrets(username, password)

@@ -5,6 +5,7 @@ import com.ably.tracking.demo.publisher.secrets.FakeSecretsManager
 import com.ably.tracking.demo.publisher.ui.FakeNavigator
 import com.ably.tracking.demo.publisher.ui.main.MainActivity
 import com.google.common.truth.Truth
+import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
@@ -19,6 +20,33 @@ internal class SplashViewModelTest : BaseViewModelTest() {
     private val viewModel = SplashViewModel(secretsManager, navigator, baseTestCoroutineDispatcher)
 
     @Test
+    fun `after calling onCreated username is read from secretsManager`() = runTest {
+        // given
+        secretsManager.usernameValue = "rider"
+
+        // when
+        viewModel.onCreated()
+
+        // then
+        val state = viewModel.state.value
+        assertThat(state.username).isEqualTo("rider")
+    }
+
+    @Test
+    fun `after calling onCreated attempts to load secret and navigate if has credentials`() =
+        runTest {
+            // given
+            secretsManager.usernameValue = "rider"
+            secretsManager.authorizationHeaderValue = "cmlkZXI6cGFzc3dvcmQ"
+
+            // when
+            viewModel.onCreated()
+
+            // then
+            assertThat(navigator.navigationPath[0]).isEqualTo(MainActivity::class.java)
+        }
+
+    @Test
     fun `after calling onContinueClicked view model navigates to main`() = runTest {
         // given
 
@@ -26,7 +54,7 @@ internal class SplashViewModelTest : BaseViewModelTest() {
         viewModel.onContinueClicked()
 
         // then
-        Truth.assertThat(navigator.navigationPath[0]).isEqualTo(MainActivity::class.java)
+        assertThat(navigator.navigationPath[0]).isEqualTo(MainActivity::class.java)
     }
 
     @Test
@@ -39,8 +67,8 @@ internal class SplashViewModelTest : BaseViewModelTest() {
 
         // then
         val state = viewModel.state.value
-        Truth.assertThat(state.showFetchingSecretsFailedDialog).isEqualTo(true)
-        Truth.assertThat(state.showProgress).isEqualTo(false)
+        assertThat(state.showFetchingSecretsFailedDialog).isEqualTo(true)
+        assertThat(state.showProgress).isEqualTo(false)
     }
 
     @Test
@@ -53,7 +81,7 @@ internal class SplashViewModelTest : BaseViewModelTest() {
 
         // then
         val state = viewModel.state.value
-        Truth.assertThat(state.username).isEqualTo("rider")
+        assertThat(state.username).isEqualTo("rider")
     }
 
     @Test
@@ -66,6 +94,6 @@ internal class SplashViewModelTest : BaseViewModelTest() {
 
         // then
         val state = viewModel.state.value
-        Truth.assertThat(state.password).isEqualTo("password")
+        assertThat(state.password).isEqualTo("password")
     }
 }
