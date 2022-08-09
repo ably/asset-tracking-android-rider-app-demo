@@ -24,8 +24,6 @@ the project root:
 - `MAPBOX_DOWNLOADS_TOKEN`: On
   the [Mapbox Access Tokens page](https://account.mapbox.com/access-tokens/), create a token with
   the `DOWNLOADS:READ` secret scope.
-- `AUTHORIZATION_HEADER_BASE_64`: Base64 encoded "user:password" used to authorize with the backend service. For more details see [Ably Asset Tracking Backend Demo](https://github.com/ably/asset-tracking-backend-demo)
-- `AUTHORIZATION_USERNAME`: username used to authorize with the backend service and as clientId
 - `FIREBASE_REGION`: Firebase region to which the backend is deployed, used to determine api host
 - `FIREBASE_PROJECT_NAME`: Backend Firebase project name, used to determine api host
 
@@ -34,11 +32,12 @@ To do this, create a file in the project root (if it doesn't exist already) name
 
 ```bash
 MAPBOX_DOWNLOADS_TOKEN=create_token_with_downloads_read_secret_scope
-AUTHORIZATION_HEADER_BASE_64=create_user_in_firestore
-AUTHORIZATION_USERNAME=create_user_in_firestore
 FIREBASE_REGION=create_firebase_action
 FIREBASE_PROJECT_NAME=create_firebase_action
 ```
+
+On the login screen on the app startup, you will be asked to login into an account created in the backend service. For more details, see [Ably Asset Tracking Backend Demo](https://github.com/ably/asset-tracking-backend-demo).
+After the first login, the app will store encoded credentials for future usage. To remove them, use the "Clear storage" option in the system app settings.
 
 ## Resolutions
 
@@ -109,3 +108,4 @@ There are the following options available on the settings menu:
 For the sake of simplicity, the demo app does not handle the following cases:
 
 - keeping Wi-Fi connection awake - when a phone with the rider app running has a locked screen, the OS will disable the Wi-Fi connection to preserve the battery power after some time. If the phone has no other connection to the internet, the tracking will stop. It will resume automatically once the connection is re-established
+- log out not implemented - to use a different account clear app data using system settings
