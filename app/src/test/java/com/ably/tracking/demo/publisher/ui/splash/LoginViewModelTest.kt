@@ -74,7 +74,6 @@ internal class LoginViewModelTest : BaseViewModelTest() {
     fun `after calling onUsernameChanged username in state is updated`() = runTest {
         // given
 
-
         // when
         viewModel.onUsernameChanged("rider")
 
@@ -86,7 +85,6 @@ internal class LoginViewModelTest : BaseViewModelTest() {
     @Test
     fun `after calling onPasswordChanged password in state is updated`() = runTest {
         // given
-
 
         // when
         viewModel.onPasswordChanged("password")

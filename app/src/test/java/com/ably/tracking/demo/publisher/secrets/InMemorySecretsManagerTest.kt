@@ -1,7 +1,6 @@
 package com.ably.tracking.demo.publisher.secrets
 
 import com.ably.tracking.demo.publisher.api.FakeDeliveryServiceDataSource
-import com.google.common.truth.Truth
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -63,7 +62,6 @@ internal class InMemorySecretsManagerTest {
         // then
         assertThat(deliveryServiceApiSource.lastAuthorizationHeader)
             .isEqualTo("cmlkZXI6cGFzc3dvcmQ")
-
     }
 
     @Test
