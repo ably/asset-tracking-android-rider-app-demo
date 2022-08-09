@@ -1,4 +1,4 @@
-package com.ably.tracking.demo.publisher.ui.splash
+package com.ably.tracking.demo.publisher.ui.login
 
 import com.ably.tracking.demo.publisher.BaseViewModelTest
 import com.ably.tracking.demo.publisher.secrets.FakeSecretsManager

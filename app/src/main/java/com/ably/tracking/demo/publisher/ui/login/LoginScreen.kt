@@ -1,4 +1,4 @@
-package com.ably.tracking.demo.publisher.ui.splash
+package com.ably.tracking.demo.publisher.ui.login
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

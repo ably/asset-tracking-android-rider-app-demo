@@ -1,4 +1,4 @@
-package com.ably.tracking.demo.publisher.ui.splash
+package com.ably.tracking.demo.publisher.ui.login
 
 data class LoginScreenState(
     val username: String = "",
