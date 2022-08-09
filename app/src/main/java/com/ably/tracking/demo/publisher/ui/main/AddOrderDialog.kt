@@ -1,4 +1,4 @@
-package com.ably.tracking.demo.publisher.main
+package com.ably.tracking.demo.publisher.ui.main
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column

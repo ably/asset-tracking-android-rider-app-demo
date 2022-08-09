@@ -27,11 +27,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ably.tracking.demo.publisher.R
-import com.ably.tracking.demo.publisher.main.AddOrderDialog
 import com.ably.tracking.demo.publisher.ui.widget.TextButton
 
 @Composable
-fun MainScreen(viewModel: MainViewModel, openSettings: () -> Unit) {
+fun MainScreen(viewModel: MainViewModel) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -42,7 +41,7 @@ fun MainScreen(viewModel: MainViewModel, openSettings: () -> Unit) {
                     Icon(
                         imageVector = Icons.Default.Settings,
                         contentDescription = stringResource(R.string.settings_screen_back_description),
-                        modifier = Modifier.clickable(onClick = openSettings),
+                        modifier = Modifier.clickable(onClick = viewModel::onSettingsClicked),
                         tint = Color.White
                     )
                 }
@@ -78,7 +77,7 @@ fun MainScreenContent(state: MainScreenState, onAddTrackable: (String, String, S
 }
 
 @Composable
-fun OrderRow(order: Order) {
+fun OrderRow(order: OrderViewItem) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
@@ -98,7 +97,7 @@ fun OrderRow(order: Order) {
 @Preview(showBackground = true)
 @Composable
 fun OrderRowPreview() {
-    val order = Order(name = "Burger", R.string.trackable_state_online, {}, {})
+    val order = OrderViewItem(name = "Burger", R.string.trackable_state_online, {}, {})
     OrderRow(order = order)
 }
 
@@ -107,9 +106,9 @@ fun OrderRowPreview() {
 fun MainScreenContentPreview() {
     val state = MainScreenState(
         listOf(
-            Order(name = "Burger", R.string.trackable_state_online, {}, {}),
-            Order(name = "Pizza", R.string.trackable_state_offline, {}, {}),
-            Order(name = "Sushi", R.string.trackable_state_publishing, {}, {})
+            OrderViewItem(name = "Burger", R.string.trackable_state_online, {}, {}),
+            OrderViewItem(name = "Pizza", R.string.trackable_state_offline, {}, {}),
+            OrderViewItem(name = "Sushi", R.string.trackable_state_publishing, {}, {})
         )
     )
     MainScreenContent(state) { _, _, _ -> }
