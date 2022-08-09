@@ -8,16 +8,23 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun StyledTextField(@StringRes label: Int, value: String, onValueChange: (String) -> Unit) {
+fun StyledTextField(
+    @StringRes label: Int,
+    value: String,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    onValueChange: (String) -> Unit
+) {
     OutlinedTextField(
         modifier = Modifier
             .padding(16.dp)
             .fillMaxWidth(),
         value = value,
         onValueChange = onValueChange,
+        visualTransformation = visualTransformation,
         label = { Text(stringResource(id = label)) },
     )
 }

@@ -8,7 +8,7 @@
     <string name="track_order_button">Start tracking</string>
     <string name="remove_order_button">Remove order</string>
     <string name="fetching_secrets_failed_dialog_title">Fetching secrets failed</string>
-    <string name="fetching_secrets_failed_dialog_text">Check if authorization properties are set correctly</string>
+    <string name="fetching_secrets_failed_dialog_text">Check if provided credentials are correct</string>
     <string name="add_order_dialog_title">Enter order detail</string>
     <string name="add_order_dialog_confirm_button">Confirm</string>
     <string name="add_order_dialog_order_name_hint">Order name</string>
