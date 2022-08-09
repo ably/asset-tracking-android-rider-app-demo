@@ -6,13 +6,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ably.tracking.demo.publisher.R
@@ -21,11 +19,11 @@ import com.ably.tracking.demo.publisher.ui.widget.TextAlertDialog
 import com.ably.tracking.demo.publisher.ui.widget.TextButton
 
 @Composable
-fun SplashScreen(viewModel: SplashViewModel) {
+fun LoginScreen(viewModel: LoginViewModel) {
     val state = viewModel.state.collectAsState()
     Scaffold(
         content = {
-            SplashScreenContent(
+            LoginScreenContent(
                 state = state.value,
                 onDialogClose = viewModel::onFetchingSecretsFailedDialogClosed,
                 onUsernameValueChange = viewModel::onUsernameChanged,
@@ -39,8 +37,8 @@ fun SplashScreen(viewModel: SplashViewModel) {
 
 @Preview
 @Composable
-fun SplashScreenContent(
-    state: SplashScreenState = SplashScreenState(),
+fun LoginScreenContent(
+    state: LoginScreenState = LoginScreenState(),
     onDialogClose: () -> Unit = {},
     onUsernameValueChange: (String) -> Unit = {},
     onPasswordValueChange: (String) -> Unit = {},
@@ -78,7 +76,7 @@ fun SplashScreenContent(
 @Preview
 @Composable
 fun UserCredentialsInputs(
-    state: SplashScreenState = SplashScreenState(),
+    state: LoginScreenState = LoginScreenState(),
     onUsernameValueChange: (String) -> Unit = {},
     onPasswordValueChange: (String) -> Unit = {},
     onContinueClicked: () -> Unit = {}

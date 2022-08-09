@@ -7,14 +7,14 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-class SplashViewModel(
+class LoginViewModel(
     private val secretsManager: SecretsManager,
     private val navigator: Navigator,
     coroutineScope: CoroutineDispatcher
 ) :
     BaseViewModel(coroutineScope) {
 
-    val state: MutableStateFlow<SplashScreenState> = MutableStateFlow(SplashScreenState())
+    val state: MutableStateFlow<LoginScreenState> = MutableStateFlow(LoginScreenState())
 
     fun onCreated() = launch {
         val username = secretsManager.getUsername() ?: ""
@@ -59,7 +59,7 @@ class SplashViewModel(
         }
     }
 
-    private suspend fun updateState(update: (SplashScreenState) -> SplashScreenState) {
+    private suspend fun updateState(update: (LoginScreenState) -> LoginScreenState) {
         state.emit(update(state.value))
     }
 }

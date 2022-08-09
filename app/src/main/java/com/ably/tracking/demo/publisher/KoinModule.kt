@@ -26,7 +26,7 @@ import com.ably.tracking.demo.publisher.ui.ActivityNavigator
 import com.ably.tracking.demo.publisher.ui.Navigator
 import com.ably.tracking.demo.publisher.ui.main.MainViewModel
 import com.ably.tracking.demo.publisher.ui.settings.SettingsActionsProvider
-import com.ably.tracking.demo.publisher.ui.splash.SplashViewModel
+import com.ably.tracking.demo.publisher.ui.splash.LoginViewModel
 import com.google.gson.GsonBuilder
 import java.util.Locale
 import java.util.TimeZone
@@ -103,5 +103,5 @@ val appModule = module {
 
     viewModel { MainViewModel(get(), get(), Dispatchers.Main) }
 
-    viewModel { SplashViewModel(get(), get(), Dispatchers.Main) }
+    viewModel { LoginViewModel(get(), get(), Dispatchers.Main) }
 }

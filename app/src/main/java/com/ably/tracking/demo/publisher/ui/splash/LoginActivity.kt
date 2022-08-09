@@ -5,13 +5,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SplashActivity : ComponentActivity() {
+class LoginActivity : ComponentActivity() {
 
-    private val viewModel: SplashViewModel by viewModel()
+    private val viewModel: LoginViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent { SplashScreen(viewModel) }
+        setContent { LoginScreen(viewModel) }
         viewModel.onCreated()
     }
 }

@@ -4,20 +4,19 @@ import com.ably.tracking.demo.publisher.BaseViewModelTest
 import com.ably.tracking.demo.publisher.secrets.FakeSecretsManager
 import com.ably.tracking.demo.publisher.ui.FakeNavigator
 import com.ably.tracking.demo.publisher.ui.main.MainActivity
-import com.google.common.truth.Truth
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-internal class SplashViewModelTest : BaseViewModelTest() {
+internal class LoginViewModelTest : BaseViewModelTest() {
 
     private val navigator = FakeNavigator()
 
     private val secretsManager = FakeSecretsManager()
 
-    private val viewModel = SplashViewModel(secretsManager, navigator, baseTestCoroutineDispatcher)
+    private val viewModel = LoginViewModel(secretsManager, navigator, baseTestCoroutineDispatcher)
 
     @Test
     fun `after calling onCreated username is read from secretsManager`() = runTest {
