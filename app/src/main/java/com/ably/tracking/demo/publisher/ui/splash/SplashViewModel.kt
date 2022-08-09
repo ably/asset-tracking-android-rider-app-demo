@@ -21,12 +21,12 @@ class SplashViewModel(
         updateState { it.copy(username = username) }
 
         if (secretsManager.hasAuthorizationSecrets()) {
-            tryLoadSecrets(username, secretsManager.getAuthorizationHeader())
+            tryLoadSecrets(username, null)
         }
     }
 
-    fun onFetchingSecretsFailedDialogClosed() {
-        navigator.closeCurrentScreen()
+    fun onFetchingSecretsFailedDialogClosed() = launch {
+        updateState { it.copy(showFetchingSecretsFailedDialog = false) }
     }
 
     fun onUsernameChanged(value: String) = launch {

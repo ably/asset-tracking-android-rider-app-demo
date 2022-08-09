@@ -17,11 +17,18 @@ class InMemorySecretsManager(
     override suspend fun loadSecrets(username: String, password: String?) {
         secretsStorage.writeUsername(username)
 
-        val encodedAuthorization = base64Encoder.encode("$username:$password")
-        secretsStorage.writeAuthorization(encodedAuthorization)
 
-        secrets[MAPBOX_TOKEN_KEY] = deliveryServiceDataSource.getMapboxToken(readAuthorization())
+        val encodedAuthorization =
+            if (password == null) {
+                readAuthorization()
+            } else {
+                base64Encoder.encode("$username:$password")
+            }
+
+        secretsStorage.writeAuthorization(encodedAuthorization)
+        secrets[MAPBOX_TOKEN_KEY] = deliveryServiceDataSource.getMapboxToken(encodedAuthorization)
     }
+
 
     override fun hasAuthorizationSecrets(): Boolean =
         getUsername() != null && getAuthorizationHeader() != null

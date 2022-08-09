@@ -17,8 +17,11 @@ import com.ably.tracking.demo.publisher.common.NotificationProvider
 import com.ably.tracking.demo.publisher.domain.DefaultOrderInteractor
 import com.ably.tracking.demo.publisher.domain.OrderManager
 import com.ably.tracking.demo.publisher.secrets.AndroidBase64Encoder
+import com.ably.tracking.demo.publisher.secrets.Base64Encoder
 import com.ably.tracking.demo.publisher.secrets.InMemorySecretsManager
 import com.ably.tracking.demo.publisher.secrets.SecretsManager
+import com.ably.tracking.demo.publisher.secrets.SecretsStorage
+import com.ably.tracking.demo.publisher.secrets.SharedPreferencesSecretsStorage
 import com.ably.tracking.demo.publisher.ui.ActivityNavigator
 import com.ably.tracking.demo.publisher.ui.Navigator
 import com.ably.tracking.demo.publisher.ui.main.MainViewModel
@@ -90,7 +93,13 @@ val appModule = module {
         )
     } bind SecretsManager::class
 
-    factory { AndroidBase64Encoder() }
+    single {
+        SharedPreferencesSecretsStorage(
+            get()
+        )
+    } bind SecretsStorage::class
+
+    factory { AndroidBase64Encoder() } bind Base64Encoder::class
 
     viewModel { MainViewModel(get(), get(), Dispatchers.Main) }
 
