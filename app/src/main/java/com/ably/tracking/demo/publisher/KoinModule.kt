@@ -24,9 +24,9 @@ import com.ably.tracking.demo.publisher.secrets.SecretsStorage
 import com.ably.tracking.demo.publisher.secrets.SharedPreferencesSecretsStorage
 import com.ably.tracking.demo.publisher.ui.ActivityNavigator
 import com.ably.tracking.demo.publisher.ui.Navigator
+import com.ably.tracking.demo.publisher.ui.login.LoginViewModel
 import com.ably.tracking.demo.publisher.ui.main.MainViewModel
 import com.ably.tracking.demo.publisher.ui.settings.SettingsActionsProvider
-import com.ably.tracking.demo.publisher.ui.login.LoginViewModel
 import com.google.gson.GsonBuilder
 import java.util.Locale
 import java.util.TimeZone
