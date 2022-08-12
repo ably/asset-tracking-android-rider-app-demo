@@ -16,13 +16,17 @@ import com.ably.tracking.demo.publisher.api.buildRetrofit
 import com.ably.tracking.demo.publisher.common.NotificationProvider
 import com.ably.tracking.demo.publisher.domain.DefaultOrderInteractor
 import com.ably.tracking.demo.publisher.domain.OrderManager
+import com.ably.tracking.demo.publisher.secrets.AndroidBase64Encoder
+import com.ably.tracking.demo.publisher.secrets.Base64Encoder
 import com.ably.tracking.demo.publisher.secrets.InMemorySecretsManager
 import com.ably.tracking.demo.publisher.secrets.SecretsManager
+import com.ably.tracking.demo.publisher.secrets.SecretsStorage
+import com.ably.tracking.demo.publisher.secrets.SharedPreferencesSecretsStorage
 import com.ably.tracking.demo.publisher.ui.ActivityNavigator
 import com.ably.tracking.demo.publisher.ui.Navigator
+import com.ably.tracking.demo.publisher.ui.login.LoginViewModel
 import com.ably.tracking.demo.publisher.ui.main.MainViewModel
 import com.ably.tracking.demo.publisher.ui.settings.SettingsActionsProvider
-import com.ably.tracking.demo.publisher.ui.splash.SplashViewModel
 import com.google.gson.GsonBuilder
 import java.util.Locale
 import java.util.TimeZone
@@ -68,7 +72,7 @@ val appModule = module {
         DefaultOrderInteractor(
             get(),
             get(),
-            BuildConfig.AUTHORIZATION_HEADER_BASE_64,
+            get(),
             Dispatchers.Default
         )
     } bind OrderManager::class
@@ -84,12 +88,20 @@ val appModule = module {
     single {
         InMemorySecretsManager(
             get(),
-            BuildConfig.AUTHORIZATION_HEADER_BASE_64,
-            BuildConfig.AUTHORIZATION_USERNAME
+            get(),
+            get()
         )
     } bind SecretsManager::class
 
+    single {
+        SharedPreferencesSecretsStorage(
+            get()
+        )
+    } bind SecretsStorage::class
+
+    factory { AndroidBase64Encoder() } bind Base64Encoder::class
+
     viewModel { MainViewModel(get(), get(), Dispatchers.Main) }
 
-    viewModel { SplashViewModel(get(), get(), Dispatchers.Main) }
+    viewModel { LoginViewModel(get(), get(), Dispatchers.Main) }
 }

@@ -50,7 +50,7 @@ class DefaultAssetTracker(
     @SuppressLint("MissingPermission")
     private fun establishNewConnection() {
         val mapboxToken = secretsManager.getMapboxToken()
-        val username = secretsManager.getUsername()
+        val username = secretsManager.getUsername()!!
 
         publisher = Publisher.publishers() // get the Publisher builder in default state
             .connection(

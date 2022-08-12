@@ -4,8 +4,8 @@ import com.ably.tracking.demo.publisher.api.DeliveryServiceDataSource
 
 class InMemorySecretsManager(
     private val deliveryServiceDataSource: DeliveryServiceDataSource,
-    private val authBase64: String,
-    private val authUsername: String
+    private val secretsStorage: SecretsStorage,
+    private val base64Encoder: Base64Encoder
 ) : SecretsManager {
 
     companion object {
@@ -14,13 +14,31 @@ class InMemorySecretsManager(
 
     private val secrets = mutableMapOf<String, String>()
 
-    override suspend fun loadSecrets() {
-        secrets[MAPBOX_TOKEN_KEY] = deliveryServiceDataSource.getMapboxToken(authBase64)
+    override suspend fun loadSecrets(username: String, password: String?) {
+        secretsStorage.writeUsername(username)
+
+        val encodedAuthorization =
+            if (password == null) {
+                readAuthorization()
+            } else {
+                base64Encoder.encode("$username:$password")
+            }
+
+        secretsStorage.writeAuthorization(encodedAuthorization)
+        secrets[MAPBOX_TOKEN_KEY] = deliveryServiceDataSource.getMapboxToken(encodedAuthorization)
     }
 
-    override fun getUsername(): String = authUsername
+    override fun hasAuthorizationSecrets(): Boolean =
+        getUsername() != null && getAuthorizationHeader() != null
+
+    override fun getUsername(): String? = secretsStorage.readUsername()
+
+    override fun getAuthorizationHeader(): String? = secretsStorage.readAuthorization()
 
     override fun getMapboxToken(): String = secrets[MAPBOX_TOKEN_KEY] ?: ""
 
-    override suspend fun getAblyToken(): String = deliveryServiceDataSource.getAblyToken(authBase64)
+    override suspend fun getAblyToken(): String =
+        deliveryServiceDataSource.getAblyToken(readAuthorization())
+
+    private fun readAuthorization() = secretsStorage.readAuthorization()!!
 }
