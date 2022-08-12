@@ -14,7 +14,7 @@ class ApiDeliveryServiceDataSource(private val deliveryServiceApi: DeliveryServi
         deliveryServiceApi.getAblyToken(AUTHORIZATION_HEADER_PREFIX + authBase64).token
 
     override suspend fun assignOrder(authBase64: String, orderId: Long) =
-        deliveryServiceApi.assignOrder(AUTHORIZATION_HEADER_PREFIX + authBase64, orderId)
+        deliveryServiceApi.assignOrder(AUTHORIZATION_HEADER_PREFIX + authBase64, orderId).to
 
     override suspend fun deleteOrder(authBase64: String, orderId: Long) =
         deliveryServiceApi.deleteOrder(AUTHORIZATION_HEADER_PREFIX + authBase64, orderId)

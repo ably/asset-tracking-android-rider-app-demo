@@ -77,13 +77,9 @@ class MainViewModel(
         trackableStates.remove(trackableId)
     }
 
-    fun addOrder(orderName: String, destinationLatitude: String, destinationLongitude: String) =
+    fun addOrder(orderName: String) =
         launch {
-            orderManager.assignOrder(
-                orderName,
-                destinationLatitude.toDouble(),
-                destinationLongitude.toDouble()
-            )
+            orderManager.assignOrder(orderName)
         }
 
     fun onSettingsClicked() {

@@ -50,8 +50,8 @@ fun MainScreen(viewModel: MainViewModel) {
         modifier = Modifier.fillMaxSize(),
         content = {
             val state = viewModel.state.collectAsState()
-            MainScreenContent(state.value) { name, destinationLatitude, destinationLongitude ->
-                viewModel.addOrder(name, destinationLatitude, destinationLongitude)
+            MainScreenContent(state.value) { name ->
+                viewModel.addOrder(name)
             }
         },
     )
@@ -59,7 +59,7 @@ fun MainScreen(viewModel: MainViewModel) {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun MainScreenContent(state: MainScreenState, onAddTrackable: (String, String, String) -> Unit) {
+fun MainScreenContent(state: MainScreenState, onAddTrackable: (String) -> Unit) {
     val (showDialog, setShowDialog) = remember { mutableStateOf(false) }
     LazyColumn {
         stickyHeader {
@@ -111,11 +111,11 @@ fun MainScreenContentPreview() {
             OrderViewItem(name = "Sushi", R.string.trackable_state_publishing, {}, {})
         )
     )
-    MainScreenContent(state) { _, _, _ -> }
+    MainScreenContent(state) { }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun AddOrderDialogPreview() {
-    AddOrderDialog({}) { _, _, _ -> }
+    AddOrderDialog({}) { }
 }

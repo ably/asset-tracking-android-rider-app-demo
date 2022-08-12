@@ -24,11 +24,7 @@ interface OrderManager {
 
     fun connect()
 
-    suspend fun assignOrder(
-        orderId: String,
-        destinationLatitude: Double,
-        destinationLongitude: Double
-    )
+    suspend fun assignOrder(orderId: String)
 
     suspend fun pickUpOrder(orderId: String)
 
@@ -72,13 +68,12 @@ class DefaultOrderInteractor(
         return trackableStateFlow?.value ?: TrackableState.Offline()
     }
 
-    override suspend fun assignOrder(
-        orderId: String,
-        destinationLatitude: Double,
-        destinationLongitude: Double
-    ) {
-        deliveryServiceDataSource.assignOrder(secretsManager.getAuthorizationHeader()!!, orderId.toLong())
-        addOrder(orderId, destinationLatitude, destinationLongitude)
+    override suspend fun assignOrder(orderId: String) {
+        val destination = deliveryServiceDataSource.assignOrder(
+            secretsManager.getAuthorizationHeader()!!,
+            orderId.toLong()
+        )
+        addOrder(orderId, destination.latitude, destination.longitude)
     }
 
     private suspend fun addOrder(

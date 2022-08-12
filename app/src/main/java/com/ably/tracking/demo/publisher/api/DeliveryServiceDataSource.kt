@@ -5,7 +5,7 @@ interface DeliveryServiceDataSource {
 
     suspend fun getAblyToken(authBase64: String): String
 
-    suspend fun deleteOrder(authBase64: String, orderId: Long)
+    suspend fun assignOrder(authBase64: String, orderId: Long): Destination
 
-    suspend fun assignOrder(authBase64: String, orderId: Long)
+    suspend fun deleteOrder(authBase64: String, orderId: Long)
 }

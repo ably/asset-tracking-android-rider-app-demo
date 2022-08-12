@@ -22,7 +22,7 @@ interface DeliveryServiceApi {
     suspend fun assignOrder(
         @Header(AUTHORIZATION_HEADER_NAME) authorizationHeader: String,
         @Path("orderID") orderId: Long
-    )
+    ): OrderResponse
 
     @DELETE("orders/{orderID}")
     suspend fun deleteOrder(
