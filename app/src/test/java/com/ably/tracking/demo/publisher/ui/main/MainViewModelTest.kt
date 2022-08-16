@@ -12,10 +12,6 @@ import org.junit.Test
 
 @ExperimentalCoroutinesApi
 internal class MainViewModelTest : BaseViewModelTest() {
-
-    private val destinationLatitude = "51.1065859"
-    private val destinationLongitude = "17.0312766"
-
     private val navigator = FakeNavigator()
 
     private val orderInteractor = FakeOrderInteractor()
@@ -29,7 +25,7 @@ internal class MainViewModelTest : BaseViewModelTest() {
         viewModel.onLocationPermissionGranted()
 
         // when
-        viewModel.addOrder(orderName, destinationLatitude, destinationLongitude)
+        viewModel.addOrder(orderName)
 
         // then
         val order = viewModel.state.value.orders.firstOrNull { it.name == orderName }
@@ -43,7 +39,7 @@ internal class MainViewModelTest : BaseViewModelTest() {
             // given
             val orderName = "Sushi"
             viewModel.onLocationPermissionGranted()
-            viewModel.addOrder(orderName, destinationLatitude, destinationLongitude)
+            viewModel.addOrder(orderName)
 
             // when
             orderInteractor.updateOrderState(orderName, OrderState.Publishing)
@@ -59,7 +55,7 @@ internal class MainViewModelTest : BaseViewModelTest() {
             // given
             val orderName = "Pancake"
             viewModel.onLocationPermissionGranted()
-            viewModel.addOrder(orderName, destinationLatitude, destinationLongitude)
+            viewModel.addOrder(orderName)
 
             // when
             viewModel.state.value.orders.first().onTrackClicked()
@@ -74,7 +70,7 @@ internal class MainViewModelTest : BaseViewModelTest() {
             // given
             val orderName = "Pancake"
             viewModel.onLocationPermissionGranted()
-            viewModel.addOrder(orderName, destinationLatitude, destinationLongitude)
+            viewModel.addOrder(orderName)
 
             // when
             viewModel.state.value.orders.first().onRemoveClicked()

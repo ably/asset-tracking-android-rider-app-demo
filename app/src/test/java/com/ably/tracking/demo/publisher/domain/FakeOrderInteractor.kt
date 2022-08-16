@@ -13,11 +13,7 @@ class FakeOrderInteractor : OrderManager {
         // no-op
     }
 
-    override suspend fun assignOrder(
-        orderId: String,
-        destinationLatitude: Double,
-        destinationLongitude: Double
-    ) {
+    override suspend fun assignOrder(orderId: String) {
         orders.emit(orders.value.plus(Order(orderId, OrderState.Offline)))
     }
 

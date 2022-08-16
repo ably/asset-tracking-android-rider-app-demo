@@ -19,11 +19,12 @@ class FakeDeliveryServiceDataSource : DeliveryServiceDataSource {
         return ablyToken
     }
 
-    override suspend fun deleteOrder(authBase64: String, orderId: Long) {
+    override suspend fun assignOrder(authBase64: String, orderId: Long): Destination {
         lastAuthorizationHeader = authBase64
+        return Destination(0.0, 0.0)
     }
 
-    override suspend fun assignOrder(authBase64: String, orderId: Long) {
+    override suspend fun deleteOrder(authBase64: String, orderId: Long) {
         lastAuthorizationHeader = authBase64
     }
 }
