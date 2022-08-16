@@ -1,7 +1,9 @@
 package com.ably.tracking.demo.publisher.api
 
+import com.google.gson.annotations.SerializedName
+
 data class OrderResponse(
-    val to: Destination
+    @SerializedName("to") val destination: Destination
 )
 
 data class Destination(
