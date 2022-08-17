@@ -7,14 +7,17 @@ import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.annotation.StringRes
 import com.ably.tracking.demo.publisher.R
-import com.ably.tracking.demo.publisher.common.PermissionHelper
 
 
-fun requestLocationPermission(activity: ComponentActivity, viewModel: MainViewModel) {
-    PermissionHelper.ensureLocationPermission(
-        activity,
-        onDenied = { showPermissionRequiredDialog(activity) }) {
+fun onLocationPermissionResult(
+    granted: Boolean,
+    activity: ComponentActivity,
+    viewModel: MainViewModel
+) {
+    if (granted) {
         viewModel.onLocationPermissionGranted()
+    } else {
+        showPermissionRequiredDialog(activity)
     }
 }
 

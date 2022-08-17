@@ -14,10 +14,12 @@ import com.ably.tracking.demo.publisher.ui.navigation.AndroidJetpackNavigator
 import com.ably.tracking.demo.publisher.ui.navigation.Routes
 import com.ably.tracking.demo.publisher.ui.settings.SettingsActionsProvider
 import com.ably.tracking.demo.publisher.ui.settings.SettingsScreen
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import org.koin.android.ext.android.inject
 import org.koin.androidx.compose.get
 import org.koin.core.parameter.parametersOf
 
+@ExperimentalPermissionsApi
 class MainActivity : ComponentActivity() {
 
     private val navigator: AndroidJetpackNavigator by inject()

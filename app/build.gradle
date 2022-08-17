@@ -95,6 +95,7 @@ dependencies {
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
     implementation 'androidx.compose.material:material:1.1.1'
     implementation "androidx.navigation:navigation-compose:2.4.2"
+    implementation "com.google.accompanist:accompanist-permissions:0.24.10-beta"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
 

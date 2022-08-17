@@ -1,5 +1,6 @@
 package com.ably.tracking.demo.publisher.ui.main
 
+import android.Manifest
 import android.content.Intent
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -33,17 +34,29 @@ import com.ably.tracking.demo.publisher.PublisherService
 import com.ably.tracking.demo.publisher.R
 import com.ably.tracking.demo.publisher.common.doOnCreateLifecycleEvent
 import com.ably.tracking.demo.publisher.ui.widget.TextButton
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberPermissionState
 
 import org.koin.androidx.compose.getViewModel
 
+@ExperimentalPermissionsApi
 @Composable
 fun MainScreen(
     activity: ComponentActivity,
     viewModel: MainViewModel = getViewModel()
 ) {
+
+    val locationPermissionState = rememberPermissionState(
+        permission = Manifest.permission.ACCESS_FINE_LOCATION,
+        onPermissionResult = { granted ->
+            onLocationPermissionResult(granted, activity, viewModel)
+        }
+    )
+
     doOnCreateLifecycleEvent {
-        requestLocationPermission(activity, viewModel)
+        locationPermissionState.launchPermissionRequest()
     }
+
     doOnCreateLifecycleEvent {
         ContextCompat.startForegroundService(
             activity,
