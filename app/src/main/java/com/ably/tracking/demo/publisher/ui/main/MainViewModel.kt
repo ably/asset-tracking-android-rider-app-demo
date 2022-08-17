@@ -7,7 +7,7 @@ import com.ably.tracking.demo.publisher.common.BaseViewModel
 import com.ably.tracking.demo.publisher.domain.Order
 import com.ably.tracking.demo.publisher.domain.OrderManager
 import com.ably.tracking.demo.publisher.domain.OrderState
-import com.ably.tracking.demo.publisher.ui.Navigator
+import com.ably.tracking.demo.publisher.ui.navigation.Navigator
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

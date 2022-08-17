@@ -1,5 +1,7 @@
 package com.ably.tracking.demo.publisher.ui.main
 
+import android.content.Intent
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -26,11 +28,29 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
+import com.ably.tracking.demo.publisher.PublisherService
 import com.ably.tracking.demo.publisher.R
+import com.ably.tracking.demo.publisher.common.doOnCreateLifecycleEvent
 import com.ably.tracking.demo.publisher.ui.widget.TextButton
 
+import org.koin.androidx.compose.getViewModel
+
 @Composable
-fun MainScreen(viewModel: MainViewModel) {
+fun MainScreen(
+    activity: ComponentActivity,
+    viewModel: MainViewModel = getViewModel()
+) {
+    doOnCreateLifecycleEvent {
+        requestLocationPermission(activity, viewModel)
+    }
+    doOnCreateLifecycleEvent {
+        ContextCompat.startForegroundService(
+            activity,
+            Intent(activity, PublisherService::class.java)
+        )
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(

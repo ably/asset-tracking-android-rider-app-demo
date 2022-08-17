@@ -22,10 +22,10 @@ import com.ably.tracking.demo.publisher.secrets.InMemorySecretsManager
 import com.ably.tracking.demo.publisher.secrets.SecretsManager
 import com.ably.tracking.demo.publisher.secrets.SecretsStorage
 import com.ably.tracking.demo.publisher.secrets.SharedPreferencesSecretsStorage
-import com.ably.tracking.demo.publisher.ui.ActivityNavigator
-import com.ably.tracking.demo.publisher.ui.Navigator
+import com.ably.tracking.demo.publisher.ui.navigation.Navigator
 import com.ably.tracking.demo.publisher.ui.login.LoginViewModel
 import com.ably.tracking.demo.publisher.ui.main.MainViewModel
+import com.ably.tracking.demo.publisher.ui.navigation.AndroidJetpackNavigator
 import com.ably.tracking.demo.publisher.ui.settings.SettingsActionsProvider
 import com.google.gson.GsonBuilder
 import java.util.Locale
@@ -48,7 +48,7 @@ val appModule = module {
         )
     } bind AssetTracker::class
 
-    single { ActivityNavigator() } binds arrayOf(ActivityNavigator::class, Navigator::class)
+    single { AndroidJetpackNavigator() } binds arrayOf(AndroidJetpackNavigator::class, Navigator::class)
 
     factory { params -> SettingsActionsProvider(get(), get(), params.get()) }
 

@@ -2,7 +2,7 @@ package com.ably.tracking.demo.publisher.ui.login
 
 import com.ably.tracking.demo.publisher.common.BaseViewModel
 import com.ably.tracking.demo.publisher.secrets.SecretsManager
-import com.ably.tracking.demo.publisher.ui.Navigator
+import com.ably.tracking.demo.publisher.ui.navigation.Navigator
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -51,7 +51,6 @@ class LoginViewModel(
         try {
             secretsManager.loadSecrets(username, password)
             navigator.openMain()
-            navigator.closeCurrentScreen()
         } catch (_: Exception) {
             updateState { it.copy(showFetchingSecretsFailedDialog = true) }
         } finally {

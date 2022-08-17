@@ -20,7 +20,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         tools:targetApi="31">
       <activity
-        android:name="com.ably.tracking.demo.publisher.ui.login.LoginActivity"
+        android:name="com.ably.tracking.demo.publisher.ui.MainActivity"
         android:exported="true"
         android:theme="@style/Theme.AATPublisherDemo">
         <intent-filter>
@@ -29,12 +29,6 @@
           <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
-      <activity
-        android:name="com.ably.tracking.demo.publisher.ui.main.MainActivity"
-        android:theme="@style/Theme.AATPublisherDemo"/>
-      <activity
-        android:name="com.ably.tracking.demo.publisher.ui.settings.SettingsActivity"
-        android:theme="@style/Theme.AATPublisherDemo"/>
 
       <provider
         android:name="androidx.core.content.FileProvider"
@@ -46,7 +40,7 @@
           android:resource="@xml/shared_filepaths" />
       </provider>
 
-        <service
+      <service
             android:name=".PublisherService"
             android:foregroundServiceType="location" />
     </application>
