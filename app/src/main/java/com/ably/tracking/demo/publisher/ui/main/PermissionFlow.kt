@@ -8,7 +8,6 @@ import androidx.activity.ComponentActivity
 import androidx.annotation.StringRes
 import com.ably.tracking.demo.publisher.R
 
-
 fun onLocationPermissionResult(
     granted: Boolean,
     activity: ComponentActivity,

@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
-import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ably.tracking.demo.publisher.ui.login.LoginScreen
@@ -22,7 +22,7 @@ import org.koin.core.parameter.parametersOf
 @ExperimentalPermissionsApi
 class MainActivity : ComponentActivity() {
 
-    private val navigator: AndroidJetpackNavigator by inject()
+    private val navigator: AndroidJetpackNavigator by inject(parameters = { parametersOf(this) })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +42,5 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     private fun getSettingsActionsProvider(): SettingsActionsProvider =
-        get(parameters = { parametersOf(this) })
-
+        get(parameters = { parametersOf(navigator) })
 }
