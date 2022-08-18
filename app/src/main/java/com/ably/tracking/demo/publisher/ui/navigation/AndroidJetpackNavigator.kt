@@ -17,6 +17,6 @@ class AndroidJetpackNavigator : Navigator {
     }
 
     override fun goBack() {
-
+        navController.popBackStack()
     }
 }
