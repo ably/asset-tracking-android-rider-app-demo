@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
                 startDestination = Routes.Login.path
             ) {
                 composable(Routes.Login.path) { LoginScreen() }
-                composable(Routes.Main.path) { MainScreen(this@MainActivity) }
+                composable(Routes.Main.path) { MainScreen(this@MainActivity, navigator) }
                 composable(Routes.Settings.path) { SettingsScreen(getSettingsActionsProvider()) }
             }
         }

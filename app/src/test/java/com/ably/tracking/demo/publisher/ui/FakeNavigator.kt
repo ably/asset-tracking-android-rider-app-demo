@@ -23,4 +23,8 @@ class FakeNavigator : Navigator {
     override fun share(logShareHeader: Int, shareFiles: List<Uri>) {
         // no-op
     }
+
+    override fun navigateToAppSettingsScreen() {
+        // no-op
+    }
 }

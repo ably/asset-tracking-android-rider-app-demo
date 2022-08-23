@@ -8,4 +8,5 @@ interface Navigator {
     fun openSettings()
     fun goBack()
     fun share(@StringRes logShareHeader: Int, shareFiles: List<Uri>)
+    fun navigateToAppSettingsScreen()
 }

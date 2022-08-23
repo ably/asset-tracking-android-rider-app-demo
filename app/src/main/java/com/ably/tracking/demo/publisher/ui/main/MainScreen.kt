@@ -33,6 +33,7 @@ import androidx.core.content.ContextCompat
 import com.ably.tracking.demo.publisher.PublisherService
 import com.ably.tracking.demo.publisher.R
 import com.ably.tracking.demo.publisher.common.doOnCreateLifecycleEvent
+import com.ably.tracking.demo.publisher.ui.navigation.Navigator
 import com.ably.tracking.demo.publisher.ui.widget.TextButton
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
@@ -43,21 +44,20 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun MainScreen(
     activity: ComponentActivity,
+    navigator: Navigator,
     viewModel: MainViewModel = getViewModel()
 ) {
 
     val locationPermissionState = rememberPermissionState(
         permission = Manifest.permission.ACCESS_FINE_LOCATION,
         onPermissionResult = { granted ->
-            onLocationPermissionResult(granted, activity, viewModel)
+            onLocationPermissionResult(granted, activity, navigator, viewModel)
         }
     )
 
     doOnCreateLifecycleEvent {
         locationPermissionState.launchPermissionRequest()
-    }
 
-    doOnCreateLifecycleEvent {
         ContextCompat.startForegroundService(
             activity,
             Intent(activity, PublisherService::class.java)
