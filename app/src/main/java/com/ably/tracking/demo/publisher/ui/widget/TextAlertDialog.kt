@@ -25,7 +25,7 @@ fun TextAlertDialog(
             )
         },
         confirmButton = {
-            TextButton(
+            StyledTextButton(
                 text = R.string.ok,
                 onClick = onDismiss
             )

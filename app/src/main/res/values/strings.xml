@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">AATPublisherDemo</string>
+    <string name="image_content_description_header_logo_with_title">Ably logo with AAT title</string>
     <string name="username_label">Enter username</string>
     <string name="password_label">Enter password</string>
     <string name="continue_button">Continue</string>
