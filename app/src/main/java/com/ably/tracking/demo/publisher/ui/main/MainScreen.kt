@@ -37,7 +37,6 @@ import com.ably.tracking.demo.publisher.ui.navigation.Navigator
 import com.ably.tracking.demo.publisher.ui.widget.TextButton
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
-
 import org.koin.androidx.compose.getViewModel
 
 @ExperimentalPermissionsApi
