@@ -3,7 +3,7 @@ package com.ably.tracking.demo.publisher.ui.login
 import com.ably.tracking.demo.publisher.BaseViewModelTest
 import com.ably.tracking.demo.publisher.secrets.FakeSecretsManager
 import com.ably.tracking.demo.publisher.ui.FakeNavigator
-import com.ably.tracking.demo.publisher.ui.main.MainActivity
+import com.ably.tracking.demo.publisher.ui.navigation.Routes
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
@@ -42,7 +42,7 @@ internal class LoginViewModelTest : BaseViewModelTest() {
             viewModel.onCreated()
 
             // then
-            assertThat(navigator.navigationPath[0]).isEqualTo(MainActivity::class.java)
+            assertThat(navigator.navigationPath[0]).isEqualTo(Routes.Main.path)
         }
 
     @Test
@@ -53,7 +53,7 @@ internal class LoginViewModelTest : BaseViewModelTest() {
         viewModel.onContinueClicked()
 
         // then
-        assertThat(navigator.navigationPath[0]).isEqualTo(MainActivity::class.java)
+        assertThat(navigator.navigationPath[0]).isEqualTo(Routes.Main.path)
     }
 
     @Test

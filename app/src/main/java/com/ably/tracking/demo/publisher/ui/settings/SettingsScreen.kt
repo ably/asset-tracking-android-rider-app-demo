@@ -15,10 +15,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import com.ably.tracking.demo.publisher.R
+import com.ably.tracking.demo.publisher.ui.navigation.Navigator
 import com.ably.tracking.demo.publisher.ui.widget.TextButton
+import org.koin.androidx.compose.get
 
 @Composable
-fun SettingsScreen(onClose: () -> Unit = {}, debugActionsProvider: SettingsActionsProvider) {
+fun SettingsScreen(
+    debugActionsProvider: SettingsActionsProvider,
+    navigator: Navigator = get()
+) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -29,7 +34,7 @@ fun SettingsScreen(onClose: () -> Unit = {}, debugActionsProvider: SettingsActio
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
                         contentDescription = stringResource(R.string.settings_screen_back_description),
-                        modifier = Modifier.clickable(onClick = onClose)
+                        modifier = Modifier.clickable(onClick = navigator::goBack)
                     )
                 }
             )

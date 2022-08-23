@@ -14,12 +14,17 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ably.tracking.demo.publisher.R
+import com.ably.tracking.demo.publisher.common.doOnCreateLifecycleEvent
 import com.ably.tracking.demo.publisher.ui.widget.StyledTextField
 import com.ably.tracking.demo.publisher.ui.widget.TextAlertDialog
 import com.ably.tracking.demo.publisher.ui.widget.TextButton
+import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun LoginScreen(viewModel: LoginViewModel) {
+fun LoginScreen(viewModel: LoginViewModel = getViewModel()) {
+    doOnCreateLifecycleEvent {
+        viewModel.onCreated()
+    }
     val state = viewModel.state.collectAsState()
     Scaffold(
         content = {
