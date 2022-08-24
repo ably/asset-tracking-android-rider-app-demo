@@ -12,9 +12,13 @@ import com.ably.tracking.demo.publisher.ui.theme.AATPublisherDemoTheme
 
 @Preview
 @Composable
-fun AATAppBar(actions: @Composable RowScope.() -> Unit = {}) = AATPublisherDemoTheme {
+fun AATAppBar(
+    navigationIcon: @Composable (() -> Unit)? = null,
+    actions: @Composable RowScope.() -> Unit = {}
+) = AATPublisherDemoTheme {
     TopAppBar(
         actions = actions,
+        navigationIcon = navigationIcon,
         title = {
             Image(
                 painter = painterResource(
