@@ -3,8 +3,6 @@ package com.ably.tracking.demo.publisher.ui.login
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -12,32 +10,37 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.ably.tracking.demo.publisher.R
 import com.ably.tracking.demo.publisher.common.doOnCreateLifecycleEvent
+import com.ably.tracking.demo.publisher.ui.theme.AATPublisherDemoTheme
+import com.ably.tracking.demo.publisher.ui.widget.AATAppBar
+import com.ably.tracking.demo.publisher.ui.widget.StyledCircularProgressIndicator
+import com.ably.tracking.demo.publisher.ui.widget.StyledTextButton
 import com.ably.tracking.demo.publisher.ui.widget.StyledTextField
 import com.ably.tracking.demo.publisher.ui.widget.TextAlertDialog
-import com.ably.tracking.demo.publisher.ui.widget.TextButton
 import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun LoginScreen(viewModel: LoginViewModel = getViewModel()) {
-    doOnCreateLifecycleEvent {
-        viewModel.onCreated()
+    AATPublisherDemoTheme {
+        doOnCreateLifecycleEvent {
+            viewModel.onCreated()
+        }
+        val state = viewModel.state.collectAsState()
+        Scaffold(
+            topBar = { AATAppBar() },
+            content = {
+                LoginScreenContent(
+                    state = state.value,
+                    onDialogClose = viewModel::onFetchingSecretsFailedDialogClosed,
+                    onUsernameValueChange = viewModel::onUsernameChanged,
+                    onPasswordValueChange = viewModel::onPasswordChanged,
+                    onContinueClicked = viewModel::onContinueClicked
+                )
+            },
+            modifier = Modifier.fillMaxSize(),
+        )
     }
-    val state = viewModel.state.collectAsState()
-    Scaffold(
-        content = {
-            LoginScreenContent(
-                state = state.value,
-                onDialogClose = viewModel::onFetchingSecretsFailedDialogClosed,
-                onUsernameValueChange = viewModel::onUsernameChanged,
-                onPasswordValueChange = viewModel::onPasswordChanged,
-                onContinueClicked = viewModel::onContinueClicked
-            )
-        },
-        modifier = Modifier.fillMaxSize(),
-    )
 }
 
 @Preview
@@ -63,10 +66,7 @@ fun LoginScreenContent(
         verticalArrangement = Arrangement.Center
     ) {
         if (state.showProgress) {
-            CircularProgressIndicator(
-                modifier = Modifier.size(64.dp),
-                strokeWidth = 6.dp
-            )
+            StyledCircularProgressIndicator()
         } else {
             UserCredentialsInputs(
                 state = state,
@@ -97,5 +97,5 @@ fun UserCredentialsInputs(
         visualTransformation = PasswordVisualTransformation(),
         onValueChange = onPasswordValueChange
     )
-    TextButton(text = R.string.continue_button, onClick = onContinueClicked)
+    StyledTextButton(text = R.string.continue_button, onClick = onContinueClicked)
 }

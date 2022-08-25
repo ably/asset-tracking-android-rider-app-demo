@@ -8,15 +8,16 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
@@ -34,7 +35,9 @@ import com.ably.tracking.demo.publisher.PublisherService
 import com.ably.tracking.demo.publisher.R
 import com.ably.tracking.demo.publisher.common.doOnCreateLifecycleEvent
 import com.ably.tracking.demo.publisher.ui.navigation.Navigator
-import com.ably.tracking.demo.publisher.ui.widget.TextButton
+import com.ably.tracking.demo.publisher.ui.theme.AATPublisherDemoTheme
+import com.ably.tracking.demo.publisher.ui.widget.AATAppBar
+import com.ably.tracking.demo.publisher.ui.widget.StyledTextButton
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
 import org.koin.androidx.compose.getViewModel
@@ -62,31 +65,27 @@ fun MainScreen(
             Intent(activity, PublisherService::class.java)
         )
     }
-
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(text = stringResource(R.string.main_screen_title), color = Color.White)
-                },
-                actions = {
+    AATPublisherDemoTheme {
+        Scaffold(
+            topBar = {
+                AATAppBar(actions = {
                     Icon(
                         imageVector = Icons.Default.Settings,
                         contentDescription = stringResource(R.string.settings_screen_back_description),
                         modifier = Modifier.clickable(onClick = viewModel::onSettingsClicked),
                         tint = Color.White
                     )
+                })
+            },
+            modifier = Modifier.fillMaxSize(),
+            content = {
+                val state = viewModel.state.collectAsState()
+                MainScreenContent(state.value) { name ->
+                    viewModel.addOrder(name)
                 }
-            )
-        },
-        modifier = Modifier.fillMaxSize(),
-        content = {
-            val state = viewModel.state.collectAsState()
-            MainScreenContent(state.value) { name ->
-                viewModel.addOrder(name)
-            }
-        },
-    )
+            },
+        )
+    }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -95,7 +94,7 @@ fun MainScreenContent(state: MainScreenState, onAddTrackable: (String) -> Unit) 
     val (showDialog, setShowDialog) = remember { mutableStateOf(false) }
     LazyColumn {
         stickyHeader {
-            TextButton(text = R.string.add_order_button) {
+            StyledTextButton(text = R.string.add_order_button) {
                 setShowDialog(true)
             }
         }
@@ -118,10 +117,11 @@ fun OrderRow(order: OrderViewItem) {
             .padding(8.dp)
     ) {
         Text(text = order.name)
+        Spacer(modifier = Modifier.width(8.dp))
         Text(text = stringResource(id = order.state))
         Column {
-            TextButton(text = R.string.track_order_button, onClick = order.onTrackClicked)
-            TextButton(text = R.string.remove_order_button, onClick = order.onRemoveClicked)
+            StyledTextButton(text = R.string.track_order_button, onClick = order.onTrackClicked)
+            StyledTextButton(text = R.string.remove_order_button, onClick = order.onRemoveClicked)
         }
     }
 }
@@ -130,7 +130,9 @@ fun OrderRow(order: OrderViewItem) {
 @Composable
 fun OrderRowPreview() {
     val order = OrderViewItem(name = "Burger", R.string.trackable_state_online, {}, {})
-    OrderRow(order = order)
+    AATPublisherDemoTheme {
+        OrderRow(order = order)
+    }
 }
 
 @Preview(showBackground = true)
@@ -143,11 +145,15 @@ fun MainScreenContentPreview() {
             OrderViewItem(name = "Sushi", R.string.trackable_state_publishing, {}, {})
         )
     )
-    MainScreenContent(state) { }
+    AATPublisherDemoTheme {
+        MainScreenContent(state) { }
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun AddOrderDialogPreview() {
-    AddOrderDialog({}) { }
+    AATPublisherDemoTheme {
+        AddOrderDialog({}) { }
+    }
 }
