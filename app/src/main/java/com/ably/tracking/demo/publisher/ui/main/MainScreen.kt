@@ -129,7 +129,7 @@ fun OrderRow(order: OrderViewItem) {
 @Preview(showBackground = true)
 @Composable
 fun OrderRowPreview() {
-    val order = OrderViewItem(name = "Burger", R.string.trackable_state_online, {}, {})
+    val order = OrderViewItem(name = "Burger", R.string.order_state_online, {}, {})
     AATPublisherDemoTheme {
         OrderRow(order = order)
     }
@@ -140,9 +140,9 @@ fun OrderRowPreview() {
 fun MainScreenContentPreview() {
     val state = MainScreenState(
         listOf(
-            OrderViewItem(name = "Burger", R.string.trackable_state_online, {}, {}),
-            OrderViewItem(name = "Pizza", R.string.trackable_state_offline, {}, {}),
-            OrderViewItem(name = "Sushi", R.string.trackable_state_publishing, {}, {})
+            OrderViewItem(name = "Burger", R.string.order_state_online, {}, {}),
+            OrderViewItem(name = "Pizza", R.string.order_state_offline, {}, {}),
+            OrderViewItem(name = "Sushi", R.string.order_state_publishing, {}, {})
         )
     )
     AATPublisherDemoTheme {

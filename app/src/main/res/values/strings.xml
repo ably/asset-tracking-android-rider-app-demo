@@ -18,10 +18,10 @@
     <string name="location_permission_denied_dialog_title">Location permission required</string>
     <string name="location_permission_denied_dialog_message">This application requires location permission to work</string>
     <string name="ok">OK</string>
-    <string name="trackable_state_online">Online</string>
-    <string name="trackable_state_publishing">Publishing</string>
-    <string name="trackable_state_offline">Offline</string>
-    <string name="trackable_state_failed">Failed</string>
+    <string name="order_state_online">Online</string>
+    <string name="order_state_publishing">Publishing</string>
+    <string name="order_state_offline">Offline</string>
+    <string name="order_state_failed">Failed</string>
     <string name="settings_screen_title">Debug Settings</string>
     <string name="settings_screen_back_description">Back</string>
     <string name="settings_screen_close_session_button_text">Close session and save logs</string>
