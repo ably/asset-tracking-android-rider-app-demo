@@ -1,6 +1,7 @@
 package com.ably.tracking.demo.publisher.di
 
 import com.ably.tracking.demo.publisher.BuildConfig
+import com.ably.tracking.demo.publisher.common.NotificationProvider
 import com.ably.tracking.demo.publisher.data.ably.AssetTracker
 import com.ably.tracking.demo.publisher.data.ably.DefaultAssetTracker
 import com.ably.tracking.demo.publisher.data.ably.log.DateFormatterFactory
@@ -10,23 +11,22 @@ import com.ably.tracking.demo.publisher.data.ably.log.FileManager
 import com.ably.tracking.demo.publisher.data.ably.log.LocationLogger
 import com.ably.tracking.demo.publisher.data.ably.log.LogFileWriter
 import com.ably.tracking.demo.publisher.data.api.ApiDeliveryServiceDataSource
-import com.ably.tracking.demo.publisher.domain.DeliveryServiceDataSource
 import com.ably.tracking.demo.publisher.data.api.buildDeliveryServiceApi
 import com.ably.tracking.demo.publisher.data.api.buildOkHttpClient
 import com.ably.tracking.demo.publisher.data.api.buildRetrofit
-import com.ably.tracking.demo.publisher.common.NotificationProvider
+import com.ably.tracking.demo.publisher.data.secrets.AndroidBase64Encoder
+import com.ably.tracking.demo.publisher.data.secrets.SharedPreferencesSecretsStorage
+import com.ably.tracking.demo.publisher.domain.DeliveryServiceDataSource
 import com.ably.tracking.demo.publisher.domain.order.DefaultOrderManager
 import com.ably.tracking.demo.publisher.domain.order.OrderManager
-import com.ably.tracking.demo.publisher.data.secrets.AndroidBase64Encoder
 import com.ably.tracking.demo.publisher.domain.secrets.Base64Encoder
 import com.ably.tracking.demo.publisher.domain.secrets.InMemorySecretsManager
 import com.ably.tracking.demo.publisher.domain.secrets.SecretsManager
 import com.ably.tracking.demo.publisher.domain.secrets.SecretsStorage
-import com.ably.tracking.demo.publisher.data.secrets.SharedPreferencesSecretsStorage
-import com.ably.tracking.demo.publisher.presentation.screens.login.LoginViewModel
-import com.ably.tracking.demo.publisher.presentation.screens.main.MainViewModel
 import com.ably.tracking.demo.publisher.presentation.navigation.AndroidJetpackNavigator
 import com.ably.tracking.demo.publisher.presentation.navigation.Navigator
+import com.ably.tracking.demo.publisher.presentation.screens.login.LoginViewModel
+import com.ably.tracking.demo.publisher.presentation.screens.main.MainViewModel
 import com.ably.tracking.demo.publisher.presentation.screens.settings.SettingsActionsProvider
 import com.google.gson.GsonBuilder
 import java.util.Locale

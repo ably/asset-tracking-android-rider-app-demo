@@ -1,7 +1,7 @@
 package com.ably.tracking.demo.publisher.presentation.screens.login
 
-import com.ably.tracking.demo.publisher.presentation.BaseViewModel
 import com.ably.tracking.demo.publisher.domain.secrets.SecretsManager
+import com.ably.tracking.demo.publisher.presentation.BaseViewModel
 import com.ably.tracking.demo.publisher.presentation.navigation.Navigator
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
