@@ -1,8 +1,7 @@
 package com.ably.tracking.demo.publisher.domain
 
 import com.ably.tracking.TrackableState
-import com.ably.tracking.demo.publisher.ably.AssetTracker
-import com.ably.tracking.demo.publisher.api.DeliveryServiceDataSource
+import com.ably.tracking.demo.publisher.data.ably.AssetTracker
 import com.ably.tracking.demo.publisher.common.copyAndReplaceElementAt
 import com.ably.tracking.demo.publisher.common.toOrderState
 import com.ably.tracking.demo.publisher.secrets.SecretsManager
@@ -13,7 +12,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach

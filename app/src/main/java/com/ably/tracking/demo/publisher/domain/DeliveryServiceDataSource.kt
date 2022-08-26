@@ -1,4 +1,6 @@
-package com.ably.tracking.demo.publisher.api
+package com.ably.tracking.demo.publisher.domain
+
+import com.ably.tracking.demo.publisher.data.api.Destination
 
 interface DeliveryServiceDataSource {
     suspend fun getMapboxToken(authBase64: String): String

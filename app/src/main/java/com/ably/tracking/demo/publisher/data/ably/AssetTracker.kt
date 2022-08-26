@@ -1,4 +1,4 @@
-package com.ably.tracking.demo.publisher.ably
+package com.ably.tracking.demo.publisher.data.ably
 
 import com.ably.tracking.TrackableState
 import com.ably.tracking.publisher.Trackable

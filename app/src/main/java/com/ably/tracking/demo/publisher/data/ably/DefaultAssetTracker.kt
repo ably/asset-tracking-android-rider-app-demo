@@ -1,4 +1,4 @@
-package com.ably.tracking.demo.publisher.ably
+package com.ably.tracking.demo.publisher.data.ably
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,7 +7,7 @@ import com.ably.tracking.Resolution
 import com.ably.tracking.TrackableState
 import com.ably.tracking.connection.Authentication
 import com.ably.tracking.connection.ConnectionConfiguration
-import com.ably.tracking.demo.publisher.ably.log.LocationLogger
+import com.ably.tracking.demo.publisher.data.ably.log.LocationLogger
 import com.ably.tracking.demo.publisher.common.NotificationProvider
 import com.ably.tracking.demo.publisher.secrets.SecretsManager
 import com.ably.tracking.publisher.DefaultProximity

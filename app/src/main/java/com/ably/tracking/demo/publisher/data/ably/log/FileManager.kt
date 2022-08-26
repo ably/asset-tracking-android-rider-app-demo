@@ -1,4 +1,4 @@
-package com.ably.tracking.demo.publisher.ably.log
+package com.ably.tracking.demo.publisher.data.ably.log
 
 import android.net.Uri
 import java.io.File

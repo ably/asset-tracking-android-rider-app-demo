@@ -2,8 +2,8 @@ package com.ably.tracking.demo.publisher.presentation.screens.settings
 
 import android.os.Process
 import com.ably.tracking.demo.publisher.R
-import com.ably.tracking.demo.publisher.ably.AssetTracker
-import com.ably.tracking.demo.publisher.ably.log.LocationLogger
+import com.ably.tracking.demo.publisher.data.ably.AssetTracker
+import com.ably.tracking.demo.publisher.data.ably.log.LocationLogger
 import com.ably.tracking.demo.publisher.presentation.navigation.Navigator
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

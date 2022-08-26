@@ -1,7 +1,7 @@
-package com.ably.tracking.demo.publisher.ably
+package com.ably.tracking.demo.publisher.data.ably
 
 import android.net.Uri
-import com.ably.tracking.demo.publisher.ably.log.FileManager
+import com.ably.tracking.demo.publisher.data.ably.log.FileManager
 import java.io.File
 
 class FakeFileManager : FileManager {

@@ -1,6 +1,6 @@
 package com.ably.tracking.demo.publisher.secrets
 
-import com.ably.tracking.demo.publisher.api.DeliveryServiceDataSource
+import com.ably.tracking.demo.publisher.domain.DeliveryServiceDataSource
 
 class InMemorySecretsManager(
     private val deliveryServiceDataSource: DeliveryServiceDataSource,

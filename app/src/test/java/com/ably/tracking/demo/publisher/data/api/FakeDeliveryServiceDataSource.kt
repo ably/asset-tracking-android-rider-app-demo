@@ -1,4 +1,6 @@
-package com.ably.tracking.demo.publisher.api
+package com.ably.tracking.demo.publisher.data.api
+
+import com.ably.tracking.demo.publisher.domain.DeliveryServiceDataSource
 
 class FakeDeliveryServiceDataSource : DeliveryServiceDataSource {
 

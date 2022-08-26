@@ -1,4 +1,4 @@
-package com.ably.tracking.demo.publisher.api
+package com.ably.tracking.demo.publisher.data.api
 
 import retrofit2.http.DELETE
 import retrofit2.http.GET

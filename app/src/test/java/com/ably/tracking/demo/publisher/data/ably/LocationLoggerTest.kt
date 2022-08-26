@@ -1,9 +1,9 @@
-package com.ably.tracking.demo.publisher.ably
+package com.ably.tracking.demo.publisher.data.ably
 
 import com.ably.tracking.Location
 import com.ably.tracking.LocationUpdate
-import com.ably.tracking.demo.publisher.ably.log.DateFormatterFactory
-import com.ably.tracking.demo.publisher.ably.log.LocationLogger
+import com.ably.tracking.demo.publisher.data.ably.log.DateFormatterFactory
+import com.ably.tracking.demo.publisher.data.ably.log.LocationLogger
 import com.ably.tracking.publisher.GeoJsonGeometry
 import com.ably.tracking.publisher.GeoJsonMessage
 import com.ably.tracking.publisher.GeoJsonProperties

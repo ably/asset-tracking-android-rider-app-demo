@@ -1,4 +1,4 @@
-package com.ably.tracking.demo.publisher.api
+package com.ably.tracking.demo.publisher.data.api
 
 import com.google.gson.annotations.SerializedName
 

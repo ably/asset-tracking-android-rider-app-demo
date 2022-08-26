@@ -1,6 +1,6 @@
-package com.ably.tracking.demo.publisher.ably
+package com.ably.tracking.demo.publisher.data.ably
 
-import com.ably.tracking.demo.publisher.ably.log.LogFileWriter
+import com.ably.tracking.demo.publisher.data.ably.log.LogFileWriter
 
 class FakeLogFileWriter : LogFileWriter {
 

@@ -1,4 +1,4 @@
-package com.ably.tracking.demo.publisher.ably.log
+package com.ably.tracking.demo.publisher.data.ably.log
 
 import java.io.FileWriter
 

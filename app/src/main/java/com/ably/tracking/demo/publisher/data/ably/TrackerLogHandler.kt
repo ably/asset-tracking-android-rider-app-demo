@@ -1,4 +1,4 @@
-package com.ably.tracking.demo.publisher.ably
+package com.ably.tracking.demo.publisher.data.ably
 
 import android.util.Log
 import com.ably.tracking.logging.LogHandler
