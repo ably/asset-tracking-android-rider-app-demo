@@ -1,4 +1,4 @@
-package com.ably.tracking.demo.publisher.secrets
+package com.ably.tracking.demo.publisher.domain.secrets
 
 import com.ably.tracking.demo.publisher.domain.DeliveryServiceDataSource
 

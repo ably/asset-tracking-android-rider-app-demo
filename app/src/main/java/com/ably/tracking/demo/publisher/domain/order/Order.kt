@@ -1,4 +1,4 @@
-package com.ably.tracking.demo.publisher.domain
+package com.ably.tracking.demo.publisher.domain.order
 
 data class Order(
     val id: String,

@@ -1,6 +1,7 @@
-package com.ably.tracking.demo.publisher.secrets
+package com.ably.tracking.demo.publisher.data.secrets
 
 import android.util.Base64
+import com.ably.tracking.demo.publisher.domain.secrets.Base64Encoder
 
 class AndroidBase64Encoder : Base64Encoder {
     override fun encode(input: String) =

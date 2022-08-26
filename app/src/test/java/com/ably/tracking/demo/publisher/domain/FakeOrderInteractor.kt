@@ -1,6 +1,9 @@
 package com.ably.tracking.demo.publisher.domain
 
 import com.ably.tracking.demo.publisher.common.copyAndReplaceElementAt
+import com.ably.tracking.demo.publisher.domain.order.Order
+import com.ably.tracking.demo.publisher.domain.order.OrderManager
+import com.ably.tracking.demo.publisher.domain.order.OrderState
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class FakeOrderInteractor : OrderManager {

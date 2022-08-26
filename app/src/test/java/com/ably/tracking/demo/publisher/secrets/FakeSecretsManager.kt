@@ -1,5 +1,7 @@
 package com.ably.tracking.demo.publisher.secrets
 
+import com.ably.tracking.demo.publisher.domain.secrets.SecretsManager
+
 class FakeSecretsManager : SecretsManager {
 
     var mapboxTokenValue: String? = null

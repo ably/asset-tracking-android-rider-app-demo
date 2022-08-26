@@ -3,9 +3,9 @@ package com.ably.tracking.demo.publisher.presentation.screens.main
 import androidx.annotation.StringRes
 import com.ably.tracking.demo.publisher.R
 import com.ably.tracking.demo.publisher.presentation.BaseViewModel
-import com.ably.tracking.demo.publisher.domain.Order
-import com.ably.tracking.demo.publisher.domain.OrderManager
-import com.ably.tracking.demo.publisher.domain.OrderState
+import com.ably.tracking.demo.publisher.domain.order.Order
+import com.ably.tracking.demo.publisher.domain.order.OrderManager
+import com.ably.tracking.demo.publisher.domain.order.OrderState
 import com.ably.tracking.demo.publisher.presentation.navigation.Navigator
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow

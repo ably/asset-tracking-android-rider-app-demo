@@ -1,4 +1,4 @@
-package com.ably.tracking.demo.publisher.secrets
+package com.ably.tracking.demo.publisher.domain.secrets
 
 interface SecretsManager {
     suspend fun loadSecrets(username: String, password: String?)

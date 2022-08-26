@@ -1,6 +1,7 @@
-package com.ably.tracking.demo.publisher.secrets
+package com.ably.tracking.demo.publisher.data.secrets
 
 import android.content.Context
+import com.ably.tracking.demo.publisher.domain.secrets.SecretsStorage
 
 class SharedPreferencesSecretsStorage(context: Context) : SecretsStorage {
 

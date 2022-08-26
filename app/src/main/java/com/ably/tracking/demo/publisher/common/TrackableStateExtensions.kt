@@ -1,7 +1,7 @@
 package com.ably.tracking.demo.publisher.common
 
 import com.ably.tracking.TrackableState
-import com.ably.tracking.demo.publisher.domain.OrderState
+import com.ably.tracking.demo.publisher.domain.order.OrderState
 
 fun TrackableState.toOrderState(): OrderState = when (this) {
     is TrackableState.Online -> OrderState.Online
