@@ -1,8 +1,8 @@
 package com.ably.tracking.demo.publisher.ui
 
 import android.net.Uri
-import com.ably.tracking.demo.publisher.ui.navigation.Navigator
-import com.ably.tracking.demo.publisher.ui.navigation.Routes
+import com.ably.tracking.demo.publisher.presentation.navigation.Navigator
+import com.ably.tracking.demo.publisher.presentation.navigation.Routes
 
 class FakeNavigator : Navigator {
 

@@ -23,11 +23,11 @@ import com.ably.tracking.demo.publisher.secrets.InMemorySecretsManager
 import com.ably.tracking.demo.publisher.secrets.SecretsManager
 import com.ably.tracking.demo.publisher.secrets.SecretsStorage
 import com.ably.tracking.demo.publisher.secrets.SharedPreferencesSecretsStorage
-import com.ably.tracking.demo.publisher.ui.login.LoginViewModel
-import com.ably.tracking.demo.publisher.ui.main.MainViewModel
-import com.ably.tracking.demo.publisher.ui.navigation.AndroidJetpackNavigator
-import com.ably.tracking.demo.publisher.ui.navigation.Navigator
-import com.ably.tracking.demo.publisher.ui.settings.SettingsActionsProvider
+import com.ably.tracking.demo.publisher.presentation.screens.login.LoginViewModel
+import com.ably.tracking.demo.publisher.presentation.screens.main.MainViewModel
+import com.ably.tracking.demo.publisher.presentation.navigation.AndroidJetpackNavigator
+import com.ably.tracking.demo.publisher.presentation.navigation.Navigator
+import com.ably.tracking.demo.publisher.presentation.screens.settings.SettingsActionsProvider
 import com.google.gson.GsonBuilder
 import java.util.Locale
 import java.util.TimeZone
