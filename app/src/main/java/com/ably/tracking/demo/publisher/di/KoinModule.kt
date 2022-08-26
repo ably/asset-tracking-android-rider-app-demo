@@ -15,7 +15,7 @@ import com.ably.tracking.demo.publisher.data.api.buildDeliveryServiceApi
 import com.ably.tracking.demo.publisher.data.api.buildOkHttpClient
 import com.ably.tracking.demo.publisher.data.api.buildRetrofit
 import com.ably.tracking.demo.publisher.common.NotificationProvider
-import com.ably.tracking.demo.publisher.domain.order.DefaultOrderInteractor
+import com.ably.tracking.demo.publisher.domain.order.DefaultOrderManager
 import com.ably.tracking.demo.publisher.domain.order.OrderManager
 import com.ably.tracking.demo.publisher.data.secrets.AndroidBase64Encoder
 import com.ably.tracking.demo.publisher.domain.secrets.Base64Encoder
@@ -73,7 +73,7 @@ val appModule = module {
     single { NotificationProvider(get()) }
 
     single {
-        DefaultOrderInteractor(
+        DefaultOrderManager(
             get(),
             get(),
             get(),

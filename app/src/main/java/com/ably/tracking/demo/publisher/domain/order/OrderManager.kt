@@ -32,7 +32,7 @@ interface OrderManager {
     suspend fun disconnect()
 }
 
-class DefaultOrderInteractor(
+class DefaultOrderManager(
     private val assetTracker: AssetTracker,
     private val deliveryServiceDataSource: DeliveryServiceDataSource,
     private val secretsManager: SecretsManager,
