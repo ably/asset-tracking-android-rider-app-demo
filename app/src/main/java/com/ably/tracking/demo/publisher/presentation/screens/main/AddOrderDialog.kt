@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.ably.tracking.demo.publisher.R
-import com.ably.tracking.demo.publisher.common.canParseToDouble
 import com.ably.tracking.demo.publisher.presentation.widget.StyledTextButton
 import com.ably.tracking.demo.publisher.presentation.widget.StyledTextField
 
@@ -52,3 +51,7 @@ fun AddOrderDialog(setShowDialog: (Boolean) -> Unit, onConfirm: (String) -> Unit
         },
     )
 }
+
+private fun String.canParseToDouble() =
+    toDoubleOrNull() != null
+

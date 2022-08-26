@@ -1,4 +1,4 @@
-package com.ably.tracking.demo.publisher.common
+package com.ably.tracking.demo.publisher.data.ably
 
 import android.app.Notification
 import android.app.NotificationChannel

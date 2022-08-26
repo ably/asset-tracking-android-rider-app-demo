@@ -8,10 +8,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.ably.tracking.demo.publisher.presentation.screens.login.LoginScreen
-import com.ably.tracking.demo.publisher.presentation.screens.main.MainScreen
 import com.ably.tracking.demo.publisher.presentation.navigation.AndroidJetpackNavigator
 import com.ably.tracking.demo.publisher.presentation.navigation.Routes
+import com.ably.tracking.demo.publisher.presentation.screens.login.LoginScreen
+import com.ably.tracking.demo.publisher.presentation.screens.main.MainScreen
 import com.ably.tracking.demo.publisher.presentation.screens.settings.SettingsActionsProvider
 import com.ably.tracking.demo.publisher.presentation.screens.settings.SettingsScreen
 import com.google.accompanist.permissions.ExperimentalPermissionsApi

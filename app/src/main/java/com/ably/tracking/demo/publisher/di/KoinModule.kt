@@ -1,9 +1,9 @@
 package com.ably.tracking.demo.publisher.di
 
 import com.ably.tracking.demo.publisher.BuildConfig
-import com.ably.tracking.demo.publisher.common.NotificationProvider
 import com.ably.tracking.demo.publisher.data.ably.AssetTracker
 import com.ably.tracking.demo.publisher.data.ably.DefaultAssetTracker
+import com.ably.tracking.demo.publisher.data.ably.NotificationProvider
 import com.ably.tracking.demo.publisher.data.ably.log.DateFormatterFactory
 import com.ably.tracking.demo.publisher.data.ably.log.DefaultFileManager
 import com.ably.tracking.demo.publisher.data.ably.log.DefaultLogFileWriter
