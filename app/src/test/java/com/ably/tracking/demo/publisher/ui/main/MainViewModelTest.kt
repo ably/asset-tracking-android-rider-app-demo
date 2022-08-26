@@ -30,7 +30,7 @@ internal class MainViewModelTest : BaseViewModelTest() {
         // then
         val order = viewModel.state.value.orders.firstOrNull { it.name == orderName }
         assertThat(order).isNotNull()
-        assertThat(order!!.state).isEqualTo(R.string.trackable_state_offline)
+        assertThat(order!!.state).isEqualTo(R.string.order_state_offline)
     }
 
     @Test
@@ -46,11 +46,11 @@ internal class MainViewModelTest : BaseViewModelTest() {
 
             // then
             val order = viewModel.state.value.orders.first { it.name == orderName }
-            assertThat(order.state).isEqualTo(R.string.trackable_state_publishing)
+            assertThat(order.state).isEqualTo(R.string.order_state_publishing)
         }
 
     @Test
-    fun `onTrack clicked selected trackable is tracked`() =
+    fun `onTrack clicked selected order is tracked`() =
         runTest {
             // given
             val orderName = "Pancake"
@@ -65,7 +65,7 @@ internal class MainViewModelTest : BaseViewModelTest() {
         }
 
     @Test
-    fun `on remove clicked selected trackable is removed`() =
+    fun `on remove clicked selected order is removed`() =
         runTest {
             // given
             val orderName = "Pancake"
