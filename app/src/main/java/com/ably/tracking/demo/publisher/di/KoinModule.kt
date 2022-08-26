@@ -1,5 +1,6 @@
-package com.ably.tracking.demo.publisher
+package com.ably.tracking.demo.publisher.di
 
+import com.ably.tracking.demo.publisher.BuildConfig
 import com.ably.tracking.demo.publisher.ably.AssetTracker
 import com.ably.tracking.demo.publisher.ably.DefaultAssetTracker
 import com.ably.tracking.demo.publisher.ably.log.DateFormatterFactory
