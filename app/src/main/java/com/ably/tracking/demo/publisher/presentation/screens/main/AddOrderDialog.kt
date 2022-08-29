@@ -54,4 +54,3 @@ fun AddOrderDialog(setShowDialog: (Boolean) -> Unit, onConfirm: (String) -> Unit
 
 private fun String.canParseToDouble() =
     toDoubleOrNull() != null
-
