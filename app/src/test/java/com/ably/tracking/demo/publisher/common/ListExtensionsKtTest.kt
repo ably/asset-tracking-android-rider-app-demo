@@ -1,5 +1,6 @@
 package com.ably.tracking.demo.publisher.common
 
+import com.ably.tracking.demo.publisher.domain.order.copyAndReplaceElementAt
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest

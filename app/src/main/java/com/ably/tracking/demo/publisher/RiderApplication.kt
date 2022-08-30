@@ -1,6 +1,7 @@
 package com.ably.tracking.demo.publisher
 
 import android.app.Application
+import com.ably.tracking.demo.publisher.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.startKoin
 

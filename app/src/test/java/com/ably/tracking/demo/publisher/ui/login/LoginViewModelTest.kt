@@ -1,9 +1,10 @@
 package com.ably.tracking.demo.publisher.ui.login
 
 import com.ably.tracking.demo.publisher.BaseViewModelTest
+import com.ably.tracking.demo.publisher.presentation.navigation.Routes
+import com.ably.tracking.demo.publisher.presentation.screens.login.LoginViewModel
 import com.ably.tracking.demo.publisher.secrets.FakeSecretsManager
 import com.ably.tracking.demo.publisher.ui.FakeNavigator
-import com.ably.tracking.demo.publisher.ui.navigation.Routes
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest

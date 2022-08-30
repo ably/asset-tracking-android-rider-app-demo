@@ -3,7 +3,8 @@ package com.ably.tracking.demo.publisher.ui.main
 import com.ably.tracking.demo.publisher.BaseViewModelTest
 import com.ably.tracking.demo.publisher.R
 import com.ably.tracking.demo.publisher.domain.FakeOrderInteractor
-import com.ably.tracking.demo.publisher.domain.OrderState
+import com.ably.tracking.demo.publisher.domain.order.OrderState
+import com.ably.tracking.demo.publisher.presentation.screens.main.MainViewModel
 import com.ably.tracking.demo.publisher.ui.FakeNavigator
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
