@@ -6,6 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
 
       # Gradle 7 requires Java 11 to run
       - uses: actions/setup-java@v2
