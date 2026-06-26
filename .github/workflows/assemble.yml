@@ -3,14 +3,19 @@ on:
   push:
     branches:
       - main
+permissions: {}
 jobs:
   assemble:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5 # v2
+        with:
+          persist-credentials: false
 
       # Gradle 7 requires Java 11 to run
-      - uses: actions/setup-java@v2
+      - uses: actions/setup-java@91d3aa4956ec4a53e477c4907347b5e3481be8c9 # v2
         with:
           distribution: 'zulu'
           java-version: '11'
@@ -26,7 +31,7 @@ jobs:
           GOOGLE_SERVICES_JSON: ${{secrets.GOOGLE_SERVICES_JSON}}
 
       - name: Bump version
-        uses: chkfung/android-version-actions@v1.1
+        uses: chkfung/android-version-actions@6808116590161dacdcab6bdd59e034b98dffcbdf # v1.1
         with:
           gradlePath: app/build.gradle
           versionCode: ${{github.run_number}}
@@ -40,7 +45,7 @@ jobs:
           ORG_GRADLE_PROJECT_SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           ORG_GRADLE_PROJECT_SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
 
-      - uses: r0adkll/sign-android-release@v1
+      - uses: r0adkll/sign-android-release@349ebdef58775b1e0d8099458af0816dc79b6407 # v1
         name: Sign app APK
         # ID used to access action output
         id: sign_app
@@ -54,7 +59,7 @@ jobs:
           BUILD_TOOLS_VERSION: "32.0.0"
 
       - name: upload artifact to Firebase App Distribution
-        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        uses: wzieba/Firebase-Distribution-Github-Action@bd494989dd4bec0343f78adee87fe66e48279ad6 # v1
         with:
           appId: ${{secrets.FIREBASE_APP_ID}}
           token: ${{secrets.FIREBASE_CLI_TOKEN}}
